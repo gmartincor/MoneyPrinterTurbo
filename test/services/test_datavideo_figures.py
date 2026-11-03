@@ -1,4 +1,5 @@
 from app.datavideo.figures import verify_figures
+from app.datavideo.locale import ENGLISH_US
 
 FACTS = [
     "Fecha: miércoles 4 de noviembre de 2026",
@@ -79,6 +80,22 @@ def test_proportional_claims_are_reported_as_spelled_numbers():
     check = verify_figures(narration, FACTS)
 
     assert check.spelled_numbers == ("doble",)
+
+
+def test_english_spelled_numbers_are_reported_for_english_narration():
+    narration = "Gas costs twice as much as it did three years ago."
+
+    check = verify_figures(narration, ["Gas price: $3.12"], locale=ENGLISH_US)
+
+    assert check.spelled_numbers == ("twice", "three")
+
+
+def test_english_articles_are_not_treated_as_numbers():
+    narration = "One reason: a single state sets the price."
+
+    check = verify_figures(narration, [], locale=ENGLISH_US)
+
+    assert check.passed
 
 
 def test_repeated_unverified_figure_is_reported_once():
