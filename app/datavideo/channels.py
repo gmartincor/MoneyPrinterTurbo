@@ -2,7 +2,7 @@ import os
 import tomllib
 from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import Callable, Literal
+from typing import Callable
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
@@ -25,9 +25,8 @@ class ModelRoles(_StrictModel):
 
 
 class VoiceSettings(_StrictModel):
-    provider: Literal["elevenlabs"] = "elevenlabs"
-    model: str = "eleven_multilingual_v2"
-    voice_id: str = ""
+    name: str = Field(min_length=1)
+    rate: float = Field(default=1.0, gt=0)
 
 
 class _ThemeOverrides(_StrictModel):
@@ -45,7 +44,7 @@ class _ProfilePayload(_StrictModel):
     name: str = Field(min_length=1)
     language: str
     models: ModelRoles
-    voice: VoiceSettings = VoiceSettings()
+    voice: VoiceSettings
     theme: _ThemeOverrides = _ThemeOverrides()
 
 

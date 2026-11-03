@@ -42,7 +42,9 @@ Agreed with the owner:
 - Primary platform: YouTube (Shorts plus weekly and search-driven long-form videos). Instagram Reels and carousels and Facebook are secondary distribution of the same original content.
 - Four channels, launched one after another a few weeks apart, each with its own profile in `channels/`: `tu_dinero_es` (household finance, Spain, Spanish), `your_money_us` (household finance, US, English), `mundo_es` (the world in data, Spanish), `space_en` (space and science, English). Sports channels are out: paid sports APIs grant no rights over the competitions and sports RPM is low; a later experiment may use public-domain openfootball data, never match footage.
 - Only data sources whose licence allows commercial use. A source is used in a published video only when `Source.license_verified` is true.
-- Text models: GPT-6.1 Sol through the official OpenAI API for writer and judge roles, configurable per channel; compare with GPT-6.1 Terra on the prompt test bench. Voice: ElevenLabs Multilingual v2 with one Voice Design voice per channel, on an account separate from the owner's agents. No video-generation models.
+- Topics are never typed in by a person: the story detector picks them from each channel's official data, the judge chooses, the writer scripts. The LLM does not search the web.
+- Text models: GPT-6.1 Sol through the official OpenAI API for writer and judge roles, configurable per channel; compare with GPT-6.1 Terra on the prompt test bench. No video-generation models.
+- Reuse the upstream engine instead of rebuilding it: `llm._generate_response` for text, `voice.tts` for voice and word timings, `task.generate_subtitle` and `task.generate_final_videos` for subtitles, music and FFmpeg assembly, `upload_post.py` for publishing. Voice is chosen per channel with the upstream voice name: official Azure Speech by default, ElevenLabs only when a channel's data justifies it, Edge TTS only in development.
 - No face, avatar, or voice clone of any real person.
 - Every video is built from fresh, real data. The LLM writes narration only; every figure comes from a data source and is verified against the script before rendering. A failed check blocks publication.
 - Visuals are code-generated charts, maps, and figures. Stock footage is secondary background only. Use only music and voices with a clear commercial license; the bundled `resource/songs` files are not used until their license is verified.
@@ -70,6 +72,12 @@ Agreed with the owner:
 - Data-video tests: `uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py`
 - With secrets from a local `.env`: add `--env-file .env` after `uv run`
 - Native rendering tests need `ffmpeg` installed.
+
+## Verification Policy
+
+- After each change: run the data-video tests and lint the touched paths. This takes seconds and is the default verification for work inside `app/datavideo/`, `channels/` and `test/services/test_datavideo_*.py`.
+- Run the full upstream suite locally only when a change touches files outside those paths. Otherwise GitHub Actions runs it on every push to `main`; check that run before calling a release done.
+- The upstream suite has 9 known failures in audio tests under Python 3.13 (`test_bgm_decoded_audio`, `test_remote_speech_complete_decode`, `test_webui_bgm`, `test_webui_custom_audio_upload`). They predate this fork's work; any other failure is a regression.
 
 ## Code Principles
 

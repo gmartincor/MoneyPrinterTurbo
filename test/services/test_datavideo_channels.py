@@ -18,9 +18,7 @@ writer = "gpt-6.1-sol"
 judge = "gpt-6.1-sol"
 
 [voice]
-provider = "elevenlabs"
-model = "eleven_multilingual_v2"
-voice_id = ""
+name = "es-ES-AlvaroNeural-Male-V2"
 
 [theme]
 positive = [0, 200, 100]
@@ -39,7 +37,15 @@ def test_profile_is_loaded_with_its_language_models_and_voice(tmp_path):
     assert profile.id == "tu_dinero_es"
     assert profile.language == SPANISH_SPAIN
     assert profile.models.writer == "gpt-6.1-sol"
-    assert profile.voice.model == "eleven_multilingual_v2"
+    assert profile.voice.name == "es-ES-AlvaroNeural-Male-V2"
+    assert profile.voice.rate == 1.0
+
+
+def test_profile_without_a_voice_is_rejected(tmp_path):
+    content = VALID_PROFILE.replace('[voice]\nname = "es-ES-AlvaroNeural-Male-V2"', "")
+
+    with pytest.raises(ValueError, match="voice"):
+        load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
 
 
 def test_theme_overrides_only_the_colors_the_profile_sets(tmp_path):
