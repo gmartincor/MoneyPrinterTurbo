@@ -1,0 +1,54 @@
+name: Data-video tests
+
+on:
+  pull_request:
+    paths:
+      - "app/datavideo/**"
+      - "channels/**"
+      - "test/services/test_datavideo_*.py"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/datavideo.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - "app/datavideo/**"
+      - "channels/**"
+      - "test/services/test_datavideo_*.py"
+      - "pyproject.toml"
+      - "uv.lock"
+      - ".github/workflows/datavideo.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  tests:
+    name: Data-video tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --frozen --python 3.11
+
+      - name: Lint data-video sources
+        run: uv run --no-sync ruff check app/datavideo test/services/test_datavideo_*.py
+
+      - name: Run data-video tests
+        run: uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py

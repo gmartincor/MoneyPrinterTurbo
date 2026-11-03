@@ -76,7 +76,9 @@ Agreed with the owner:
 ## Verification Policy
 
 - After each change: run the data-video tests and lint the touched paths. This takes seconds and is the default verification for work inside `app/datavideo/`, `channels/` and `test/services/test_datavideo_*.py`.
-- Run the full upstream suite locally only when a change touches files outside those paths. Otherwise GitHub Actions runs it on every push to `main`; check that run before calling a release done.
+- GitHub Actions: `datavideo.yml` runs the data-video tests on pushes that touch data-video paths. The upstream `ci.yml` (full suite, ~14 min) ignores pushes that only touch data-video paths, docs, `.claude/` or `CLAUDE.md`, and runs when upstream code changes or when started manually (`workflow_dispatch`). Run it manually after merging upstream changes.
+- Run the full upstream suite locally only when a change touches upstream Python code.
+- `docker-ghcr.yml` only runs in the upstream repository, because it publishes to the upstream author's registry.
 - The upstream suite has 9 known failures in audio tests under Python 3.13 (`test_bgm_decoded_audio`, `test_remote_speech_complete_decode`, `test_webui_bgm`, `test_webui_custom_audio_upload`). They predate this fork's work; any other failure is a regression.
 
 ## Code Principles

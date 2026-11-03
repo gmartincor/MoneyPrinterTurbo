@@ -60,7 +60,10 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
    ```bash
    git remote add upstream https://github.com/harry0703/MoneyPrinterTurbo.git
    ```
-8. Activa **GitHub Actions** en tu fork (pestaña *Actions* del repositorio → activar flujos). Así la batería completa de pruebas se ejecuta sola en GitHub cada vez que se sube a `main`, y en local solo hace falta la de `datavideo`, que tarda segundos.
+8. Activa **GitHub Actions** en tu fork (pestaña *Actions* del repositorio → activar flujos). Al subir cambios a `main`:
+   - Si solo tocan nuestro código (`app/datavideo/`, `channels/`, sus pruebas), documentación, `.claude/` o `CLAUDE.md`, se ejecutan **solo nuestras pruebas** (`datavideo.yml`, ~1–2 min contando la instalación).
+   - Las ~3.200 pruebas del proyecto original (`ci.yml`, ~14 min) solo se ejecutan si se toca código del proyecto original, o a mano desde la pestaña *Actions* (botón *Run workflow*). Conviene lanzarlas a mano después de traer cambios del proyecto original.
+   - Ninguna de las dos bloquea tu trabajo: se ejecutan en GitHub en segundo plano.
 
 **Nunca pegues claves en el chat.** Van solo en `.env` o en las variables del servidor.
 

@@ -26,6 +26,7 @@ env:
 jobs:
   publish:
     name: Build and publish
+    if: github.repository == 'harry0703/MoneyPrinterTurbo'
     runs-on: ubuntu-latest
     timeout-minutes: 90
 

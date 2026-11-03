@@ -122,7 +122,7 @@ Reglas comprobadas por código: cada cifra de un segmento aparece en los datos q
 | Simulación | Vídeo completo sin publicar | `cli dry-run` |
 | Canal de pruebas | Subidas privadas antes de activar un canal | YouTube |
 
-**Ciclo de desarrollo:** en cada cambio se ejecutan solo las pruebas de `datavideo` y el lint (segundos). La batería completa del proyecto original (~3.200 pruebas, 12–14 min) solo se ejecuta en local cuando se modifica un archivo del proyecto original; en el resto de casos la ejecuta GitHub Actions al subir a `main`.
+**Ciclo de desarrollo:** en cada cambio se ejecutan solo las pruebas de `datavideo` y el lint (segundos). En GitHub Actions, `datavideo.yml` ejecuta esas pruebas cuando cambia nuestro código, y la batería completa del proyecto original (`ci.yml`, ~3.200 pruebas, ~14 min) solo cuando cambia código del proyecto original o se lanza a mano (tras traer cambios del original). No se borran esas pruebas: protegen el motor original del que dependemos (voz, subtítulos, montaje, publicación) y borrarlas causaría conflictos al traer actualizaciones.
 
 ## 9. Costes previstos
 
