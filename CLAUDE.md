@@ -29,7 +29,8 @@ Complete these steps at the start of every session, before planning, answering i
    - `.claude/skills/verification-before-completion/SKILL.md`
    - `.claude/skills/writing-skills/SKILL.md`
 4. Read the remaining `.claude/skills/_shared/*.md` checklists whenever a skill points to them.
-5. Apply each skill whenever its description matches the task. When a skill conflicts with this file or with `project-constraints.md`, this file and the constraints win.
+5. Read `docs/datavideo/handoff.md` (current state, next steps, accounts) and `docs/datavideo/architecture.md` (confirmed architecture). Continue from the next steps listed there unless the owner asks for something else.
+6. Apply each skill whenever its description matches the task. When a skill conflicts with this file or with `project-constraints.md`, this file and the constraints win.
 
 If a new skill is added under `.claude/skills/`, add it to the list above in the same change.
 
@@ -38,14 +39,17 @@ If a new skill is added under `.claude/skills/`, add it to the list above in the
 Agreed with the owner:
 
 - The owner lives in Spain. Income is declared under Spanish tax rules, and TikTok's Creator Rewards Program is not available there, so TikTok is optional reach only.
-- Primary platform: YouTube (daily Shorts plus a weekly long-form video). Instagram Reels and carousels and Facebook are secondary distribution of the same original content.
-- First channel: Spanish-language household finance built from official open data (electricity prices, fuel prices, Euribor, CPI, housing).
+- Primary platform: YouTube (Shorts plus weekly and search-driven long-form videos). Instagram Reels and carousels and Facebook are secondary distribution of the same original content.
+- Four channels, launched one after another a few weeks apart, each with its own profile in `channels/`: `tu_dinero_es` (household finance, Spain, Spanish), `your_money_us` (household finance, US, English), `mundo_es` (the world in data, Spanish), `space_en` (space and science, English). Sports channels are out: paid sports APIs grant no rights over the competitions and sports RPM is low; a later experiment may use public-domain openfootball data, never match footage.
+- Only data sources whose licence allows commercial use. A source is used in a published video only when `Source.license_verified` is true.
+- Text models: GPT-6.1 Sol through the official OpenAI API for writer and judge roles, configurable per channel; compare with GPT-6.1 Terra on the prompt test bench. Voice: ElevenLabs Multilingual v2 with one Voice Design voice per channel, on an account separate from the owner's agents. No video-generation models.
 - No face, avatar, or voice clone of any real person.
 - Every video is built from fresh, real data. The LLM writes narration only; every figure comes from a data source and is verified against the script before rendering. A failed check blocks publication.
 - Visuals are code-generated charts, maps, and figures. Stock footage is secondary background only. Use only music and voices with a clear commercial license; the bundled `resource/songs` files are not used until their license is verified.
-- Disclose synthetic or altered content wherever YouTube, Meta, or the EU AI Act require it.
+- Disclose synthetic or altered content wherever YouTube, Meta, or the EU AI Act require it. Every video description credits its data sources, states that the script was generated with AI from official data, and discloses affiliate links.
 - Automatic quality gates decide publication; Telegram alerts the owner only for blocked items plus a weekly digest.
-- One engine, many channel profiles. New channels are added one at a time, each with its own niche, data, and identity. Never build channel farms, duplicate content across channels, evade platform detection, fake engagement, or reupload third-party content.
+- One engine, many channel profiles. Each channel has its own niche, data, and identity. Never build channel farms, duplicate content across channels, evade platform detection, fake engagement, or reupload third-party content.
+- Spend only where a channel proves it with data; pause a channel that shows no growth at its 3- and 6-month reviews.
 - Publishing gateway: the upstream Upload-Post integration (`app/services/upload_post.py`) for YouTube, Instagram, Facebook, and TikTok. Instagram carousels use Upload-Post's `/api/upload_photos` endpoint, which extends the existing service when carousels are built. Zernio is not used.
 - Request the YouTube Data API audit in parallel. Switching YouTube uploads to the direct API is optional once the audit passes. The OAuth consent screen must be in Production status, never Testing.
 - Comments are not automated. Moderation relies on native platform settings configured by the owner: YouTube Studio blocked words with "hold potentially inappropriate comments for review", and Instagram Hidden Words. Revisit automated moderation or replies only if comment volume or scam spam makes manual settings insufficient; replies would then be factual, drawn only from the channel's own data, never generic, and never personalized financial advice.
@@ -54,7 +58,7 @@ Agreed with the owner:
 
 - Keep the fork easy to merge with upstream. Put new functionality in new modules and keep edits to upstream files minimal and focused.
 - Do not delete upstream providers or integrations; disable them through configuration instead.
-- Data-video code lives in `app/datavideo/`. Its tests live in `test/services/test_datavideo_*.py`, because `.gitignore` only tracks `test_*.py` files under `test/services/` and the `test/` root.
+- Data-video code lives in `app/datavideo/` and channel profiles in `channels/`. Its tests live in `test/services/test_datavideo_*.py`, because `.gitignore` only tracks `test_*.py` files under `test/services/` and the `test/` root.
 - Sync upstream with `git remote add upstream https://github.com/harry0703/MoneyPrinterTurbo.git` (once) and `git fetch upstream main`.
 
 ## Commands
@@ -63,6 +67,8 @@ Agreed with the owner:
 - Compile check: `uv run --no-sync python -m compileall app cli.py main.py webui test docs/skill`
 - Lint: `uv run --no-sync ruff check app cli.py main.py webui test docs/skill`
 - Tests: `uv run --no-sync python -X utf8 -m pytest -q test`
+- Data-video tests: `uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py`
+- With secrets from a local `.env`: add `--env-file .env` after `uv run`
 - Native rendering tests need `ffmpeg` installed.
 
 ## Code Principles
@@ -91,5 +97,6 @@ Agreed with the owner:
 
 ## Documentation
 
-- Do not create or add documentation files unless explicitly requested
+- The owner requested two living documents: keep `docs/datavideo/handoff.md` current at the end of every work session (state, next steps, accounts), and update `docs/datavideo/architecture.md` before implementing any design change
+- Do not create or add other documentation files unless explicitly requested
 - Do not add inline comments or docstrings unless explicitly requested
