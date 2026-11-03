@@ -58,14 +58,14 @@ def summarize_day(day: date, prices: Iterable[HourlyPrice]) -> DailyElectricityS
 def describe_day(summary: DailyElectricitySummary) -> list[str]:
     window = summary.cheapest_window
     facts = [
-        f"Fecha: {_spanish_date(summary.day)}",
+        f"Fecha: {spanish_date(summary.day)}",
         f"Hora más barata: {_time_range(summary.cheapest, summary.cheapest)}, "
-        f"a {_format_eur_per_kwh(summary.cheapest.eur_per_kwh)}",
+        f"a {format_eur_per_kwh(summary.cheapest.eur_per_kwh)}",
         f"Hora más cara: {_time_range(summary.most_expensive, summary.most_expensive)}, "
-        f"a {_format_eur_per_kwh(summary.most_expensive.eur_per_kwh)}",
-        f"Precio medio del día: {_format_eur_per_kwh(summary.average_eur_per_kwh)}",
+        f"a {format_eur_per_kwh(summary.most_expensive.eur_per_kwh)}",
+        f"Precio medio del día: {format_eur_per_kwh(summary.average_eur_per_kwh)}",
         f"Franja de {CHEAPEST_WINDOW_HOURS} horas más barata: {_time_range(window[0], window[-1])}, "
-        f"a una media de {_format_eur_per_kwh(_average_eur_per_kwh(window))}",
+        f"a una media de {format_eur_per_kwh(_average_eur_per_kwh(window))}",
     ]
     gap = _percentage_gap(summary)
     if gap is not None:
@@ -105,10 +105,10 @@ def _time_range(first: HourlyPrice, last: HourlyPrice) -> str:
     return f"de {local_hour_label(first.starts_at)} a {local_hour_label(last.starts_at + _ONE_HOUR)}"
 
 
-def _format_eur_per_kwh(value: Decimal) -> str:
+def format_eur_per_kwh(value: Decimal) -> str:
     rounded = value.quantize(Decimal("0.001"), rounding=ROUND_HALF_UP)
     return f"{str(rounded).replace('.', ',')} €/kWh"
 
 
-def _spanish_date(day: date) -> str:
+def spanish_date(day: date) -> str:
     return f"{_WEEKDAYS[day.weekday()]} {day.day} de {_MONTHS[day.month - 1]} de {day.year}"
