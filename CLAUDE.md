@@ -45,12 +45,12 @@ Agreed with the owner:
 - Disclose synthetic or altered content wherever YouTube, Meta, or the EU AI Act require it.
 - Automatic quality gates decide publication; Telegram alerts the owner only for blocked items plus a weekly digest.
 - One engine, many channel profiles. New channels are added one at a time, each with its own niche, data, and identity. Never build channel farms, duplicate content across channels, evade platform detection, fake engagement, or reupload third-party content.
-- Upload through an already-audited publishing gateway while the YouTube Data API audit is pending. The OAuth consent screen must be in Production status, never Testing.
+- Publishing gateway: the upstream Upload-Post integration (`app/services/upload_post.py`) for YouTube, Instagram, Facebook, and TikTok. Instagram carousels use Upload-Post's `/api/upload_photos` endpoint, which extends the existing service when carousels are built. Zernio is not used.
+- Request the YouTube Data API audit in parallel. Switching YouTube uploads to the direct API is optional once the audit passes. The OAuth consent screen must be in Production status, never Testing.
+- Comments are not automated. Moderation relies on native platform settings configured by the owner: YouTube Studio blocked words with "hold potentially inappropriate comments for review", and Instagram Hidden Words. Revisit automated moderation or replies only if comment volume or scam spam makes manual settings insufficient; replies would then be factual, drawn only from the channel's own data, never generic, and never personalized financial advice.
 
 Pending confirmation from the owner (do not build on these until confirmed):
 
-- Social gateway: Zernio as the single gateway for publishing, comments, and analytics, keeping the upstream Upload-Post integration as fallback.
-- Comment handling: automatic spam and scam moderation, factual replies drawn only from the channel's own data, everything else routed to the owner. No generic bot replies and no personalized financial advice.
 - Owner's country of residence (affects TikTok eligibility and tax setup).
 
 ## Upstream Compatibility
