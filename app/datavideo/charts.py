@@ -10,8 +10,8 @@ from app.datavideo.electricity import (
     HourlyPrice,
     format_eur_per_kwh,
     local_hour_label,
-    spanish_date,
 )
+from app.datavideo.locale import SPANISH_SPAIN, format_long_date
 from app.utils import utils
 
 Color = tuple[int, int, int]
@@ -147,7 +147,7 @@ def _font(layout: _Layout, share_of_width: float, theme: ChartTheme) -> ImageFon
 def _draw_header(draw: ImageDraw.ImageDraw, layout: _Layout, summary: DailyElectricitySummary, theme: ChartTheme) -> None:
     center_x = layout.width / 2
     draw.text((center_x, layout.height * 0.13), TITLE, font=_font(layout, 0.085, theme), fill=theme.text, anchor="mm")
-    draw.text((center_x, layout.height * 0.19), spanish_date(summary.day), font=_font(layout, 0.042, theme), fill=theme.muted, anchor="mm")
+    draw.text((center_x, layout.height * 0.19), format_long_date(summary.day, SPANISH_SPAIN), font=_font(layout, 0.042, theme), fill=theme.muted, anchor="mm")
 
 
 def _draw_hour_axis(

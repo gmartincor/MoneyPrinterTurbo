@@ -3,7 +3,7 @@ from decimal import Decimal
 
 import pytest
 
-from app.datavideo.electricity import HourlyPrice, describe_day, summarize_day
+from app.datavideo.electricity import RED_ELECTRICA_PVPC, HourlyPrice, describe_day, summarize_day
 
 MADRID_WINTER = timezone(timedelta(hours=1))
 
@@ -48,15 +48,21 @@ def test_describe_day_formats_facts_in_spanish():
 
     facts = describe_day(summarize_day(date(2026, 11, 4), day_of_prices(prices)))
 
-    assert facts == [
-        "Fecha: miércoles 4 de noviembre de 2026",
-        "Hora más barata: de 14:00 a 15:00, a 0,082 €/kWh",
-        "Hora más cara: de 20:00 a 21:00, a 0,231 €/kWh",
-        "Precio medio del día: 0,146 €/kWh",
-        "Franja de 3 horas más barata: de 13:00 a 16:00, a una media de 0,089 €/kWh",
-        "Diferencia entre la hora más cara y la más barata: 181 %",
-        "Fuente: Red Eléctrica, precio PVPC",
-    ]
+    assert {fact.key: fact.statement for fact in facts} == {
+        "date": "Fecha: miércoles 4 de noviembre de 2026",
+        "cheapest_hour": "Hora más barata: de 14:00 a 15:00, a 0,082 €/kWh",
+        "most_expensive_hour": "Hora más cara: de 20:00 a 21:00, a 0,231 €/kWh",
+        "daily_average": "Precio medio del día: 0,146 €/kWh",
+        "cheapest_window": "Franja de 3 horas más barata: de 13:00 a 16:00, a una media de 0,089 €/kWh",
+        "price_gap": "Diferencia entre la hora más cara y la más barata: 181 %",
+    }
+
+
+def test_every_fact_cites_red_electrica_and_the_day_it_describes():
+    facts = describe_day(summarize_day(date(2026, 11, 4), day_of_prices(FLAT_PRICES)))
+
+    assert {fact.source for fact in facts} == {RED_ELECTRICA_PVPC}
+    assert {fact.as_of for fact in facts} == {date(2026, 11, 4)}
 
 
 def test_hour_labels_follow_madrid_local_time():
@@ -69,7 +75,8 @@ def test_hour_labels_follow_madrid_local_time():
 
     facts = describe_day(summarize_day(date(2026, 11, 4), prices))
 
-    assert facts[1] == "Hora más barata: de 00:00 a 01:00, a 0,050 €/kWh"
+    cheapest = next(fact for fact in facts if fact.key == "cheapest_hour")
+    assert cheapest.statement == "Hora más barata: de 00:00 a 01:00, a 0,050 €/kWh"
 
 
 def test_spring_forward_day_with_23_hours_is_accepted():
@@ -90,7 +97,7 @@ def test_percentage_gap_is_omitted_when_cheapest_price_is_not_positive():
 
     facts = describe_day(summarize_day(date(2026, 11, 4), day_of_prices(prices)))
 
-    assert not any(fact.startswith("Diferencia") for fact in facts)
+    assert "price_gap" not in {fact.key for fact in facts}
 
 
 @pytest.mark.parametrize("hours", [0, 22, 26])
