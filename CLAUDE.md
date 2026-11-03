@@ -37,6 +37,7 @@ If a new skill is added under `.claude/skills/`, add it to the list above in the
 
 Agreed with the owner:
 
+- The owner lives in Spain. Income is declared under Spanish tax rules, and TikTok's Creator Rewards Program is not available there, so TikTok is optional reach only.
 - Primary platform: YouTube (daily Shorts plus a weekly long-form video). Instagram Reels and carousels and Facebook are secondary distribution of the same original content.
 - First channel: Spanish-language household finance built from official open data (electricity prices, fuel prices, Euribor, CPI, housing).
 - No face, avatar, or voice clone of any real person.
@@ -49,14 +50,11 @@ Agreed with the owner:
 - Request the YouTube Data API audit in parallel. Switching YouTube uploads to the direct API is optional once the audit passes. The OAuth consent screen must be in Production status, never Testing.
 - Comments are not automated. Moderation relies on native platform settings configured by the owner: YouTube Studio blocked words with "hold potentially inappropriate comments for review", and Instagram Hidden Words. Revisit automated moderation or replies only if comment volume or scam spam makes manual settings insufficient; replies would then be factual, drawn only from the channel's own data, never generic, and never personalized financial advice.
 
-Pending confirmation from the owner (do not build on these until confirmed):
-
-- Owner's country of residence (affects TikTok eligibility and tax setup).
-
 ## Upstream Compatibility
 
 - Keep the fork easy to merge with upstream. Put new functionality in new modules and keep edits to upstream files minimal and focused.
 - Do not delete upstream providers or integrations; disable them through configuration instead.
+- Data-video code lives in `app/datavideo/`. Its tests live in `test/services/test_datavideo_*.py`, because `.gitignore` only tracks `test_*.py` files under `test/services/` and the `test/` root.
 - Sync upstream with `git remote add upstream https://github.com/harry0703/MoneyPrinterTurbo.git` (once) and `git fetch upstream main`.
 
 ## Commands
