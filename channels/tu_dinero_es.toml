@@ -1,0 +1,16 @@
+id = "tu_dinero_es"
+name = "Tu Dinero en Datos"
+language = "es-ES"
+
+[models]
+provider = "openai"
+writer = "gpt-6.1-sol"
+judge = "gpt-6.1-sol"
+
+[voice]
+provider = "elevenlabs"
+model = "eleven_multilingual_v2"
+voice_id = ""
+
+[theme]
+font_file = "BeVietnamPro-Bold.ttf"

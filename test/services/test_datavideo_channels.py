@@ -1,0 +1,101 @@
+from pathlib import Path
+from unittest.mock import patch
+
+import pytest
+
+from app.datavideo.channels import CHANNELS_DIRECTORY, load_channel, load_channels, text_generator
+from app.datavideo.locale import SPANISH_SPAIN
+from app.datavideo.theme import DEFAULT_THEME
+
+VALID_PROFILE = """
+id = "tu_dinero_es"
+name = "Tu Dinero en Datos"
+language = "es-ES"
+
+[models]
+provider = "openai"
+writer = "gpt-6.1-sol"
+judge = "gpt-6.1-sol"
+
+[voice]
+provider = "elevenlabs"
+model = "eleven_multilingual_v2"
+voice_id = ""
+
+[theme]
+positive = [0, 200, 100]
+"""
+
+
+def write_profile(directory: Path, name: str, content: str) -> Path:
+    path = directory / name
+    path.write_text(content, encoding="utf-8")
+    return path
+
+
+def test_profile_is_loaded_with_its_language_models_and_voice(tmp_path):
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", VALID_PROFILE))
+
+    assert profile.id == "tu_dinero_es"
+    assert profile.language == SPANISH_SPAIN
+    assert profile.models.writer == "gpt-6.1-sol"
+    assert profile.voice.model == "eleven_multilingual_v2"
+
+
+def test_theme_overrides_only_the_colors_the_profile_sets(tmp_path):
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", VALID_PROFILE))
+
+    assert profile.theme.positive == (0, 200, 100)
+    assert profile.theme.negative == DEFAULT_THEME.negative
+
+
+def test_unknown_fields_are_rejected_to_catch_typos(tmp_path):
+    content = VALID_PROFILE.replace('language = "es-ES"', 'language = "es-ES"\nlanguaje = "es-ES"')
+
+    with pytest.raises(ValueError, match="languaje"):
+        load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
+
+
+def test_unsupported_languages_are_rejected(tmp_path):
+    content = VALID_PROFILE.replace('"es-ES"', '"fr-FR"')
+
+    with pytest.raises(ValueError, match="language"):
+        load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
+
+
+def test_file_name_must_match_the_channel_id(tmp_path):
+    with pytest.raises(ValueError, match="file name"):
+        load_channel(write_profile(tmp_path, "other.toml", VALID_PROFILE))
+
+
+def test_all_profiles_in_a_directory_are_loaded_by_id(tmp_path):
+    write_profile(tmp_path, "tu_dinero_es.toml", VALID_PROFILE)
+
+    assert list(load_channels(tmp_path)) == ["tu_dinero_es"]
+
+
+def test_repository_profiles_are_valid():
+    profiles = load_channels(CHANNELS_DIRECTORY)
+
+    assert "tu_dinero_es" in profiles
+
+
+def test_text_generator_uses_the_role_model_and_the_api_key_from_the_environment(tmp_path, monkeypatch):
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", VALID_PROFILE))
+    monkeypatch.setenv("OPENAI_API_KEY", "fixture-key")
+
+    with patch("app.services.llm._generate_response", return_value="{}") as generate:
+        reply = text_generator(profile, "writer")("prompt")
+
+    app_config = generate.call_args.kwargs["app_config"]
+    assert reply == "{}"
+    assert app_config["llm_provider"] == "openai"
+    assert app_config["openai_model_name"] == "gpt-6.1-sol"
+    assert app_config["openai_api_key"] == "fixture-key"
+
+
+def test_text_generator_rejects_unknown_roles(tmp_path):
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", VALID_PROFILE))
+
+    with pytest.raises(ValueError, match="role"):
+        text_generator(profile, "editor")
