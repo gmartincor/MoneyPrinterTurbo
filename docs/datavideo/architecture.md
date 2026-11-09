@@ -12,14 +12,15 @@ Producir y publicar sin intervención humana vídeos originales construidos a pa
 
 | Tema | Decisión |
 |---|---|
-| Canales | 4, lanzados de forma escalonada: `tu_dinero_es` (finanzas del hogar, España, español), `your_money_us` (finanzas del hogar, EE. UU., inglés), `mundo_es` (el mundo en datos, español), `space_en` (espacio y ciencia, inglés) |
+| Canales | 4, lanzados de forma escalonada: `tu_dinero_es` (*Tu Dinero en Datos*: finanzas del hogar, España, español), `your_money_us` (*The Wallet Census*: finanzas del hogar, EE. UU., inglés), `mundo_es` (*Medir el Mundo*: el mundo en datos, español), `space_en` (*The Apogee Almanac*: espacio y ciencia, inglés) |
 | Deportes | Descartados como canal principal: los datos de pago no incluyen derechos sobre las competiciones y el RPM es bajo. Posible experimento futuro con datos de dominio público de openfootball, sin imágenes de partidos |
-| Formatos por canal | Shorts 3–5 por semana (solo si superan el listón), vídeo largo semanal de 8–12 min, vídeo largo de búsqueda cada 2 semanas, especiales por publicación de datos |
-| Plataformas | YouTube (principal), Instagram Reels y carruseles, Facebook. TikTok solo alcance opcional |
+| Formatos por canal | El vídeo largo es el formato principal: semanal de 8–12 min con una pregunta, ranking y mapa; de búsqueda cada 2 semanas; especiales el día que se publica un dato oficial. Shorts 3–5 por semana (solo si superan el listón), con un dato de un vídeo largo para llevar a él |
+| Datos del canal 1 | INE (CC BY 4.0) y Eurostat, ambos con uso comercial permitido sin autorización previa. REE queda descartada: su aviso legal limita la reutilización a fines no comerciales salvo autorización escrita, y un dato diario del precio de la luz caduca en 24 horas y repite el mismo formato |
+| Plataformas | YouTube (principal), Instagram Reels y carruseles. Facebook descartado definitivamente. TikTok solo alcance opcional |
 | Imagen | Generada por nuestro código: gráficos, mapas, cifras. Imágenes reales de NASA/ESA en `space_en`. Sin modelos de generación de vídeo (Sora cerrado, Veo caro e impreciso con cifras) |
 | Texto | GPT-6.1 Sol por API oficial de OpenAI para guionista y juez; configurable por rol en el perfil del canal. Se valida frente a GPT-6.1 Terra con un banco de pruebas |
 | Voz | Motor de voz del proyecto original, elegido por canal con `voice.name`. **Azure Speech oficial** (pago por uso, ~1–5 $/mes con los 4 canales) por defecto. **ElevenLabs** solo si las estadísticas demuestran que la voz frena la retención de un canal. **Edge TTS** solo para desarrollo: es gratis pero no es un servicio pensado para uso comercial |
-| Publicación | Upload-Post (integración del proyecto original) hasta pasar la auditoría de la API de YouTube y la configuración directa con Meta |
+| Publicación | Upload-Post (integración del proyecto original). Pasar a las APIs directas de YouTube o Meta es opcional. No se solicita la auditoría de la API de YouTube: solo sería obligatoria para superar 100 subidas al día |
 | Comentarios | Sin automatizar. Moderación con ajustes nativos de YouTube Studio e Instagram |
 | Avisos | Fuente en pantalla y descripción; aviso de "guion generado con IA a partir de datos oficiales" (art. 50 del Reglamento de IA); aviso de afiliados |
 | Datos | Solo fuentes con licencia que permita uso comercial. Cada fuente registra su licencia y si está verificada |
@@ -41,12 +42,12 @@ Producir y publicar sin intervención humana vídeos originales construidos a pa
 |---|---|---|
 | D1 | Datos con tipo: `Fact(key, statement, source, as_of)` y `Source(name, url, license, license_verified)` | ✅ `app/datavideo/facts.py` |
 | D2 | Guion estructurado en JSON: título + segmentos con texto, claves de datos y escena; verificación por segmento | ✅ `app/datavideo/script.py` |
-| D3 | Dos textos por segmento: el mostrado (cifras, para subtítulos) y el hablado (normalizado por código para que la voz lea bien unidades y cifras) | ⏳ `speech.py` |
-| D4 | Voz y tiempos por palabra con `voice.tts` del proyecto original; los tiempos fijan cuándo empieza y acaba cada segmento | ⏳ `timeline.py` |
-| D5 | Catálogo de escenas con interfaz común `draw(size, progress)`, renderizables en 9:16 y 16:9 | ✅ base + `hourly_prices`; ⏳ resto |
-| D6 | Montaje con las funciones del proyecto original (subtítulos, música, FFmpeg). Nuestro código solo aporta los clips de escena en orden, cada uno con la duración de su segmento | ⏳ `render.py` |
+| D3 | Un solo texto por segmento, el mismo para la voz y los subtítulos. Azure Speech en es-ES lee bien cifras con coma decimal, "%" y fechas; los datos se redactan con unidades en palabras ("puntos", "euros"). Un normalizador (`speech.py`) solo se añadirá cuando una fuente traiga unidades que la voz lea mal | Aplazado |
+| D4 | Voz y tiempos por palabra con `voice.tts` del proyecto original en una sola síntesis de toda la narración. Cada palabra se alinea con su segmento comparando solo letras y dígitos; el corte entre segmentos cae entre la última palabra de uno y la primera del siguiente | ⏳ `timeline.py` |
+| D5 | Catálogo de escenas con interfaz común `draw(size, progress)`, renderizables en 9:16 y 16:9. Las escenas dibujan los datos de la historia, nunca texto del modelo, y dejan libre el tercio inferior para los subtítulos | ✅ base; ⏳ `ranking`, `big_number`, `source_card` |
+| D6 | Montaje: nuestro código genera una única pista de escenas sin audio, con la duración exacta de la voz. `voice.create_subtitle` y `video.generate_video` del proyecto original añaden subtítulos, voz y, cuando haya licencia, música. No se usa `task.generate_final_videos`, porque corta y baraja los clips de material | ⏳ `render.py` |
 | D7 | Perfil de canal en `channels/<id>.toml`, validado de forma estricta | ✅ `app/datavideo/channels.py` |
-| D8 | Estado de cada ejecución en SQLite, pasos reanudables, publicación idempotente | ⏳ `store.py`, `pipeline.py` |
+| D8 | Cada ejecución tiene su carpeta (`storage/datavideo/<canal>/<historia>/`) con un artefacto por paso: respuesta de la fuente, datos, guion, audio, subtítulos, vídeo y resultado de publicación. Un paso se salta si su artefacto ya existe (reanudable) y una historia ya publicada no se vuelve a publicar (idempotente). SQLite solo si se necesitan consultas entre ejecuciones | ⏳ `store.py`, `pipeline.py` |
 | D9 | Interfaz de publicación común; Upload-Post ahora, APIs directas después | ⏳ `publish/` |
 | D10 | Límites de gasto mensuales por proveedor y canal | ⏳ `budget.py` |
 | D11 | Copia de cada respuesta de las fuentes con su licencia, para auditoría y pruebas | ⏳ `sources/` |
@@ -61,9 +62,9 @@ Planificador (cada noche, por canal) — sin tema de entrada
  3. Juez (LLM + pesos aprendidos) → si nada supera el listón, no se publica
  4. Guion JSON (LLM): segmentos + datos + escena + título + descripción (D2)
  5. Verificador: cifras por segmento, título, longitud, escenas y datos existentes
- 6. Texto hablado (D3) → voice.tts del proyecto original → audio + tiempos por palabra (D4)
+ 6. voice.tts del proyecto original → audio + tiempos por palabra (D3, D4)
  7. Línea de tiempo: cada segmento con su escena y su duración exacta
- 8. Escenas renderizadas en orden → montaje del proyecto original: subtítulos, música, FFmpeg (D5, D6)
+ 8. Pista de escenas → voice.create_subtitle + video.generate_video del proyecto original: subtítulos, voz, música (D5, D6)
  9. Controles técnicos: duración, volumen (-14 LUFS), fotogramas negros, metadatos
 10. Publicación programada con veto opcional por Telegram (D9)
 11. Estadísticas a 48 h y 7 días → pesos del juez, horarios, formatos
@@ -81,24 +82,22 @@ app/datavideo/
   script.py      ✅ guion estructurado y verificado
   channels.py    ✅ perfiles de canal y generador de texto por rol
   theme.py       ✅ colores y tipografía
-  scenes/        ✅ base.py (interfaz, render a clip), hourly_prices.py
-  electricity.py ✅ resumen diario PVPC → datos
-  sources/       ⏳ un cliente por fuente: ree, minetur_fuel, bde, ine, eurostat, worldbank, nasa, bls, eia, fred
-  stories/       ⏳ detectores de historias
-  judge.py       ⏳ juez con rúbrica + pesos aprendidos
-  speech.py      ⏳ texto hablado (D3)
-  timeline.py    ⏳ tiempos por palabra → segmentos con inicio y fin
-  render.py      ⏳ escenas en orden + llamada al montaje del proyecto original
+  scenes/        ✅ base.py (interfaz, render a clip); ⏳ ranking, big_number, source_card
+  sources/       ⏳ un cliente por fuente: ine (primero), eurostat, worldbank, nasa, bls, eia, fred; minetur_fuel y bde solo si se verifica su licencia
+  stories/       ⏳ detectores de historias: regional_ranking (primero)
+  judge.py       ⏳ juez con rúbrica + pesos aprendidos (cuando haya varias historias candidatas)
+  timeline.py    ⏳ voz, tiempos por palabra → segmentos con inicio y fin, subtítulos
+  render.py      ⏳ pista de escenas + montaje del proyecto original
   packaging.py   ⏳ título, descripción, etiquetas, capítulos, miniatura, avisos
   qa.py          ⏳ controles técnicos
-  publish/       ⏳ interfaz + upload_post + youtube_api + meta_graph
+  publish.py     ⏳ Upload-Post con la cuenta del perfil del canal (clave desde .env)
   analytics.py   ⏳ ingesta de estadísticas
   learning.py    ⏳ ajuste de pesos
   budget.py      ⏳ control de gasto
   notify.py      ⏳ Telegram
-  store.py       ⏳ SQLite
+  store.py       ⏳ carpeta por ejecución, artefactos por paso
   pipeline.py    ⏳ orquestación reanudable
-  cli.py         ⏳ produce | dry-run | publish | report
+  cli.py         ⏳ produce | publish
 ```
 
 ## 7. Contratos clave
@@ -109,7 +108,7 @@ app/datavideo/
 ```
 Reglas comprobadas por código: cada cifra de un segmento aparece en los datos que ese segmento cita; el título solo usa cifras de los datos; no hay números escritos con letra ni proporciones; claves y escenas existen; longitud total dentro del rango.
 
-**Perfil de canal (campos actuales):** `id`, `name`, `language`, `[models] provider/writer/judge`, `[voice] name/rate` (nombre de voz en el formato del proyecto original: `es-ES-AlvaroNeural-Male-V2` para Azure oficial, `elevenlabs:<voice_id>` para ElevenLabs, `es-ES-AlvaroNeural-Male` para Edge en desarrollo), `[theme]` con colores y fuente. Campos previstos que se añadirán cuando exista el módulo que los usa: `sources`, `formats`, `schedule`, `publish`, `budget`, `disclosure`, `affiliates`.
+**Perfil de canal (campos actuales):** `id`, `name`, `language`, `[models] provider/writer/judge`, `[voice] name/rate` (nombre de voz en el formato del proyecto original: `es-ES-TristanMultilingualNeural-V2-Male` para Azure oficial (sufijo `-V2` antes del género), `elevenlabs:<voice_id>` para ElevenLabs, `es-ES-AlvaroNeural-Male` para Edge en desarrollo), `[theme]` con colores y fuente. Campos previstos que se añadirán cuando exista el módulo que los usa: `sources`, `formats`, `schedule`, `publish`, `budget`, `disclosure`, `affiliates`.
 
 ## 8. Estrategia de pruebas
 

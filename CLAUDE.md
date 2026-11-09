@@ -39,7 +39,7 @@ If a new skill is added under `.claude/skills/`, add it to the list above in the
 Agreed with the owner:
 
 - The owner lives in Spain. Income is declared under Spanish tax rules, and TikTok's Creator Rewards Program is not available there, so TikTok is optional reach only.
-- Primary platform: YouTube (Shorts plus weekly and search-driven long-form videos). Instagram Reels and carousels and Facebook are secondary distribution of the same original content.
+- Primary platform: YouTube (Shorts plus weekly and search-driven long-form videos). Instagram Reels and carousels are secondary distribution of the same original content. Facebook is out permanently.
 - Four channels, launched one after another a few weeks apart, each with its own profile in `channels/`: `tu_dinero_es` (household finance, Spain, Spanish), `your_money_us` (household finance, US, English), `mundo_es` (the world in data, Spanish), `space_en` (space and science, English). Sports channels are out: paid sports APIs grant no rights over the competitions and sports RPM is low; a later experiment may use public-domain openfootball data, never match footage.
 - Only data sources whose licence allows commercial use. A source is used in a published video only when `Source.license_verified` is true.
 - Topics are never typed in by a person: the story detector picks them from each channel's official data, the judge chooses, the writer scripts. The LLM does not search the web.
@@ -52,8 +52,8 @@ Agreed with the owner:
 - Automatic quality gates decide publication; Telegram alerts the owner only for blocked items plus a weekly digest.
 - One engine, many channel profiles. Each channel has its own niche, data, and identity. Never build channel farms, duplicate content across channels, evade platform detection, fake engagement, or reupload third-party content.
 - Spend only where a channel proves it with data; pause a channel that shows no growth at its 3- and 6-month reviews.
-- Publishing gateway: the upstream Upload-Post integration (`app/services/upload_post.py`) for YouTube, Instagram, Facebook, and TikTok. Instagram carousels use Upload-Post's `/api/upload_photos` endpoint, which extends the existing service when carousels are built. Zernio is not used.
-- Request the YouTube Data API audit in parallel. Switching YouTube uploads to the direct API is optional once the audit passes. The OAuth consent screen must be in Production status, never Testing.
+- Publishing gateway: the upstream Upload-Post integration (`app/services/upload_post.py`) for YouTube, Instagram, and TikTok. Instagram carousels use Upload-Post's `/api/upload_photos` endpoint, which extends the existing service when carousels are built. Zernio is not used.
+- The YouTube Data API audit is not requested: since 2 November 2026 uploads from unaudited API projects are no longer forced to private, and the default quota of 100 `videos.insert` calls per day is enough. Switching YouTube uploads to the direct API is optional. The OAuth consent screen must be in Production status, never Testing.
 - Comments are not automated. Moderation relies on native platform settings configured by the owner: YouTube Studio blocked words with "hold potentially inappropriate comments for review", and Instagram Hidden Words. Revisit automated moderation or replies only if comment volume or scam spam makes manual settings insufficient; replies would then be factual, drawn only from the channel's own data, never generic, and never personalized financial advice.
 
 ## Upstream Compatibility
