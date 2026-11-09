@@ -22,6 +22,11 @@ name = "es-ES-TristanMultilingualNeural-V2-Male"
 
 [theme]
 positive = [0, 200, 100]
+
+[publish]
+user = "default"
+platforms = ["youtube"]
+privacy = "private"
 """
 
 
@@ -112,3 +117,31 @@ def test_repository_voices_resolve_to_an_azure_voice():
 
     for profile in load_channels(CHANNELS_DIRECTORY).values():
         assert is_azure_v2_voice(profile.voice.name).endswith("Neural"), profile.id
+
+
+def test_publish_settings_and_stories_are_loaded(tmp_path):
+    content = VALID_PROFILE.replace('language = "es-ES"', 'language = "es-ES"\nstories = ["ipc_anual_ccaa"]')
+
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
+
+    assert profile.stories == ("ipc_anual_ccaa",)
+    assert profile.publish.user == "default"
+    assert profile.publish.platforms == ["youtube"]
+    assert profile.publish.privacy == "private"
+
+
+@pytest.mark.parametrize("field, value", [("privacy", '"secret"'), ("platforms", '["facebook"]')])
+def test_publish_settings_outside_the_allowed_values_are_rejected(tmp_path, field, value):
+    line = {"privacy": 'privacy = "private"', "platforms": 'platforms = ["youtube"]'}[field]
+    content = VALID_PROFILE.replace(line, f"{field} = {value}")
+
+    with pytest.raises(ValueError, match=field):
+        load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
+
+
+def test_a_profile_without_publish_settings_cannot_publish(tmp_path):
+    content = VALID_PROFILE.split("[publish]")[0]
+
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
+
+    assert profile.publish is None

@@ -2,7 +2,7 @@ import os
 import tomllib
 from dataclasses import dataclass, replace
 from pathlib import Path
-from typing import Callable
+from typing import Callable, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, ValidationError
 
@@ -29,6 +29,12 @@ class VoiceSettings(_StrictModel):
     rate: float = Field(default=1.0, gt=0)
 
 
+class PublishSettings(_StrictModel):
+    user: str = Field(pattern=r"^[A-Za-z0-9_@-]+$")
+    platforms: list[Literal["youtube", "instagram"]] = Field(min_length=1)
+    privacy: Literal["private", "unlisted", "public"]
+
+
 class _ThemeOverrides(_StrictModel):
     background: Color | None = None
     neutral: Color | None = None
@@ -43,9 +49,11 @@ class _ProfilePayload(_StrictModel):
     id: str = Field(pattern=r"^[a-z0-9_]+$")
     name: str = Field(min_length=1)
     language: str
+    stories: list[str] = []
     models: ModelRoles
     voice: VoiceSettings
     theme: _ThemeOverrides = _ThemeOverrides()
+    publish: PublishSettings | None = None
 
 
 @dataclass(frozen=True)
@@ -56,6 +64,8 @@ class ChannelProfile:
     models: ModelRoles
     voice: VoiceSettings
     theme: Theme
+    stories: tuple[str, ...] = ()
+    publish: PublishSettings | None = None
 
 
 def load_channel(path: Path) -> ChannelProfile:
@@ -74,6 +84,8 @@ def load_channel(path: Path) -> ChannelProfile:
         models=payload.models,
         voice=payload.voice,
         theme=replace(DEFAULT_THEME, **payload.theme.model_dump(exclude_none=True)),
+        stories=tuple(payload.stories),
+        publish=payload.publish,
     )
 
 

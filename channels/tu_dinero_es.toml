@@ -1,6 +1,7 @@
 id = "tu_dinero_es"
 name = "Tu Dinero en Datos"
 language = "es-ES"
+stories = ["ipc_anual_ccaa"]
 
 [models]
 provider = "openai"
@@ -13,3 +14,8 @@ rate = 1.0
 
 [theme]
 font_file = "BeVietnamPro-Bold.ttf"
+
+[publish]
+user = "default"
+platforms = ["youtube"]
+privacy = "private"
