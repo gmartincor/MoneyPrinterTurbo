@@ -1,11 +1,13 @@
 import argparse
 import sys
 from dataclasses import dataclass, field
+from datetime import datetime, timezone
 from typing import Callable, Sequence
 
 from loguru import logger
 
 from app.datavideo.channels import ChannelProfile, load_channels
+from app.datavideo.digest import weekly_digest
 from app.datavideo.notify import send_alert
 from app.datavideo.pipeline import BlockedPublication, produce, publish
 from app.datavideo.script import ScriptRejected
@@ -58,9 +60,16 @@ def run_channel(
 def main(argv: Sequence[str] | None = None) -> int:
     profiles = load_channels()
     parser = argparse.ArgumentParser(prog="python -m app.datavideo.cli")
-    parser.add_argument("command", choices=["produce", "run"], help="produce only, or produce and publish")
+    parser.add_argument(
+        "command", choices=["produce", "run", "report"], help="produce only, produce and publish, or send the weekly digest"
+    )
     parser.add_argument("channel", choices=sorted(profiles))
     arguments = parser.parse_args(argv)
+    if arguments.command == "report":
+        digest = weekly_digest(arguments.channel, datetime.now(timezone.utc))
+        print(digest)
+        send_alert(digest)
+        return 0
     outcome = run_channel(profiles[arguments.channel], publish_videos=arguments.command == "run")
     for line in outcome.lines:
         print(line)

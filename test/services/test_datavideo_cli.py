@@ -110,3 +110,12 @@ def test_the_command_line_returns_a_failure_code_when_the_run_failed(monkeypatch
 def test_the_command_line_rejects_unknown_channels():
     with pytest.raises(SystemExit):
         cli.main(["run", "no_existe"])
+
+
+def test_the_report_command_sends_the_weekly_digest(monkeypatch):
+    sent = Alerts()
+    monkeypatch.setattr(cli, "weekly_digest", lambda channel, now: f"Resumen semanal de {channel}")
+    monkeypatch.setattr(cli, "send_alert", sent)
+
+    assert cli.main(["report", "tu_dinero_es"]) == 0
+    assert sent == ["Resumen semanal de tu_dinero_es"]
