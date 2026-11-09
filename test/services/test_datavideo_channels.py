@@ -18,7 +18,7 @@ writer = "gpt-6.1-sol"
 judge = "gpt-6.1-sol"
 
 [voice]
-name = "es-ES-AlvaroNeural-Male-V2"
+name = "es-ES-TristanMultilingualNeural-V2-Male"
 
 [theme]
 positive = [0, 200, 100]
@@ -37,12 +37,12 @@ def test_profile_is_loaded_with_its_language_models_and_voice(tmp_path):
     assert profile.id == "tu_dinero_es"
     assert profile.language == SPANISH_SPAIN
     assert profile.models.writer == "gpt-6.1-sol"
-    assert profile.voice.name == "es-ES-AlvaroNeural-Male-V2"
+    assert profile.voice.name == "es-ES-TristanMultilingualNeural-V2-Male"
     assert profile.voice.rate == 1.0
 
 
 def test_profile_without_a_voice_is_rejected(tmp_path):
-    content = VALID_PROFILE.replace('[voice]\nname = "es-ES-AlvaroNeural-Male-V2"', "")
+    content = VALID_PROFILE.replace('[voice]\nname = "es-ES-TristanMultilingualNeural-V2-Male"', "")
 
     with pytest.raises(ValueError, match="voice"):
         load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
@@ -105,3 +105,10 @@ def test_text_generator_rejects_unknown_roles(tmp_path):
 
     with pytest.raises(ValueError, match="role"):
         text_generator(profile, "editor")
+
+
+def test_repository_voices_resolve_to_an_azure_voice():
+    from app.services.voice import is_azure_v2_voice
+
+    for profile in load_channels(CHANNELS_DIRECTORY).values():
+        assert is_azure_v2_voice(profile.voice.name).endswith("Neural"), profile.id

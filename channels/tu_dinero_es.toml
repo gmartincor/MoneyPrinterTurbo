@@ -8,7 +8,7 @@ writer = "gpt-6.1-sol"
 judge = "gpt-6.1-sol"
 
 [voice]
-name = "es-ES-AlvaroNeural-Male-V2"
+name = "es-ES-TristanMultilingualNeural-V2-Male"
 rate = 1.0
 
 [theme]
