@@ -24,6 +24,7 @@ class RegionalRankingStory:
     measure: str
     indicator: str
     topic: str
+    tags: tuple[str, ...] = ()
     higher_is_better: bool = False
 
 
@@ -33,7 +34,9 @@ CPI_ANNUAL_BY_REGION = RegionalRankingStory(
     measure="Índice general. Variación anual.",
     indicator="Inflación anual",
     topic="la inflación anual por comunidades autónomas según el INE",
+    tags=("inflación", "IPC", "comunidades autónomas", "INE", "economía", "España"),
 )
+STORIES = {story.key: story for story in (CPI_ANNUAL_BY_REGION,)}
 
 
 @dataclass(frozen=True)
