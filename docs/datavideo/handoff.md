@@ -14,23 +14,30 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 
 | Módulo | Qué hace |
 |---|---|
-| `locale.py` | Formatea números, porcentajes y fechas en es-ES y en-US |
-| `facts.py` | Modelo de dato (`Fact`) y de fuente (`Source`, con licencia y si está verificada) |
-| `figures.py` | Comprueba que cada cifra de un texto aparece en los datos y rechaza números escritos con letra (es-ES, en-US) |
-| `script.py` | Pide el guion en JSON (título + segmentos con datos y escena), lo verifica segmento a segmento, reintenta y bloquea si no pasa |
-| `channels.py` | Carga y valida `channels/*.toml`; crea el generador de texto por rol (guionista, juez) |
-| `theme.py`, `scenes/` | Interfaz de escenas, render a clip y escena `hourly_prices` en 9:16 y 16:9 |
-| `electricity.py` | Resume los 24 precios PVPC del día en datos (hora más barata y más cara, media, franja de 3 h, diferencia) |
+| `locale.py`, `facts.py`, `figures.py` | Formato es-ES/en-US (números, porcentajes, fechas, meses); datos con etiqueta, valor, detalle y fuente con licencia; verificación de cifras |
+| `sources/ine.py` | Cliente de la API Tempus del INE: descarga, valida y conserva los valores como decimales exactos. Licencia CC BY 4.0 verificada |
+| `stories/regional_ranking.py` | Ranking por comunidades del último mes publicado por todas (empates, Ceuta y Melilla como ciudades autónomas) y sus datos. Historia `ipc_anual_ccaa` (tabla 76140) |
+| `script.py` | Guion JSON verificado: cifras por segmento, 4–7 segmentos de 30 palabras como máximo, escenas existentes, `big_number` con un dato; reintenta y bloquea |
+| `channels.py` | Perfiles `channels/*.toml` con historias y `[publish]` (perfil de Upload-Post, redes, privacidad) |
+| `scenes/` | `ranking`, `big_number` y `source_card` en 9:16 y 16:9, con el tercio inferior libre para subtítulos |
+| `timeline.py`, `audio.py` | Una síntesis de toda la narración con Azure, segmentos alineados por palabra, subtítulos del motor original; voz normalizada a −14 LUFS |
+| `render.py` | Pista de escenas con la duración de cada segmento y montaje con `video.generate_video` del motor original, sin música |
+| `qa.py` | Bloquea por tamaño, audio, duración, desfase con la narración, volumen o subtítulos |
+| `packaging.py` | Título, descripción con fuente, atribución, mes, aviso de IA y de no asesoramiento, etiquetas |
+| `store.py`, `pipeline.py` | Carpeta por historia con un artefacto por paso; reanudable, no repite historias publicadas, no publica sin licencia verificada ni controles superados y nunca reintenta solo una subida sin confirmar |
+| `publish.py`, `notify.py`, `digest.py` | Upload-Post con la clave de `.env`; Telegram solo para bloqueos, fallos y resumen semanal |
+| `cli.py` | `produce`, `run` (produce y publica) y `report` (resumen semanal) |
 
-- Perfil creado: `channels/tu_dinero_es.toml` con la voz provisional de Azure `es-ES-AlvaroNeural-Male-V2` (se elegirá la definitiva escuchando muestras; ese nombre está mal formado, ver tarea 8 de H1). Es el único perfil creado: faltan `your_money_us`, `mundo_es` y `space_en`.
-- Pruebas: `uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py` → todas pasan en ~2 segundos.
-- La batería completa del proyecto original (~3.200 pruebas, 12–14 min) tiene 9 fallos **heredados** en pruebas de audio con Python 3.13 (`test_remote_speech_complete_decode`, `test_webui_bgm`, `test_webui_custom_audio_upload`, `test_bgm_decoded_audio`). Ya fallaban antes de este trabajo. Solo se ejecuta en local si se toca código del proyecto original; si no, la ejecuta GitHub Actions al subir a `main` (ver `CLAUDE.md`, *Verification Policy*).
-- Decisión revisada: la voz, los subtítulos, la música y el montaje **los hace el motor del proyecto original**; nosotros solo aportamos datos, guion verificado y escenas. ElevenLabs deja de ser necesario de entrada.
-
-**Automatización:** todavía no existe. Ningún punto de entrada (`cli.py`, API, WebUI) usa `app/datavideo/`, no hay planificador y el motor original (voz, subtítulos, montaje, publicación) aún no está conectado. No se puede generar un vídeo de principio a fin.
-
-**Pendiente de bloqueo externo:**
-- Faltan las cuentas y claves de la sección 3.
+- **Cómo se usa** (claves en `.env`):
+  ```bash
+  uv run --env-file .env --no-sync python -X utf8 -m app.datavideo.cli produce tu_dinero_es
+  ```
+  `run` en lugar de `produce` también publica; `report` envía el resumen semanal. Los vídeos quedan en `storage/datavideo/<canal>/<historia>/final.mp4`.
+- **Primer Short real (9 de noviembre de 2026):** `storage/datavideo/tu_dinero_es/ipc_anual_ccaa_2026_09/final.mp4`, inflación anual por comunidades de septiembre de 2026: 38 s, 5 escenas, −15,2 LUFS, controles superados. Producirlo cuesta ~55 s.
+- **Sin publicar todavía:** el clasificador de seguridad de Claude Code bloqueó el comando de subida. El propietario lo ejecuta a mano (`run` en vez de `produce`); sube en **privado** al canal personal de pruebas (perfil `default`).
+- Voz del canal 1: `es-ES-TristanMultilingualNeural-V2-Male` (castellano). Muestras de otras cinco voces disponibles si se quiere cambiar.
+- Pruebas: `uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py` → 160 pruebas en ~5 s (necesitan FFmpeg).
+- La batería completa del proyecto original (~3.200 pruebas, 12–14 min) tiene 9 fallos **heredados** en pruebas de audio con Python 3.13 (`test_remote_speech_complete_decode`, `test_webui_bgm`, `test_webui_custom_audio_upload`, `test_bgm_decoded_audio`). No se ha tocado código del proyecto original.
 
 **Decisión del propietario (9 de noviembre de 2026):** REE queda descartada. El canal 1 se construye sobre INE y Eurostat, con el vídeo largo semanal como formato principal y los Shorts como entrada a él. Facebook queda fuera definitivamente.
 
@@ -87,12 +94,12 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 | # | Servicio | Para qué | Qué hacer | Coste | Variable | Cuándo |
 |---|---|---|---|---|---|---|
 | 1 | **OpenAI Platform** | Guionista y juez (GPT-6.1 Sol) | Crear clave de API y **poner un límite de gasto mensual** (p. ej. 20 $) | ~3–10 $/mes | `OPENAI_API_KEY` | H1 |
-| 2 | **Azure (Speech)** | Voz | En el portal de Azure, crear un recurso *Speech* en *North Europe* (West Europe no admite clientes nuevos): plan gratuito **F0** para H1 y **pago por uso (S0)** al empezar a publicar. Copiar la clave a `.env` (`AZURE_SPEECH_KEY`, que `timeline.py` pasará a `config.azure`, porque el motor solo lee de ahí) y la región a `config.toml` → `[azure] speech_region`. Mientras tanto, en desarrollo se puede usar Edge TTS (gratis) con `es-ES-AlvaroNeural-Male` | ~1–5 $/mes | `AZURE_SPEECH_KEY` | H1 |
+| 2 | **Azure (Speech)** | Voz | En el portal de Azure, crear un recurso *Speech* en *North Europe* (West Europe no admite clientes nuevos): plan gratuito **F0** para H1 y **pago por uso (S0)** al empezar a publicar. Copiar la clave a `.env` (`AZURE_SPEECH_KEY`; `timeline.py` la pasa a `config.azure` en memoria) y la región a `config.toml` → `[azure] speech_region` | ~1–5 $/mes | `AZURE_SPEECH_KEY` | H1 |
 | 2b | **ElevenLabs** (opcional, más adelante) | Voz más natural | Solo si las estadísticas de un canal muestran que la voz hace que la gente se vaya. Cuenta separada de la de tus agentes, voz creada con Voice Design, y en el perfil `voice.name = "elevenlabs:<voice_id>"` | 22–99 $/mes | `ELEVENLABS_API_KEY` | Si los datos lo justifican |
 | 3 | **Google / YouTube** | Canales | Verificación en dos pasos. Crear un **canal de pruebas** (privado, sin verificar por teléfono) y la cuenta de marca *Tu Dinero en Datos*. Cada número de teléfono solo verifica **2 canales al año** y la verificación es necesaria para miniaturas propias y vídeos de más de 15 min: los 4 canales necesitan 2 números | 0 € | — | H1 (pruebas), H2 |
 | 4 | **Google Cloud** | Estadísticas y API de YouTube | Proyecto nuevo; activar *YouTube Data API v3* y *YouTube Analytics API*; pantalla de consentimiento OAuth en **Producción** (nunca *Testing*; sin verificar sirve para uso propio con menos de 100 usuarios); cliente OAuth de escritorio. Desde el 2 de noviembre de 2026 los vídeos subidos desde proyectos sin auditar ya no quedan privados: la **auditoría** no se solicita (decisión del propietario), solo sería obligatoria para superar 100 `videos.insert` al día | 0 € | `GOOGLE_OAUTH_CLIENT_FILE` (ruta al JSON) | H3 |
 | 5 | **Instagram** | Reels y carruseles | Cuenta profesional por canal, creada al lanzar cada uno | 0 € | — | H2 |
-| 6 | **Upload-Post** | Publicar | Plan **Free** para H1 (2 perfiles, 10 subidas/mes). Desde H2, plan **Basic** (5 perfiles: los 4 canales y el de pruebas), un perfil por canal con YouTube e Instagram conectados. En H1 fijar `upload_post_platforms = ["youtube"]` y `upload_post_youtube_privacy_status = "private"`: los valores por defecto son TikTok + Instagram y `public` | 0 $ en H1; luego 24 $/mes, o 16 $/mes con pago anual (192 $) | `.env`: `UPLOAD_POST_API_KEY` (la pasará `publish/` con `cross_post_video(account=...)`, porque `upload_post.py` solo lee `config.toml`). `config.toml`: `upload_post_enabled`, `upload_post_username` | H1 (Free), H2 (Basic) |
+| 6 | **Upload-Post** | Publicar | Plan **Free** para H1 (2 perfiles, 10 subidas/mes). Desde H2, plan **Basic** (5 perfiles: los 4 canales y el de pruebas), un perfil por canal con YouTube e Instagram conectados. En H1 fijar `upload_post_platforms = ["youtube"]` y `upload_post_youtube_privacy_status = "private"`: los valores por defecto son TikTok + Instagram y `public` | 0 $ en H1; luego 24 $/mes, o 16 $/mes con pago anual (192 $) | `.env`: `UPLOAD_POST_API_KEY` (`publish.py` la pasa con `cross_post_video(account=...)`). Perfil, redes y privacidad en `[publish]` del perfil del canal | H1 (Free), H2 (Basic) |
 | 7 | **Telegram** | Avisos y veto | Crear bot con @BotFather y obtener tu `chat_id` | 0 € | `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID` | H2 |
 | 8 | **Datos España** | Canal 1 | INE y Eurostat responden sin registro (comprobado) | 0 € | — | H1 |
 | 9 | **Datos EE. UU.** | Canal 2 | Registro gratuito en BLS, EIA y FRED | 0 € | `BLS_API_KEY`, `EIA_API_KEY`, `FRED_API_KEY` | H4 |
@@ -105,7 +112,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 | 15 | **Gestor fiscal** | Hacienda | Consultar **antes del primer ingreso**: alta censal, autónomo (tarifa plana en torno a 80 €/mes el primer año) e IRPF | — | — | Antes de cobrar |
 | 16 | **Dominio + Cloudflare Pages** | Web de datos | Registrar dominio y crear el proyecto | ~1 €/mes | `CLOUDFLARE_API_TOKEN` | H5 |
 
-`UPLOAD_POST_API_KEY`, `AZURE_SPEECH_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_CHAT_ID`, `BLS_API_KEY`, `EIA_API_KEY`, `FRED_API_KEY`, `NASA_API_KEY`, `GOOGLE_OAUTH_CLIENT_FILE` y `CLOUDFLARE_API_TOKEN` son nombres previstos: el código que los leerá aún no existe. Hoy solo se leen `OPENAI_API_KEY`, `ELEVENLABS_API_KEY` y las claves de `config.toml`.
+Hoy se leen `OPENAI_API_KEY`, `AZURE_SPEECH_KEY`, `UPLOAD_POST_API_KEY`, `TELEGRAM_BOT_TOKEN` y `TELEGRAM_CHAT_ID`. `BLS_API_KEY`, `EIA_API_KEY`, `FRED_API_KEY`, `NASA_API_KEY`, `GOOGLE_OAUTH_CLIENT_FILE` y `CLOUDFLARE_API_TOKEN` son nombres previstos para código que aún no existe.
 
 ---
 
@@ -120,33 +127,35 @@ Una fuente solo puede usarse en un vídeo publicado cuando su `Source.license_ve
 - Mapas: Natural Earth (dominio público), IGN/CNIG (CC BY 4.0).
 - Fuente tipográfica BeVietnamPro (OFL) y biblioteca de música elegida.
 
-**Comprobadas el 9 de noviembre de 2026** (falta anotarlas en el código de cada fuente):
+**Comprobadas el 9 de noviembre de 2026:**
 
-- **INE:** CC BY 4.0, uso comercial permitido sin autorización. Citar "Elaboración propia con datos extraídos del sitio web del INE: www.ine.es" y la fecha de última actualización; no sugerir que el INE participa o respalda el vídeo. Solo cubre información cuya fuente original sea el INE.
-- **Eurostat:** uso comercial permitido citando la fuente, sin licencia escrita. Antes hay que retirar los datos de países fuera de la UE, la AELC y los candidatos, y los de fuentes ajenas a Eurostat.
+- **INE** (anotada en `sources/ine.py`): CC BY 4.0, uso comercial permitido sin autorización. Citar "Elaboración propia con datos extraídos del sitio web del INE: www.ine.es" y la fecha de última actualización; no sugerir que el INE participa o respalda el vídeo. Solo cubre información cuya fuente original sea el INE.
+- **Eurostat** (falta anotarla al crear su cliente): uso comercial permitido citando la fuente, sin licencia escrita. Antes hay que retirar los datos de países fuera de la UE, la AELC y los candidatos, y los de fuentes ajenas a Eurostat.
 - **BLS y EIA:** dominio público; citar la fuente (EIA, con fecha). Sin sus logos ni fotografías de terceros.
 
 ---
 
 ## 5. Siguientes pasos
 
-### H1 — Primer Short real, en privado
+### H1 — Primer Short real, en privado (casi terminado)
 
-| # | Tarea | Aceptación | Verificación |
-|---|---|---|---|
-| 1 | `sources/ine.py`: cliente de la API Tempus del INE | Cliente con timeout y validación; respuesta real guardada como fixture; produce `Fact` con la licencia CC BY 4.0 verificada. Se retiran `electricity.py`, `scenes/hourly_prices.py` y sus pruebas | Prueba de contrato con la fixture |
-| 2 | `speech.py`: texto hablado es-ES/en-US | "0,082 €/kWh", "14:00", "181 %" y fechas se convierten a palabras que la voz lee bien | Pruebas unitarias |
-| 3 | `timeline.py` con `voice.tts` del proyecto original | Pasa `AZURE_SPEECH_KEY` a `config.azure`, genera el audio con la voz del perfil y convierte los tiempos por palabra (`SubMaker`) en inicio y fin de cada segmento; subtítulos por frase con el texto mostrado | Pruebas unitarias con tiempos de ejemplo + prueba real con Edge TTS |
-| 4 | Escenas `ranking`, `big_number` y `source_card` | Se ven bien en 9:16 y 16:9 | Imágenes de referencia + revisión visual |
-| 5 | `render.py` | Renderiza las escenas en orden con la duración de cada segmento y llama a `task.generate_final_videos` del proyecto original (subtítulos, música, FFmpeg) para obtener el Short 9:16. `bgm_type` vacío hasta tener música con licencia: el valor por defecto del motor (`random`) usa `resource/songs` | Prueba de render corta |
-| 6 | `store.py`, `pipeline.py`, `cli.py dry-run` | Ejecución completa para `tu_dinero_es` sin publicar, reanudable. La publicación se bloquea si alguna fuente tiene `license_verified` en falso (hoy nada lo comprueba) | Simulación de principio a fin |
-| 7 | Banco de pruebas de guiones | 20 casos; comparar GPT-6.1 Sol y Terra; anotar resultado en `architecture.md` | Informe del banco |
-| 8 | Elegir la voz | Generar muestras con 3–4 voces de Azure en español; el propietario elige una y se fija en el perfil. Formato correcto: `es-ES-AlvaroNeural-V2-Male` (`…-Male-V2` se resuelve a una voz inexistente; corregir perfil, prueba y `architecture.md`) | Revisión del propietario |
-
-**Fin de H1:** un Short generado con datos reales de hoy, verificado, con voz, revisado por el propietario y subido en **privado** al canal de pruebas.
+| # | Tarea | Estado |
+|---|---|---|
+| 1 | Subir el primer Short en privado al canal de pruebas y revisarlo | **Lo hace el propietario:** `uv run --env-file .env --no-sync python -X utf8 -m app.datavideo.cli run tu_dinero_es` |
+| 2 | Banco de pruebas de guiones: 20 casos, GPT-6.1 Sol frente a Terra; anotar el resultado en `architecture.md` | Pendiente |
+| 3 | Confirmar la voz escuchando las muestras (Tristán elegida por defecto) | Propietario |
 
 ### H2 — Canal 1 publicando solo
-Vídeo largo 16:9 con capítulos y miniaturas (formato principal), detector de historias, juez, títulos y descripciones con avisos, publicación con Upload-Post, planificador, límites de gasto y Telegram (avisos, veto y resumen semanal).
+
+| # | Tarea | Aceptación |
+|---|---|---|
+| 1 | Planificador | `run` cada noche y `report` cada lunes en el servidor (o el Mac encendido), con registro de salida. Requiere decidir dónde corre |
+| 2 | Pasar el canal 1 a producción | Cuando YouTube apruebe el DNI: crear *Tu Dinero en Datos* (`@TuDineroDatos`), conectarlo al perfil `tu_dinero_es` de Upload-Post, contratar el plan Basic y cambiar `[publish]` a `user = "tu_dinero_es"`, `platforms = ["youtube", "instagram"]`, `privacy = "public"` |
+| 3 | Más historias | Otras tablas del INE (vivienda por comunidades, paro de la EPA, salarios) y comparaciones con Europa (Eurostat). Exige historias trimestrales y anuales, no solo mensuales, y un juez que elija entre varias candidatas |
+| 4 | Vídeo largo semanal 16:9 | Formato principal: 8–12 min con capítulos y miniatura, a partir de varias historias de la semana |
+| 5 | Límites de gasto | Coste por guion y por voz con tope mensual por canal; pasar Azure a S0 cuando se supere el plan gratuito |
+| 6 | Instagram | Foto de perfil y biografía; carruseles con `/api/upload_photos` |
+| 7 | Música | Elegir biblioteca con licencia comercial o seguir sin música |
 
 ### H3 — Estadísticas y más fuentes
 Más fuentes oficiales con licencia verificada, estadísticas, afiliados.

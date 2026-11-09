@@ -43,15 +43,15 @@ Producir y publicar sin intervención humana vídeos originales construidos a pa
 | D1 | Datos con tipo: `Fact(key, statement, source, as_of)` y `Source(name, url, license, license_verified)` | ✅ `app/datavideo/facts.py` |
 | D2 | Guion estructurado en JSON: título + segmentos con texto, claves de datos y escena; verificación por segmento | ✅ `app/datavideo/script.py` |
 | D3 | Un solo texto por segmento, el mismo para la voz y los subtítulos. Azure Speech en es-ES lee bien cifras con coma decimal, "%" y fechas; los datos se redactan con unidades en palabras ("puntos", "euros"). Un normalizador (`speech.py`) solo se añadirá cuando una fuente traiga unidades que la voz lea mal | Aplazado |
-| D4 | Voz y tiempos por palabra con `voice.tts` del proyecto original en una sola síntesis de toda la narración. Cada palabra se alinea con su segmento comparando solo letras y dígitos; el corte entre segmentos cae entre la última palabra de uno y la primera del siguiente | ⏳ `timeline.py` |
-| D5 | Catálogo de escenas con interfaz común `draw(size, progress)`, renderizables en 9:16 y 16:9. Las escenas dibujan los datos de la historia, nunca texto del modelo, y dejan libre el tercio inferior para los subtítulos | ✅ base; ⏳ `ranking`, `big_number`, `source_card` |
-| D6 | Montaje: nuestro código genera una única pista de escenas sin audio, con la duración exacta de la voz. `voice.create_subtitle` y `video.generate_video` del proyecto original añaden subtítulos, voz y, cuando haya licencia, música. No se usa `task.generate_final_videos`, porque corta y baraja los clips de material | ⏳ `render.py` |
+| D4 | Voz y tiempos por palabra con `voice.tts` del proyecto original en una sola síntesis de toda la narración. Cada palabra se alinea con su segmento comparando solo letras y dígitos; el corte entre segmentos cae entre la última palabra de uno y la primera del siguiente. La voz se normaliza a −14 LUFS | ✅ `timeline.py`, `audio.py` |
+| D5 | Catálogo de escenas con interfaz común `draw(size, progress)`, renderizables en 9:16 y 16:9. Las escenas dibujan los datos de la historia, nunca texto del modelo, y dejan libre el tercio inferior para los subtítulos | ✅ `ranking`, `big_number`, `source_card` |
+| D6 | Montaje: nuestro código genera una única pista de escenas sin audio, con la duración exacta de la voz. `voice.create_subtitle` y `video.generate_video` del proyecto original añaden subtítulos, voz y, cuando haya licencia, música. No se usa `task.generate_final_videos`, porque corta y baraja los clips de material | ✅ `render.py` |
 | D7 | Perfil de canal en `channels/<id>.toml`, validado de forma estricta | ✅ `app/datavideo/channels.py` |
-| D8 | Cada ejecución tiene su carpeta (`storage/datavideo/<canal>/<historia>/`) con un artefacto por paso: respuesta de la fuente, datos, guion, audio, subtítulos, vídeo y resultado de publicación. Un paso se salta si su artefacto ya existe (reanudable) y una historia ya publicada no se vuelve a publicar (idempotente). SQLite solo si se necesitan consultas entre ejecuciones | ⏳ `store.py`, `pipeline.py` |
-| D9 | Interfaz de publicación común; Upload-Post ahora, APIs directas después | ⏳ `publish/` |
+| D8 | Cada ejecución tiene su carpeta (`storage/datavideo/<canal>/<historia>/`) con un artefacto por paso: respuesta de la fuente, datos, guion, audio, subtítulos, vídeo y resultado de publicación. Un paso se salta si su artefacto ya existe (reanudable) y una historia ya publicada no se vuelve a publicar (idempotente). SQLite solo si se necesitan consultas entre ejecuciones | ✅ `store.py`, `pipeline.py` |
+| D9 | Publicación con Upload-Post: cuenta por llamada con la clave de `.env`; perfil, redes y privacidad en `[publish]` del canal. Nunca se reintenta sola una subida sin confirmar | ✅ `publish.py` |
 | D10 | Límites de gasto mensuales por proveedor y canal | ⏳ `budget.py` |
-| D11 | Copia de cada respuesta de las fuentes con su licencia, para auditoría y pruebas | ⏳ `sources/` |
-| D12 | Avisos legales automáticos en descripción y pantalla | ⏳ `packaging.py` |
+| D11 | Copia de cada respuesta de las fuentes con su licencia, para auditoría y pruebas | ✅ `source.json` por ejecución |
+| D12 | Avisos legales automáticos en descripción y pantalla | ✅ `packaging.py`, escena `source_card` |
 
 ## 5. Flujo de un vídeo
 
@@ -82,22 +82,24 @@ app/datavideo/
   script.py      ✅ guion estructurado y verificado
   channels.py    ✅ perfiles de canal y generador de texto por rol
   theme.py       ✅ colores y tipografía
-  scenes/        ✅ base.py (interfaz, render a clip); ⏳ ranking, big_number, source_card
-  sources/       ⏳ un cliente por fuente: ine (primero), eurostat, worldbank, nasa, bls, eia, fred; minetur_fuel y bde solo si se verifica su licencia
-  stories/       ⏳ detectores de historias: regional_ranking (primero)
+  scenes/        ✅ base.py, catalog.py, ranking.py, figures.py (big_number, source_card)
+  sources/       ✅ ine; ⏳ eurostat, worldbank, nasa, bls, eia, fred; minetur_fuel y bde solo si se verifica su licencia
+  stories/       ✅ regional_ranking; ⏳ más detectores
   judge.py       ⏳ juez con rúbrica + pesos aprendidos (cuando haya varias historias candidatas)
-  timeline.py    ⏳ voz, tiempos por palabra → segmentos con inicio y fin, subtítulos
-  render.py      ⏳ pista de escenas + montaje del proyecto original
-  packaging.py   ⏳ título, descripción, etiquetas, capítulos, miniatura, avisos
-  qa.py          ⏳ controles técnicos
-  publish.py     ⏳ Upload-Post con la cuenta del perfil del canal (clave desde .env)
+  timeline.py    ✅ voz, tiempos por palabra → segmentos con inicio y fin, subtítulos
+  audio.py       ✅ normalización a −14 LUFS y medición
+  render.py      ✅ pista de escenas + montaje del proyecto original
+  packaging.py   ✅ título, descripción, etiquetas, avisos; ⏳ capítulos, miniatura
+  qa.py          ✅ controles técnicos
+  publish.py     ✅ Upload-Post con la cuenta del perfil del canal (clave desde .env)
   analytics.py   ⏳ ingesta de estadísticas
   learning.py    ⏳ ajuste de pesos
   budget.py      ⏳ control de gasto
-  notify.py      ⏳ Telegram
-  store.py       ⏳ carpeta por ejecución, artefactos por paso
-  pipeline.py    ⏳ orquestación reanudable
-  cli.py         ⏳ produce | publish
+  notify.py      ✅ Telegram (bloqueos y fallos)
+  digest.py      ✅ resumen semanal
+  store.py       ✅ carpeta por ejecución, artefactos por paso
+  pipeline.py    ✅ orquestación reanudable
+  cli.py         ✅ produce | run | report
 ```
 
 ## 7. Contratos clave
@@ -106,9 +108,9 @@ app/datavideo/
 ```json
 {"title": "...", "segments": [{"text": "...", "facts": ["fact_key"], "scene": "scene_id"}]}
 ```
-Reglas comprobadas por código: cada cifra de un segmento aparece en los datos que ese segmento cita; el título solo usa cifras de los datos; no hay números escritos con letra ni proporciones; claves y escenas existen; longitud total dentro del rango.
+Reglas comprobadas por código: entre 4 y 7 segmentos de 30 palabras como máximo; cada cifra de un segmento aparece en los datos que ese segmento cita; el título solo usa cifras de los datos; no hay números escritos con letra ni proporciones; claves y escenas existen; longitud total dentro del rango.
 
-**Perfil de canal (campos actuales):** `id`, `name`, `language`, `[models] provider/writer/judge`, `[voice] name/rate` (nombre de voz en el formato del proyecto original: `es-ES-TristanMultilingualNeural-V2-Male` para Azure oficial (sufijo `-V2` antes del género), `elevenlabs:<voice_id>` para ElevenLabs, `es-ES-AlvaroNeural-Male` para Edge en desarrollo), `[theme]` con colores y fuente. Campos previstos que se añadirán cuando exista el módulo que los usa: `sources`, `formats`, `schedule`, `publish`, `budget`, `disclosure`, `affiliates`.
+**Perfil de canal (campos actuales):** `id`, `name`, `language`, `[models] provider/writer/judge`, `[voice] name/rate` (nombre de voz en el formato del proyecto original: `es-ES-TristanMultilingualNeural-V2-Male` para Azure oficial (sufijo `-V2` antes del género), `elevenlabs:<voice_id>` para ElevenLabs, `es-ES-AlvaroNeural-Male` para Edge en desarrollo), `[theme]` con colores y fuente. `stories` (claves del catálogo de historias) y `[publish]` (`user` de Upload-Post, `platforms` entre `youtube` e `instagram`, `privacy`). Campos previstos que se añadirán cuando exista el módulo que los usa: `formats`, `schedule`, `budget`, `affiliates`.
 
 ## 8. Estrategia de pruebas
 
