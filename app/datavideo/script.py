@@ -35,11 +35,12 @@ Every segment is shown with exactly one of these scenes. Use only these scene id
 1. Use only the facts above. Do not add numbers, dates, times, prices, percentages or comparisons that are not in the facts.
 2. Write every figure exactly as it appears in the facts, with digits. Never spell numbers out in words and never use words that express proportions, such as double, triple or half.
 3. Every segment lists the keys of the facts its figures come from, and may only contain figures from those facts.
-4. The first segment is a hook that states the most useful fact for the viewer.
-5. Inform, do not advise: never recommend tariffs, companies, investments or financial products.
-6. Credit the source once, in the last segment.
-7. The whole narration has between {min_words} and {max_words} words in plain sentences. No greetings, hashtags, emojis, markdown or stage directions.
-8. The title has at most {max_title} characters and follows the same rules about figures.
+4. The first segment is a hook: in its first sentence it states the most striking fact for the viewer and says when the data is from.
+5. Write like a sharp presenter talking to one viewer: short sentences, every sentence carries a fact, no filler and no comments about the video itself.
+6. Inform, do not advise: never recommend tariffs, companies, investments or financial products.
+7. Credit the source once, in the last segment.
+8. The whole narration has between {min_words} and {max_words} words in plain sentences. No greetings, hashtags, emojis, markdown or stage directions.
+9. The title states the most striking finding in plain words, in at most {max_title} characters (aim for 70), may be a question, and follows the same rules about figures.
 
 # Output
 Reply with a single JSON object and nothing else:
