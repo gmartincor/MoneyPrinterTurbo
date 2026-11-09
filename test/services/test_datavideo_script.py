@@ -5,7 +5,13 @@ import pytest
 
 from app.datavideo.facts import Fact, Source
 from app.datavideo.locale import SPANISH_SPAIN
-from app.datavideo.script import ScriptRejected, build_script_prompt, generate_verified_script
+from app.datavideo.script import (
+    ScriptRejected,
+    build_script_prompt,
+    generate_verified_script,
+    script_from_dict,
+    script_to_dict,
+)
 
 SOURCE = Source(name="Red Eléctrica, precio PVPC", url="https://example.org", license="test")
 DAY = date(2026, 11, 4)
@@ -187,3 +193,14 @@ def test_scenes_that_show_a_fact_must_reference_one():
 
     assert "segment 5" in model.prompts[1]
     assert "hourly_prices" in model.prompts[1]
+
+
+def test_a_saved_script_is_restored_exactly():
+    script = generate(ScriptedModel(reply()))
+
+    assert script_from_dict(json.loads(json.dumps(script_to_dict(script)))) == script
+
+
+def test_a_saved_script_with_a_broken_shape_is_rejected():
+    with pytest.raises(ValueError, match="script"):
+        script_from_dict({"title": "Sin segmentos"})

@@ -86,6 +86,30 @@ class _ScriptPayload(BaseModel):
     segments: list[_SegmentPayload] = Field(min_length=1)
 
 
+def script_to_dict(script: Script) -> dict:
+    return {
+        "title": script.title,
+        "segments": [
+            {"text": segment.text, "facts": list(segment.fact_keys), "scene": segment.scene}
+            for segment in script.segments
+        ],
+    }
+
+
+def script_from_dict(data: dict) -> Script:
+    try:
+        payload = _ScriptPayload.model_validate(data)
+    except ValidationError as error:
+        raise ValueError(f"saved script has an unexpected shape: {error}") from error
+    return Script(
+        title=payload.title,
+        segments=tuple(
+            ScriptSegment(text=segment.text, fact_keys=tuple(segment.facts), scene=segment.scene)
+            for segment in payload.segments
+        ),
+    )
+
+
 def build_script_prompt(
     facts: Sequence[Fact],
     topic: str,
