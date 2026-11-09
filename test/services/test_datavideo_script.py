@@ -204,3 +204,32 @@ def test_a_saved_script_is_restored_exactly():
 def test_a_saved_script_with_a_broken_shape_is_rejected():
     with pytest.raises(ValueError, match="script"):
         script_from_dict({"title": "Sin segmentos"})
+
+
+def test_a_segment_too_long_to_keep_the_picture_moving_is_rejected():
+    segments = list(VALID_SEGMENTS)
+    segments[1] = segment(
+        "Si puedes, concentra el consumo en la franja de 13:00 a 16:00, con una media de 0,089 €/kWh, "
+        "porque es la parte del día en la que la luz sale más barata y la diferencia con el resto de horas "
+        "se nota mucho en la factura de cualquier hogar.",
+        ["cheapest_window"],
+    )
+    model = ScriptedModel(reply(segments=segments), reply())
+
+    generate(model)
+
+    assert "segment 2" in model.prompts[1]
+    assert "30 words" in model.prompts[1]
+
+
+def test_too_few_segments_to_change_the_picture_are_rejected():
+    long_segments = [
+        segment(VALID_SEGMENTS[0]["text"] + " " + VALID_SEGMENTS[1]["text"], ["date", "cheapest_hour", "cheapest_window"]),
+        segment(VALID_SEGMENTS[2]["text"], ["most_expensive_hour", "daily_average"]),
+        segment(VALID_SEGMENTS[4]["text"], [], scene="source_card"),
+    ]
+    model = ScriptedModel(reply(segments=long_segments), reply())
+
+    generate(model)
+
+    assert "segments" in model.prompts[1]

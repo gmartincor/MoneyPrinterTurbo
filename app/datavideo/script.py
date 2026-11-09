@@ -12,6 +12,8 @@ from app.datavideo.locale import ENGLISH_US, SPANISH_SPAIN
 
 DEFAULT_MAX_ATTEMPTS = 3
 DEFAULT_WORD_RANGE = (60, 110)
+SEGMENT_COUNT_RANGE = (4, 7)
+MAX_SEGMENT_WORDS = 30
 MAX_TITLE_LENGTH = 100
 _PROVIDER_ERROR_PREFIX = "Error: "
 _CODE_FENCE = re.compile(r"^```[a-zA-Z0-9]*\s*|\s*```$")
@@ -40,7 +42,8 @@ Every segment is shown with exactly one of these scenes. Use only these scene id
 6. Inform, do not advise: never recommend tariffs, companies, investments or financial products.
 7. Credit the source once, in the last segment.
 8. The whole narration has between {min_words} and {max_words} words in plain sentences. No greetings, hashtags, emojis, markdown or stage directions.
-9. The title states the most striking finding in plain words, in at most {max_title} characters (aim for 70), may be a question, and follows the same rules about figures.
+9. Split the narration into {min_segments} to {max_segments} segments of at most {max_segment_words} words each, so the picture changes every few seconds.
+10. The title states the most striking finding in plain words, in at most {max_title} characters (aim for 70), may be a question, and follows the same rules about figures.
 
 # Output
 Reply with a single JSON object and nothing else:
@@ -125,6 +128,9 @@ def build_script_prompt(
         scenes="\n".join(f"- {scene_id}: {description}" for scene_id, description in scenes.items()),
         min_words=word_range[0],
         max_words=word_range[1],
+        min_segments=SEGMENT_COUNT_RANGE[0],
+        max_segments=SEGMENT_COUNT_RANGE[1],
+        max_segment_words=MAX_SEGMENT_WORDS,
         max_title=MAX_TITLE_LENGTH,
     )
 
@@ -193,10 +199,18 @@ def _find_problems(
             problems.append(f"segment {number} referenced unknown facts: {', '.join(unknown_keys)}")
         if segment.scene not in scenes:
             problems.append(f"segment {number} used a scene that is not available: {segment.scene}")
+        segment_words = len(segment.text.split())
+        if segment_words > MAX_SEGMENT_WORDS:
+            problems.append(f"segment {number} had {segment_words} words instead of at most {MAX_SEGMENT_WORDS} words")
         if segment.scene in fact_scenes and not any(key in facts_by_key for key in segment.fact_keys):
             problems.append(f"segment {number} used the scene {segment.scene} without referencing a known fact")
         referenced = [facts_by_key[key].statement for key in segment.fact_keys if key in facts_by_key]
         problems.extend(_figure_problems(f"segment {number}", verify_figures(segment.text, referenced, locale)))
+    if not SEGMENT_COUNT_RANGE[0] <= len(script.segments) <= SEGMENT_COUNT_RANGE[1]:
+        problems.append(
+            f"the script had {len(script.segments)} segments instead of "
+            f"{SEGMENT_COUNT_RANGE[0]} to {SEGMENT_COUNT_RANGE[1]} segments"
+        )
     all_statements = [fact.statement for fact in facts]
     problems.extend(_figure_problems("the title", verify_figures(script.title, all_statements, locale)))
     word_count = len(script.narration.split())
