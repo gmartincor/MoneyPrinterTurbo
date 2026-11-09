@@ -112,12 +112,13 @@ def generate_verified_script(
     generate: Callable[[str], str],
     max_attempts: int = DEFAULT_MAX_ATTEMPTS,
     word_range: tuple[int, int] = DEFAULT_WORD_RANGE,
+    fact_scenes: frozenset[str] = frozenset(),
 ) -> Script:
     base_prompt = build_script_prompt(facts, topic, locale, scenes, word_range)
     prompt = base_prompt
     problems: list[str] = []
     for attempt in range(1, max_attempts + 1):
-        script, problems = _review_reply(generate(prompt) or "", facts, locale, scenes, word_range)
+        script, problems = _review_reply(generate(prompt) or "", facts, locale, scenes, word_range, fact_scenes)
         if script is not None and not problems:
             return script
         logger.warning(f"script draft rejected: attempt={attempt} problems={problems}")
@@ -131,6 +132,7 @@ def _review_reply(
     locale: str,
     scenes: Mapping[str, str],
     word_range: tuple[int, int],
+    fact_scenes: frozenset[str],
 ) -> tuple[Script | None, list[str]]:
     text = reply.strip()
     if text.startswith(_PROVIDER_ERROR_PREFIX):
@@ -147,7 +149,7 @@ def _review_reply(
             for segment in payload.segments
         ),
     )
-    return script, _find_problems(script, facts, locale, scenes, word_range)
+    return script, _find_problems(script, facts, locale, scenes, word_range, fact_scenes)
 
 
 def _find_problems(
@@ -156,6 +158,7 @@ def _find_problems(
     locale: str,
     scenes: Mapping[str, str],
     word_range: tuple[int, int],
+    fact_scenes: frozenset[str],
 ) -> list[str]:
     facts_by_key = {fact.key: fact for fact in facts}
     problems = []
@@ -165,6 +168,8 @@ def _find_problems(
             problems.append(f"segment {number} referenced unknown facts: {', '.join(unknown_keys)}")
         if segment.scene not in scenes:
             problems.append(f"segment {number} used a scene that is not available: {segment.scene}")
+        if segment.scene in fact_scenes and not any(key in facts_by_key for key in segment.fact_keys):
+            problems.append(f"segment {number} used the scene {segment.scene} without referencing a known fact")
         referenced = [facts_by_key[key].statement for key in segment.fact_keys if key in facts_by_key]
         problems.extend(_figure_problems(f"segment {number}", verify_figures(segment.text, referenced, locale)))
     all_statements = [fact.statement for fact in facts]

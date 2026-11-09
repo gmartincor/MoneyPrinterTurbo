@@ -176,3 +176,14 @@ def test_rejection_lists_the_problems_when_every_attempt_fails():
 
     assert len(model.prompts) == 3
     assert any("40" in problem for problem in rejected.value.problems)
+
+
+def test_scenes_that_show_a_fact_must_reference_one():
+    segments = list(VALID_SEGMENTS)
+    segments[4] = segment("Datos de Red Eléctrica, precio PVPC.", [], scene="hourly_prices")
+    model = ScriptedModel(reply(segments=segments), reply())
+
+    generate(model, fact_scenes=frozenset({"hourly_prices"}))
+
+    assert "segment 5" in model.prompts[1]
+    assert "hourly_prices" in model.prompts[1]
