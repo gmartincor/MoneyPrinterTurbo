@@ -8,6 +8,7 @@ from app.datavideo.locale import (
     SPANISH_SPAIN,
     format_decimal,
     format_long_date,
+    format_month,
     format_percent,
 )
 
@@ -47,3 +48,10 @@ def test_long_dates_are_written_out_in_each_language():
 def test_unsupported_language_is_rejected():
     with pytest.raises(ValueError, match="unsupported locale"):
         format_decimal(Decimal("1"), 0, "fr-FR")
+
+
+@pytest.mark.parametrize(
+    "locale, expected", [(SPANISH_SPAIN, "septiembre de 2026"), (ENGLISH_US, "September 2026")]
+)
+def test_months_are_written_with_their_year(locale, expected):
+    assert format_month(2026, 9, locale) == expected

@@ -47,6 +47,12 @@ def format_long_date(day: date, locale: str) -> str:
     return f"{weekday}, {month} {day.day}, {day.year}"
 
 
+def format_month(year: int, month: int, locale: str) -> str:
+    _require_supported(locale)
+    name = _MONTHS[locale][month - 1]
+    return f"{name} de {year}" if locale == SPANISH_SPAIN else f"{name} {year}"
+
+
 def _require_supported(locale: str) -> None:
     if locale not in SUPPORTED_LOCALES:
         raise ValueError(f"unsupported locale: {locale}")

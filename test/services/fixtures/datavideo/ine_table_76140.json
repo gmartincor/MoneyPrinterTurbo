@@ -1,0 +1,183 @@
+[{"COD":"IPC290752", "Nombre":"Nacional. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1790805600000, "FK_TipoDato":3, "FK_Periodo":10, "Anyo":2026, "Valor":0.6, "Secreto":false}
+,{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.3, "Secreto":false}
+]
+}
+,{"COD":"IPC290750", "Nombre":"Nacional. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1790805600000, "FK_TipoDato":3, "FK_Periodo":10, "Anyo":2026, "Valor":4.9, "Secreto":false}
+,{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.9, "Secreto":false}
+]
+}
+,{"COD":"IPC290753", "Nombre":"Nacional. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.6, "Secreto":false}
+]
+}
+,{"COD":"IPC293661", "Nombre":"Andalucía. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293659", "Nombre":"Andalucía. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.7, "Secreto":false}
+]
+}
+,{"COD":"IPC293662", "Nombre":"Andalucía. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293717", "Nombre":"Aragón. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.2, "Secreto":false}
+]
+}
+,{"COD":"IPC293715", "Nombre":"Aragón. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293718", "Nombre":"Aragón. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.2, "Secreto":false}
+]
+}
+,{"COD":"IPC293773", "Nombre":"Asturias, Principado de. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":-0.2, "Secreto":false}
+]
+}
+,{"COD":"IPC293771", "Nombre":"Asturias, Principado de. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.5, "Secreto":false}
+]
+}
+,{"COD":"IPC293774", "Nombre":"Asturias, Principado de. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.5, "Secreto":false}
+]
+}
+,{"COD":"IPC293829", "Nombre":"Balears, Illes. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.1, "Secreto":false}
+]
+}
+,{"COD":"IPC293827", "Nombre":"Balears, Illes. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.1, "Secreto":false}
+]
+}
+,{"COD":"IPC293830", "Nombre":"Balears, Illes. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.5, "Secreto":false}
+]
+}
+,{"COD":"IPC293885", "Nombre":"Canarias. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.0, "Secreto":false}
+]
+}
+,{"COD":"IPC293883", "Nombre":"Canarias. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293886", "Nombre":"Canarias. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":2.6, "Secreto":false}
+]
+}
+,{"COD":"IPC293941", "Nombre":"Cantabria. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":-0.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293939", "Nombre":"Cantabria. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293942", "Nombre":"Cantabria. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.7, "Secreto":false}
+]
+}
+,{"COD":"IPC293997", "Nombre":"Castilla y León. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.3, "Secreto":false}
+]
+}
+,{"COD":"IPC293995", "Nombre":"Castilla y León. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.4, "Secreto":false}
+]
+}
+,{"COD":"IPC293998", "Nombre":"Castilla y León. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.9, "Secreto":false}
+]
+}
+,{"COD":"IPC294053", "Nombre":"Castilla - La Mancha. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.5, "Secreto":false}
+]
+}
+,{"COD":"IPC294051", "Nombre":"Castilla - La Mancha. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.5, "Secreto":false}
+]
+}
+,{"COD":"IPC294054", "Nombre":"Castilla - La Mancha. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.9, "Secreto":false}
+]
+}
+,{"COD":"IPC294109", "Nombre":"Cataluña. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.1, "Secreto":false}
+]
+}
+,{"COD":"IPC294107", "Nombre":"Cataluña. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.5, "Secreto":false}
+]
+}
+,{"COD":"IPC294110", "Nombre":"Cataluña. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.5, "Secreto":false}
+]
+}
+,{"COD":"IPC294165", "Nombre":"Comunitat Valenciana. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.2, "Secreto":false}
+]
+}
+,{"COD":"IPC294163", "Nombre":"Comunitat Valenciana. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.8, "Secreto":false}
+]
+}
+,{"COD":"IPC294166", "Nombre":"Comunitat Valenciana. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.7, "Secreto":false}
+]
+}
+,{"COD":"IPC294221", "Nombre":"Extremadura. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.7, "Secreto":false}
+]
+}
+,{"COD":"IPC294219", "Nombre":"Extremadura. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.3, "Secreto":false}
+]
+}
+,{"COD":"IPC294222", "Nombre":"Extremadura. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.8, "Secreto":false}
+]
+}
+,{"COD":"IPC294277", "Nombre":"Galicia. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.2, "Secreto":false}
+]
+}
+,{"COD":"IPC294275", "Nombre":"Galicia. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.5, "Secreto":false}
+]
+}
+,{"COD":"IPC294278", "Nombre":"Galicia. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.3, "Secreto":false}
+]
+}
+,{"COD":"IPC294333", "Nombre":"Madrid, Comunidad de. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.9, "Secreto":false}
+]
+}
+,{"COD":"IPC294331", "Nombre":"Madrid, Comunidad de. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.3, "Secreto":false}
+]
+}
+,{"COD":"IPC294334", "Nombre":"Madrid, Comunidad de. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.8, "Secreto":false}
+]
+}
+,{"COD":"IPC294389", "Nombre":"Murcia, Región de. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.3, "Secreto":false}
+]
+}
+,{"COD":"IPC294387", "Nombre":"Murcia, Región de. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.0, "Secreto":false}
+]
+}
+,{"COD":"IPC294390", "Nombre":"Murcia, Región de. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.6, "Secreto":false}
+]
+}
+,{"COD":"IPC294445", "Nombre":"Navarra, Comunidad Foral de. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.4, "Secreto":false}
+]
+}
+,{"COD":"IPC294443", "Nombre":"Navarra, Comunidad Foral de. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.3, "Secreto":false}
+]
+}
+,{"COD":"IPC294446", "Nombre":"Navarra, Comunidad Foral de. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.9, "Secreto":false}
+]
+}
+,{"COD":"IPC294501", "Nombre":"País Vasco. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.1, "Secreto":false}
+]
+}
+,{"COD":"IPC294499", "Nombre":"País Vasco. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":5.0, "Secreto":false}
+]
+}
+,{"COD":"IPC294502", "Nombre":"País Vasco. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.9, "Secreto":false}
+]
+}
+,{"COD":"IPC294557", "Nombre":"Rioja, La. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.3, "Secreto":false}
+]
+}
+,{"COD":"IPC294555", "Nombre":"Rioja, La. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.6, "Secreto":false}
+]
+}
+,{"COD":"IPC294558", "Nombre":"Rioja, La. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.0, "Secreto":false}
+]
+}
+,{"COD":"IPC294613", "Nombre":"Ceuta. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.0, "Secreto":false}
+]
+}
+,{"COD":"IPC294611", "Nombre":"Ceuta. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":3.1, "Secreto":false}
+]
+}
+,{"COD":"IPC294614", "Nombre":"Ceuta. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":2.1, "Secreto":false}
+]
+}
+,{"COD":"IPC293605", "Nombre":"Melilla. Índice general. Variación mensual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":0.0, "Secreto":false}
+]
+}
+,{"COD":"IPC293603", "Nombre":"Melilla. Índice general. Variación anual. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":4.6, "Secreto":false}
+]
+}
+,{"COD":"IPC293606", "Nombre":"Melilla. Índice general. Variación en lo que va de año. ", "FK_Unidad":135, "FK_Escala":1, "Data":[{"Fecha":1788213600000, "FK_TipoDato":1, "FK_Periodo":9, "Anyo":2026, "Valor":2.7, "Secreto":false}
+]
+}
+]
