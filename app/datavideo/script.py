@@ -56,12 +56,13 @@ Every segment is shown with exactly one of these scenes. Use only these scene id
 4. The first segment is the hook, at most {max_hook_words} words: open with concrete places and their figures, as a bold contrast between the extremes. Never open with the date, the source, a general statement or a stock phrase such as "did you know".
 5. Sound like an energetic presenter talking to one viewer: address the viewer directly, short punchy sentences, contrasts and questions, every sentence carries a fact. No filler and no comments about the video itself. {plain_words}
 6. Inform, do not advise: never recommend tariffs, companies, investments or financial products.
-7. Name the source once in the first three segments, in a few words, and say when the data is from.
+7. The screen already shows the source and the period in every scene: never spend a sentence on them. At most credit the source in three words inside another sentence.
 8. The whole narration has between {min_words} and {max_words} words in plain sentences. No greetings, hashtags, emojis, markdown or stage directions.
 9. Split the narration into {min_segments} to {max_segments} segments of at most {max_segment_words} words each, so the picture changes every few seconds.
 10. The title states the most striking finding in plain words, in at most {max_title} characters (aim for 70), may be a question, and follows the same rules about figures.
 11. The last segment closes in at most {max_closing_words} words with a question to the viewer or a reason to follow the channel for the next figure. No credits and no summary at the end.
 12. Never mention artificial intelligence, scripts or how the video was made.
+13. Say only the figures that carry the story: the extremes, the national figure and one striking count. The ranking scene shows every region with its value, so never recite a list of regions and figures.
 
 # Output
 Reply with a single JSON object and nothing else:

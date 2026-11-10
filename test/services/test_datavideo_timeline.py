@@ -130,3 +130,9 @@ def test_long_words_do_not_fit_three_to_a_line():
     texts, offsets = words(("comunidades", 0.0, 0.5), ("autónomas", 0.5, 1.0), ("superan", 1.0, 1.5))
 
     assert [text for _, _, text in caption_chunks(texts, offsets)] == ["comunidades autónomas", "superan"]
+
+
+def test_punctuation_sticks_to_the_word_before_it():
+    texts, offsets = words(("Antes", 0.0, 0.3), (",", 0.3, 0.3), ("en", 0.4, 0.5), ("2026", 0.5, 0.9), (",", 0.9, 0.9))
+
+    assert [text for _, _, text in caption_chunks(texts, offsets)] == ["Antes, en 2026,"]

@@ -248,3 +248,10 @@ def test_bars_outside_the_focus_are_dimmed(size):
 
     assert image.getpixel(center(boxes[0])) == DEFAULT_THEME.negative
     assert image.getpixel(center(boxes[1])) != DEFAULT_THEME.neutral
+
+
+def test_the_period_is_never_animated_as_a_count():
+    scene = build_scene("big_number", ("period",), context())
+
+    assert scene.counting is False
+    assert build_scene("big_number", ("national",), context()).counting is True

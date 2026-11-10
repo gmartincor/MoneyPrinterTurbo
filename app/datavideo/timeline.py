@@ -13,6 +13,7 @@ _TICKS_PER_SECOND = 10_000_000
 MAX_CAPTION_WORDS = 3
 MAX_CAPTION_CHARACTERS = 22
 _SENTENCE_ENDINGS = (".", "?", "!", ":", ";")
+_TIGHT_PUNCTUATION = frozenset(".,;:?!…)")
 
 
 @dataclass(frozen=True)
@@ -64,7 +65,7 @@ class _Caption:
 
     def add(self, word: str, end: int) -> None:
         self.end = end
-        self.text = f"{self.text}{word}" if word in _SENTENCE_ENDINGS else f"{self.text} {word}"
+        self.text = f"{self.text}{word}" if set(word) <= _TIGHT_PUNCTUATION else f"{self.text} {word}"
         self.words += 1 if _letters_and_digits(word) else 0
 
 

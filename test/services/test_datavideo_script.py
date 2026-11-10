@@ -286,3 +286,10 @@ def test_the_editor_notes_on_a_previous_draft_reach_the_writer():
     generate(model, editor_notes=("Abre con la hora más barata y su precio",))
 
     assert "Abre con la hora más barata y su precio" in model.prompts[0]
+
+
+def test_the_writer_knows_the_screen_already_shows_the_source_and_every_value():
+    prompt = build_script_prompt(FACTS, "la luz", SPANISH_SPAIN, SCENES)
+
+    assert "already shows the source and the period" in prompt
+    assert "never recite a list" in prompt

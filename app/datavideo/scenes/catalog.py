@@ -11,6 +11,7 @@ from app.datavideo.theme import Color, Theme
 
 RANKING = "ranking"
 BIG_NUMBER = "big_number"
+PERIOD_FACT = "period"
 
 SCENE_DESCRIPTIONS = {
     RANKING: "Animated bar chart ranking every region from highest to lowest, with the national figure marked. "
@@ -40,7 +41,9 @@ def build_scene(scene_id: str, fact_keys: Sequence[str], context: SceneContext) 
         if not known_keys:
             raise ValueError("big_number scene needs at least one known fact")
         fact = context.facts[known_keys[0]]
-        return BigNumberScene(fact=fact, color=_fact_color(fact.key, context), theme=context.theme)
+        return BigNumberScene(
+            fact=fact, color=_fact_color(fact.key, context), theme=context.theme, counting=fact.key != PERIOD_FACT
+        )
     raise ValueError(f"unknown scene: {scene_id}")
 
 

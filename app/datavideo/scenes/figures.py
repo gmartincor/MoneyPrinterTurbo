@@ -41,6 +41,7 @@ class BigNumberScene:
     fact: Fact
     color: Color
     theme: Theme
+    counting: bool = True
 
     def draw(self, size: Size, progress: float) -> Image.Image:
         image = Image.new("RGB", size, self.theme.background)
@@ -63,7 +64,7 @@ class BigNumberScene:
         y = _draw_lines(draw, label_lines, center_x, y, label_font, blend(self.theme.background, self.theme.muted, amount))
         draw.text(
             (center_x, y + value_font.size * 0.1),
-            counting_value(self.fact.value, amount),
+            counting_value(self.fact.value, amount) if self.counting else self.fact.value,
             font=value_font,
             fill=blend(self.theme.background, self.color, amount),
             anchor="mt",

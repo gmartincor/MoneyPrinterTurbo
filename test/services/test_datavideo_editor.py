@@ -92,3 +92,11 @@ def test_a_saved_review_is_restored_exactly():
     review = Review(scores=scores(hook=7), fixes=("Más corto",))
 
     assert review_from_dict(json.loads(json.dumps(review.to_dict()))) == review
+
+
+def test_the_editor_knows_what_the_screen_already_shows():
+    editor = Editor(editor_reply(scores()))
+
+    review_script(SCRIPT, FACTS, "el paro", SPANISH_SPAIN, editor)
+
+    assert "already shows the source and the period" in editor[0]
