@@ -11,8 +11,10 @@ from app.datavideo.scenes.catalog import (
     SCENE_DESCRIPTIONS,
     SceneContext,
     build_scene,
+    credit_line,
 )
-from app.datavideo.scenes.figures import BigNumberScene, SourceCardScene
+from app.datavideo.scenes.base import CreditedScene
+from app.datavideo.scenes.figures import BigNumberScene
 from app.datavideo.scenes.ranking import RankingScene
 from app.datavideo.sources.ine import INE_SOURCE
 from app.datavideo.scenes import ranking as ranking_module
@@ -118,7 +120,6 @@ def test_every_scene_draws_frames_of_the_requested_size(size):
     scenes = [
         ranking_scene(),
         BigNumberScene(fact=fact, color=DEFAULT_THEME.text, theme=DEFAULT_THEME),
-        SourceCardScene(source=INE_SOURCE, period="septiembre de 2026", locale=SPANISH_SPAIN, theme=DEFAULT_THEME),
     ]
 
     for scene in scenes:
@@ -147,7 +148,7 @@ def context():
 
 
 def test_catalog_describes_every_scene_it_can_build():
-    assert set(SCENE_DESCRIPTIONS) == {"ranking", "big_number", "source_card"}
+    assert set(SCENE_DESCRIPTIONS) == {"ranking", "big_number"}
     assert FACT_SCENES == frozenset({"big_number"})
 
 
@@ -165,9 +166,30 @@ def test_lowest_value_is_shown_in_the_good_color_when_lower_is_better():
     assert scene.color == DEFAULT_THEME.positive
 
 
-def test_ranking_and_source_card_are_built_from_the_story():
+def test_the_ranking_is_built_from_the_story():
     assert isinstance(build_scene("ranking", (), context()), RankingScene)
-    assert isinstance(build_scene("source_card", (), context()), SourceCardScene)
+
+
+@pytest.mark.parametrize(
+    "locale, expected", [(SPANISH_SPAIN, "Fuente: INE · septiembre de 2026"), ("en-US", "Source: INE · September 2026")]
+)
+def test_the_credit_names_the_source_and_the_period(locale, expected):
+    period = "septiembre de 2026" if locale == SPANISH_SPAIN else "September 2026"
+
+    assert credit_line(INE_SOURCE, period, locale) == expected
+
+
+@pytest.mark.parametrize("size", [SMALL_VERTICAL, SMALL_HORIZONTAL])
+def test_a_credited_scene_shows_the_credit_just_below_the_picture(size):
+    fact = labelled_fact("national", "Inflación anual en España", "4,9 %", INE_SOURCE, date(2026, 9, 1))
+    plain = BigNumberScene(fact=fact, color=DEFAULT_THEME.text, theme=DEFAULT_THEME)
+    bottom = content_box(size)[3]
+    band = (0, bottom, size[0], bottom + round(min(size) * 0.06))
+
+    credited = CreditedScene(scene=plain, credit="Fuente: INE · septiembre de 2026", theme=DEFAULT_THEME).draw(size, 1.0)
+
+    assert credited.crop(band).getcolors(10_000) != plain.draw(size, 1.0).crop(band).getcolors(10_000)
+    assert credited.crop((0, 0, size[0], bottom)).tobytes() == plain.draw(size, 1.0).crop((0, 0, size[0], bottom)).tobytes()
 
 
 def test_unknown_scenes_and_big_numbers_without_facts_are_rejected():

@@ -5,13 +5,13 @@ from typing import Any, Callable
 
 from app.datavideo.audio import normalize_loudness
 from app.datavideo.channels import ChannelProfile, text_generator
-from app.datavideo.facts import Fact
+from app.datavideo.facts import Fact, unique_sources
 from app.datavideo.packaging import Package, build_package
 from app.datavideo.publish import publish_video
 from app.datavideo.qa import SHORT_LIMITS, QualityReport, check_video
 from app.datavideo.render import TimedScene, compose_video, render_scene_track
-from app.datavideo.scenes.base import VERTICAL_SIZE, Size
-from app.datavideo.scenes.catalog import FACT_SCENES, SCENE_DESCRIPTIONS, SceneContext, build_scene
+from app.datavideo.scenes.base import VERTICAL_SIZE, CreditedScene, Size
+from app.datavideo.scenes.catalog import FACT_SCENES, SCENE_DESCRIPTIONS, SceneContext, build_scene, credit_line
 from app.datavideo.script import Script, generate_verified_script, script_from_dict, script_to_dict
 from app.datavideo.sources.ine import INE_SOURCE, download_table, parse_table
 from app.datavideo.store import PUBLICATION_FILE, Run, open_run, published_story_keys
@@ -187,8 +187,9 @@ def _scene_track(
     context = SceneContext(
         ranking=ranking, facts={fact.key: fact for fact in facts}, theme=profile.theme, locale=profile.language
     )
+    credit = credit_line(unique_sources(facts)[0], ranking.period_label(profile.language), profile.language)
     timed = [
-        TimedScene(build_scene(segment.scene, segment.fact_keys, context), duration)
+        TimedScene(CreditedScene(build_scene(segment.scene, segment.fact_keys, context), credit, profile.theme), duration)
         for segment, duration in zip(script.segments, narration.durations)
     ]
     render_scene_track(timed, run.partial_path(SCENES_FILE), size)

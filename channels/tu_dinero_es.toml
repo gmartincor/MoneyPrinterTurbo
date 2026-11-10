@@ -19,8 +19,8 @@ writer = "gpt-6.1-sol"
 judge = "gpt-6.1-sol"
 
 [voice]
-name = "es-ES-TristanMultilingualNeural-V2-Male"
-rate = 1.0
+name = "es-ES-AlvaroNeural-V2-Male"
+rate = 1.2
 
 [theme]
 font_file = "BeVietnamPro-Bold.ttf"

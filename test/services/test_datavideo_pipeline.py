@@ -20,13 +20,13 @@ FIXTURE = Path(__file__).parent / "fixtures" / "datavideo" / "ine_table_76140.js
 SMALL_VERTICAL = (180, 320)
 NARRATION_SECONDS = 16
 SEGMENTS = [
-    ("En septiembre de 2026, Castilla-La Mancha y Galicia tuvieron la inflación anual más alta de España, un 5,5 %.",
-     ["highest", "period"], "big_number"),
-    ("La media nacional se quedó en el 4,9 %, y 10 de 19 comunidades y ciudades autónomas la superaron.",
-     ["national", "above_national"], "ranking"),
-    ("En el otro extremo está Ceuta, con la inflación más baja del país: un 3,1 %.", ["lowest"], "big_number"),
+    ("¿Dónde suben más los precios? En Castilla-La Mancha y Galicia: 5,5 %.", ["highest"], "big_number"),
+    ("Es la inflación anual de septiembre de 2026, según el INE.", ["period"], "ranking"),
+    ("La media de España se queda en el 4,9 %.", ["national"], "big_number"),
+    ("Y 10 de 19 comunidades y ciudades autónomas están por encima.", ["above_national"], "ranking"),
+    ("En el otro extremo está Ceuta, con la inflación más baja: un 3,1 %.", ["lowest"], "big_number"),
     ("Entre la más alta y la más baja hay 2,4 puntos de diferencia.", ["gap"], "big_number"),
-    ("Son datos oficiales del INE.", [], "source_card"),
+    ("¿Cómo está tu comunidad? Búscala en el ranking y sigue el canal.", [], "ranking"),
 ]
 SCRIPT_REPLY = json.dumps(
     {

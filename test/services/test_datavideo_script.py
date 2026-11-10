@@ -31,7 +31,7 @@ FACTS = [
 ]
 SCENES = {
     "hourly_prices": "Animated bar chart of every hourly price, cheapest and most expensive highlighted",
-    "source_card": "Closing card naming the data source",
+    "big_number": "One figure shown very large",
 }
 
 
@@ -40,14 +40,15 @@ def segment(text, facts, scene="hourly_prices"):
 
 
 VALID_SEGMENTS = [
-    segment("Mañana, miércoles 4 de noviembre, la luz más barata llega de 14:00 a 15:00, a 0,082 €/kWh.",
-            ["date", "cheapest_hour"]),
-    segment("Si puedes, concentra el consumo en la franja de 13:00 a 16:00, con una media de 0,089 €/kWh.",
-            ["cheapest_window"]),
-    segment("La hora más cara será de 20:00 a 21:00, a 0,231 €/kWh, y el precio medio del día se queda en "
-            "0,146 €/kWh.", ["most_expensive_hour", "daily_average"]),
-    segment("Entre la hora más cara y la más barata hay un 181 % de diferencia.", ["price_gap"]),
-    segment("Datos de Red Eléctrica, precio PVPC.", [], scene="source_card"),
+    segment("¿Luz barata mañana? De 14:00 a 15:00, solo 0,082 €/kWh.", ["cheapest_hour"]),
+    segment("Es el precio del miércoles 4 de noviembre de 2026, según Red Eléctrica.", ["date"]),
+    segment("La mejor franja dura 3 horas: de 13:00 a 16:00, a 0,089 €/kWh.", ["cheapest_window"]),
+    segment("Y la hora más cara llega de 20:00 a 21:00.", ["most_expensive_hour"]),
+    segment("Ahí pagarás 0,231 €/kWh, frente a una media diaria de 0,146 €/kWh.",
+            ["most_expensive_hour", "daily_average"]),
+    segment("Entre la hora más cara y la más barata hay un 181 % de diferencia.", ["price_gap"],
+            scene="big_number"),
+    segment("¿Vas a cambiar tu horario? Sigue el canal para el precio de cada día.", []),
 ]
 
 
@@ -90,7 +91,7 @@ def test_prompt_offers_only_the_available_scenes_and_names_the_source():
     prompt = build_script_prompt(FACTS, "la luz", SPANISH_SPAIN, SCENES)
 
     assert "hourly_prices" in prompt
-    assert "source_card" in prompt
+    assert "big_number" in prompt
     assert "Red Eléctrica, precio PVPC" in prompt
 
 
@@ -98,15 +99,15 @@ def test_valid_reply_becomes_a_script_with_segments_in_order():
     script = generate(ScriptedModel(reply()))
 
     assert script.title == "La luz más barata de mañana"
-    assert [item.scene for item in script.segments] == ["hourly_prices"] * 4 + ["source_card"]
-    assert script.segments[0].fact_keys == ("date", "cheapest_hour")
-    assert script.narration.startswith("Mañana, miércoles 4 de noviembre")
+    assert [item.scene for item in script.segments] == ["hourly_prices"] * 5 + ["big_number", "hourly_prices"]
+    assert script.segments[0].fact_keys == ("cheapest_hour",)
+    assert script.narration.startswith("¿Luz barata mañana?")
 
 
 def test_reply_wrapped_in_a_code_fence_is_accepted():
     script = generate(ScriptedModel(f"```json\n{reply()}\n```"))
 
-    assert len(script.segments) == 5
+    assert len(script.segments) == 7
 
 
 def test_reply_that_is_not_json_is_retried_with_the_reason():
@@ -114,7 +115,7 @@ def test_reply_that_is_not_json_is_retried_with_the_reason():
 
     script = generate(model)
 
-    assert len(script.segments) == 5
+    assert len(script.segments) == 7
     assert "JSON" in model.prompts[1]
 
 
@@ -130,7 +131,7 @@ def test_segment_figures_must_come_from_the_facts_that_segment_references():
 
 def test_unknown_fact_keys_are_rejected():
     segments = list(VALID_SEGMENTS)
-    segments[3] = segment("Entre la hora más cara y la más barata hay un 181 % de diferencia.", ["gap"])
+    segments[5] = segment("Entre la hora más cara y la más barata hay un 181 % de diferencia.", ["gap"])
     model = ScriptedModel(reply(segments=segments), reply())
 
     generate(model)
@@ -140,7 +141,7 @@ def test_unknown_fact_keys_are_rejected():
 
 def test_unknown_scenes_are_rejected():
     segments = list(VALID_SEGMENTS)
-    segments[4] = segment("Datos de Red Eléctrica, precio PVPC.", [], scene="stock_footage")
+    segments[6] = segment("¿Vas a cambiar tu horario? Sigue el canal.", [], scene="stock_footage")
     model = ScriptedModel(reply(segments=segments), reply())
 
     generate(model)
@@ -161,7 +162,7 @@ def test_provider_error_text_is_never_copied_into_the_next_prompt():
 
     script = generate(model)
 
-    assert len(script.segments) == 5
+    assert len(script.segments) == 7
     assert "quota exceeded" not in model.prompts[1]
 
 
@@ -186,13 +187,13 @@ def test_rejection_lists_the_problems_when_every_attempt_fails():
 
 def test_scenes_that_show_a_fact_must_reference_one():
     segments = list(VALID_SEGMENTS)
-    segments[4] = segment("Datos de Red Eléctrica, precio PVPC.", [], scene="hourly_prices")
+    segments[6] = segment("¿Vas a cambiar tu horario? Sigue el canal.", [], scene="big_number")
     model = ScriptedModel(reply(segments=segments), reply())
 
-    generate(model, fact_scenes=frozenset({"hourly_prices"}))
+    generate(model, fact_scenes=frozenset({"big_number"}))
 
-    assert "segment 5" in model.prompts[1]
-    assert "hourly_prices" in model.prompts[1]
+    assert "segment 7" in model.prompts[1]
+    assert "big_number" in model.prompts[1]
 
 
 def test_a_saved_script_is_restored_exactly():
@@ -208,28 +209,54 @@ def test_a_saved_script_with_a_broken_shape_is_rejected():
 
 def test_a_segment_too_long_to_keep_the_picture_moving_is_rejected():
     segments = list(VALID_SEGMENTS)
-    segments[1] = segment(
-        "Si puedes, concentra el consumo en la franja de 13:00 a 16:00, con una media de 0,089 €/kWh, "
-        "porque es la parte del día en la que la luz sale más barata y la diferencia con el resto de horas "
-        "se nota mucho en la factura de cualquier hogar.",
+    segments[2] = segment(
+        "La mejor franja dura 3 horas, de 13:00 a 16:00, con una media de 0,089 €/kWh en toda la franja.",
         ["cheapest_window"],
     )
     model = ScriptedModel(reply(segments=segments), reply())
 
     generate(model)
 
-    assert "segment 2" in model.prompts[1]
-    assert "30 words" in model.prompts[1]
+    assert "segment 3" in model.prompts[1]
+    assert "16 words" in model.prompts[1]
 
 
 def test_too_few_segments_to_change_the_picture_are_rejected():
-    long_segments = [
-        segment(VALID_SEGMENTS[0]["text"] + " " + VALID_SEGMENTS[1]["text"], ["date", "cheapest_hour", "cheapest_window"]),
-        segment(VALID_SEGMENTS[2]["text"], ["most_expensive_hour", "daily_average"]),
-        segment(VALID_SEGMENTS[4]["text"], [], scene="source_card"),
-    ]
+    long_segments = VALID_SEGMENTS[:5]
     model = ScriptedModel(reply(segments=long_segments), reply())
 
     generate(model)
 
     assert "segments" in model.prompts[1]
+
+
+def test_a_hook_longer_than_a_quick_line_is_rejected():
+    segments = list(VALID_SEGMENTS)
+    segments[0] = segment("¿Sabes cuándo será mañana la luz más barata? De 14:00 a 15:00, 0,082 €/kWh.", ["cheapest_hour"])
+    model = ScriptedModel(reply(segments=segments), reply())
+
+    generate(model)
+
+    assert "hook" in model.prompts[1]
+
+
+@pytest.mark.parametrize(
+    "closing",
+    ["Contenido generado con inteligencia artificial.", "Guion hecho con IA a partir de datos oficiales."],
+)
+def test_the_narration_never_talks_about_artificial_intelligence(closing):
+    segments = list(VALID_SEGMENTS)
+    segments[6] = segment(closing, [])
+    model = ScriptedModel(reply(segments=segments), reply())
+
+    generate(model)
+
+    assert "artificial intelligence" in model.prompts[1]
+
+
+def test_the_prompt_asks_for_a_hook_a_presenter_voice_and_a_closing_line():
+    prompt = build_script_prompt(FACTS, "la luz", SPANISH_SPAIN, SCENES)
+
+    assert "hook" in prompt
+    assert "viewer" in prompt
+    assert "Never mention artificial intelligence" in prompt

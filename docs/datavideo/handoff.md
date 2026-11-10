@@ -8,7 +8,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 
 ## 1. Estado actual
 
-Última actualización: **9 de noviembre de 2026**, rama `main`.
+Última actualización: **10 de noviembre de 2026**, rama `main`.
 
 **Hecho y probado (`app/datavideo/`):**
 
@@ -16,7 +16,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 |---|---|
 | `locale.py`, `facts.py`, `figures.py` | Formato es-ES/en-US (números, porcentajes, fechas, meses); datos con etiqueta, valor, detalle y fuente con licencia; verificación de cifras |
 | `sources/ine.py` | Cliente de la API Tempus del INE: descarga, valida y conserva los valores como decimales exactos. Licencia CC BY 4.0 verificada |
-| `stories/regional_ranking.py` | Ranking por comunidades del último mes publicado por todas (empates, Ceuta y Melilla como ciudades autónomas) y sus datos. Historia `ipc_anual_ccaa` (tabla 76140) |
+| `stories/regional_ranking.py` | Ranking por comunidades del último periodo (mes o trimestre) publicado por todas, en % o en €, con empates y Ceuta y Melilla como ciudades autónomas. 9 historias: `ipc_anual_ccaa` (tabla 76140), `ipc_alimentos_ccaa`, `ipc_vivienda_ccaa`, `ipc_transporte_ccaa`, `ipc_restaurantes_ccaa` (76136, mensuales), `paro_ccaa`, `paro_juvenil_ccaa` (EPA 14506), `precio_vivienda_ccaa` (IPV 80270) y `salario_ccaa` (ETCL 6061, trimestrales) |
 | `script.py` | Guion JSON verificado: cifras por segmento, 4–7 segmentos de 30 palabras como máximo, escenas existentes, `big_number` con un dato; reintenta y bloquea |
 | `channels.py` | Perfiles `channels/*.toml` con historias y `[publish]` (perfil de Upload-Post, redes, privacidad) |
 | `scenes/` | `ranking`, `big_number` y `source_card` en 9:16 y 16:9, con el tercio inferior libre para subtítulos |
@@ -26,7 +26,8 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 | `packaging.py` | Título, descripción con fuente, atribución, mes, aviso de IA y de no asesoramiento, etiquetas |
 | `store.py`, `pipeline.py` | Carpeta por historia con un artefacto por paso; reanudable, no repite historias publicadas, no publica sin licencia verificada ni controles superados y nunca reintenta solo una subida sin confirmar |
 | `publish.py`, `notify.py`, `digest.py` | Upload-Post con la clave de `.env`; Telegram solo para bloqueos, fallos y resumen semanal |
-| `cli.py` | `produce`, `run` (produce y publica) y `report` (resumen semanal) |
+| `cli.py` | `produce`, `run` (produce todo y publica como máximo `per_day` vídeos al día, empezando por la tabla que lleva más tiempo sin salir) y `report` (resumen semanal) |
+| `scheduler.py` | Planificador del contenedor: `run` a la hora `daily_at` de cada canal y `report` los lunes, con límite de 90 min por orden y latido para la comprobación de salud |
 
 - **Cómo se usa** (claves en `.env`):
   ```bash
@@ -35,7 +36,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
   `run` en lugar de `produce` también publica; `report` envía el resumen semanal. Los vídeos quedan en `storage/datavideo/<canal>/<historia>/final.mp4`.
 - **Primer Short real (9 de noviembre de 2026):** `storage/datavideo/tu_dinero_es/ipc_anual_ccaa_2026_09/final.mp4`, inflación anual por comunidades de septiembre de 2026: 38 s, 5 escenas, −15,2 LUFS, controles superados. Producirlo cuesta ~55 s.
 - **Sin publicar todavía:** el clasificador de seguridad de Claude Code bloqueó el comando de subida. El propietario lo ejecuta a mano (`run` en vez de `produce`); sube en **privado** al canal personal de pruebas (perfil `default`).
-- Voz del canal 1: `es-ES-TristanMultilingualNeural-V2-Male` (castellano). Muestras de otras cinco voces disponibles si se quiere cambiar.
+- Voz del canal 1: `es-ES-AlvaroNeural-V2-Male` a velocidad 1,2 (castellano, "segura y animada"). Tristán a 1,0 se descartó el 10 de noviembre de 2026 por plana y lenta (121–130 palabras por minuto). Alternativas con tiempos por palabra: Ximena, Arabella e Isidora Multilingual. Marta (MAI-Voice-2, HD con estilos como *excited*) es la más expresiva de Azure, pero no da tiempos por palabra ni marcas: usarla exige sintetizar cada segmento por separado.
 - Pruebas: `uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py` → 160 pruebas en ~5 s (necesitan FFmpeg).
 - La batería completa del proyecto original (~3.200 pruebas, 12–14 min) tiene 9 fallos **heredados** en pruebas de audio con Python 3.13 (`test_remote_speech_complete_decode`, `test_webui_bgm`, `test_webui_custom_audio_upload`, `test_bgm_decoded_audio`). No se ha tocado código del proyecto original.
 
@@ -137,25 +138,26 @@ Una fuente solo puede usarse en un vídeo publicado cuando su `Source.license_ve
 
 ## 5. Siguientes pasos
 
-### H1 — Primer Short real, en privado (casi terminado)
+### Ritmo objetivo por canal (análisis del 10 de noviembre de 2026)
 
-| # | Tarea | Estado |
-|---|---|---|
-| 1 | Subir el primer Short en privado al canal de pruebas y revisarlo | **Lo hace el propietario:** `uv run --env-file .env --no-sync python -X utf8 -m app.datavideo.cli run tu_dinero_es` |
-| 2 | Banco de pruebas de guiones: 20 casos, GPT-6.1 Sol frente a Terra; anotar el resultado en `architecture.md` | Pendiente |
-| 3 | Confirmar la voz escuchando las muestras (Tristán elegida por defecto) | Propietario |
+- **Shorts:** como máximo 1 al día (`per_day = 1`), cada uno de una historia distinta con datos recién publicados. Sirven para ganar suscriptores: pagan 50–100 veces menos por visualización que un vídeo largo y sus visualizaciones no cuentan para las 4.000 horas.
+- **Vídeo largo:** 1 a la semana (8–12 min, con anuncios a mitad de vídeo a partir de 8 min) y 1 de búsqueda al mes con datos anuales o trimestrales. Es lo que genera ingresos: las 4.000 horas equivalen a unas 60.000 visualizaciones largas al año (~1.150 por semana) con ~4 min vistos de media.
+- **Historias necesarias:** para 1 Short al día hacen falta ~20–25 vídeos nuevos al mes. Hoy hay 9 historias, que dan ~6–7 al mes (5 mensuales y 4 trimestrales). Hay que llegar a ~20 historias mensuales.
+- **Límites:** más de 1 Short al día no aporta ingresos y aumenta el riesgo de que YouTube considere el canal contenido de plantilla (política de contenido no auténtico), que retira la monetización a todo el canal. La variedad de escenas y formatos importa tanto como el número.
 
 ### H2 — Canal 1 publicando solo
 
-| # | Tarea | Aceptación |
+| # | Tarea | Estado / aceptación |
 |---|---|---|
-| 1 | Planificador | `run` cada noche y `report` cada lunes en el servidor (o el Mac encendido), con registro de salida. Requiere decidir dónde corre |
-| 2 | Pasar el canal 1 a producción | Cuando YouTube apruebe el DNI: crear *Tu Dinero en Datos* (`@TuDineroDatos`), conectarlo al perfil `tu_dinero_es` de Upload-Post, contratar el plan Basic y cambiar `[publish]` a `user = "tu_dinero_es"`, `platforms = ["youtube", "instagram"]`, `privacy = "public"` |
-| 3 | Más historias | Otras tablas del INE (vivienda por comunidades, paro de la EPA, salarios) y comparaciones con Europa (Eurostat). Exige historias trimestrales y anuales, no solo mensuales, y un juez que elija entre varias candidatas |
-| 4 | Vídeo largo semanal 16:9 | Formato principal: 8–12 min con capítulos y miniatura, a partir de varias historias de la semana |
-| 5 | Límites de gasto | Coste por guion y por voz con tope mensual por canal; pasar Azure a S0 cuando se supere el plan gratuito |
-| 6 | Instagram | Foto de perfil y biografía; carruseles con `/api/upload_photos` |
-| 7 | Música | Elegir biblioteca con licencia comercial o seguir sin música |
+| 1 | Planificador en el servidor | ✅ Contenedor `datavideo-scheduler` en el VPS (ver sección 7). Publica 1 vídeo al día a las 12:00 (Madrid) en **privado** en el canal de pruebas hasta el paso 2 |
+| 2 | Pasar el canal 1 a producción | **Propietario:** pulsar *Crear canal* para *Tu Dinero en Datos* (`@TuDineroDatos`, formulario ya relleno; crea una cuenta de marca de Google), conectarlo al perfil `tu_dinero_es` de Upload-Post (consentimiento de Google) y contratar Upload-Post Basic (el plan Free solo admite 10 subidas al mes). Después: `[publish]` con `user = "tu_dinero_es"`, `platforms = ["youtube", "instagram"]`, `privacy = "public"` y desplegar |
+| 3 | Vídeo largo semanal 16:9 | **Siguiente tarea de desarrollo, la de más valor.** 8–12 min con capítulos y miniatura, a partir de las historias de la semana; mismas reglas de verificación |
+| 4 | Más historias (hasta ~20 mensuales) | Eurostat (IPCA y paro por país de la UE, mensuales; precios de la luz y el gas por país, semestrales), INE hipotecas y compraventa de viviendas por comunidad (mensuales), precio medio de hotel por comunidad (mensual) |
+| 5 | Más tipos de escena | Evolución temporal (líneas) y mapa de comunidades, para que no todos los vídeos sean rankings |
+| 6 | Banco de pruebas de guiones | 20 casos, GPT-6.1 Sol frente a Terra; anotar el resultado en `architecture.md` |
+| 7 | Límites de gasto | Coste por guion y por voz con tope mensual por canal. El plan F0 de Azure cubre ~500.000 caracteres al mes (un canal usa ~60.000) |
+| 8 | Instagram | Foto de perfil y biografía; carruseles con `/api/upload_photos` |
+| 9 | Música | Elegir biblioteca con licencia comercial o seguir sin música |
 
 ### H3 — Estadísticas y más fuentes
 Más fuentes oficiales con licencia verificada, estadísticas, afiliados.
@@ -185,3 +187,28 @@ Estimación propia, con mucha incertidumbre. Los ingresos dependen de que los ca
 | Optimista | 3–4 canales monetizados y uno despega | 1.500–4.000 € | +1.450 a +3.950 € (a partir del mes 15–24) |
 
 A esto hay que restar impuestos y, si corresponde, la cuota de autónomo (consultar al gestor).
+
+---
+
+## 7. Servidor (VPS de Hostinger)
+
+- **Acceso:** `ssh deploy@72.61.199.239` (`srv1169320.hstgr.cloud`, Debian 13, 4 núcleos, 15 GB). Lo comparten otros proyectos (`/opt/projects/*`, Traefik, bases de datos): nunca usar `docker compose down` sin `-f docker-compose.datavideo.yml`, ni `docker system prune`.
+- **Carpeta:** `/opt/projects/datavideo`, clon de este repositorio. `.env` (permisos 600, con `DATAVIDEO_UID=1001` y `DATAVIDEO_GID=1001` al final) y `config.toml` se copian a mano y nunca se suben a Git. Los vídeos y registros quedan en `storage/datavideo/`.
+- **Contenedor:** `datavideo-scheduler`, sin puertos, usuario `deploy` (1001), 2 CPU y 3 GB como máximo, `restart: unless-stopped`. El vigilante del servidor (`watchdog-containers.sh`) lo reinicia si la comprobación de salud falla; la limpieza nocturna de imágenes no lo toca mientras esté encendido.
+- **Actualizar** tras subir cambios a `main`:
+  ```bash
+  cd /opt/projects/datavideo && git pull --ff-only && export DATAVIDEO_TAG=$(git rev-parse --short HEAD) && docker compose -f docker-compose.datavideo.yml up -d --build
+  ```
+- **Ver qué hace:**
+  ```bash
+  docker logs --tail 100 datavideo-scheduler
+  ```
+- **Producir sin publicar** (prueba, dentro del contenedor encendido; un contenedor aparte con `run` no tiene latido, sale como no sano y el vigilante del servidor lo reinicia):
+  ```bash
+  docker exec datavideo-scheduler python -m app.datavideo.cli produce tu_dinero_es
+  ```
+- **Parar la publicación automática:**
+  ```bash
+  docker compose -f docker-compose.datavideo.yml stop
+  ```
+- **Volver a la versión anterior:** `git checkout <commit>` y el mismo comando de actualizar.

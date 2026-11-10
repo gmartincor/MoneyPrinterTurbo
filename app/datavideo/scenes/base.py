@@ -1,4 +1,5 @@
 import os
+from dataclasses import dataclass
 from typing import Protocol
 
 from PIL import Image, ImageDraw, ImageFont
@@ -15,6 +16,8 @@ _VERTICAL_CONTENT_SHARES = (0.07, 0.15, 0.93, 0.68)
 _HORIZONTAL_CONTENT_SHARES = (0.06, 0.17, 0.94, 0.80)
 _HEADER_TITLE_SHARE = 0.055
 _HEADER_SUBTITLE_SHARE = 0.032
+_CREDIT_GAP_SHARE = 0.03
+_CREDIT_FONT_SHARE = 0.03
 
 
 class Scene(Protocol):
@@ -85,3 +88,18 @@ def draw_header(
         fill=blend(theme.background, theme.muted, amount),
         anchor="mm",
     )
+
+
+@dataclass(frozen=True)
+class CreditedScene:
+    scene: Scene
+    credit: str
+    theme: Theme
+
+    def draw(self, size: Size, progress: float) -> Image.Image:
+        image = self.scene.draw(size, progress)
+        draw = ImageDraw.Draw(image)
+        font = load_font(self.theme, round(short_side(size) * _CREDIT_FONT_SHARE))
+        y = content_box(size)[3] + short_side(size) * _CREDIT_GAP_SHARE
+        draw.text((size[0] / 2, y), self.credit, font=font, fill=self.theme.muted, anchor="mm")
+        return image
