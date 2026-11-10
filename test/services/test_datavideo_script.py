@@ -260,3 +260,21 @@ def test_the_prompt_asks_for_a_hook_a_presenter_voice_and_a_closing_line():
     assert "hook" in prompt
     assert "viewer" in prompt
     assert "Never mention artificial intelligence" in prompt
+
+
+@pytest.mark.parametrize("opener", ["¿Sabías que la luz", "¿Has visto la luz", "¿Sabes que la luz"])
+def test_a_hook_that_opens_with_a_stock_phrase_is_rejected(opener):
+    segments = list(VALID_SEGMENTS)
+    segments[0] = segment(f"{opener} cuesta 0,082 €/kWh mañana?", ["cheapest_hour"])
+    model = ScriptedModel(reply(segments=segments), reply())
+
+    generate(model)
+
+    assert "stock phrase" in model.prompts[1]
+
+
+def test_the_spanish_prompt_bans_press_release_verbs():
+    prompt = build_script_prompt(FACTS, "la luz", SPANISH_SPAIN, SCENES)
+
+    assert "«se sitúa»" in prompt
+    assert "«registra»" in prompt

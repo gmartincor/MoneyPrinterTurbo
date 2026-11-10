@@ -19,6 +19,16 @@ MAX_CLOSING_WORDS = 14
 MAX_TITLE_LENGTH = 100
 _PROVIDER_ERROR_PREFIX = "Error: "
 _CODE_FENCE = re.compile(r"^```[a-zA-Z0-9]*\s*|\s*```$")
+_STOCK_OPENERS = {
+    SPANISH_SPAIN: re.compile(r"^\W*(?:sabías|sabes|has visto|te has preguntado|imagina)\b", re.IGNORECASE),
+    ENGLISH_US: re.compile(r"^\W*(?:did you know|have you seen|have you ever wondered|imagine)\b", re.IGNORECASE),
+}
+_PLAIN_WORDS = {
+    SPANISH_SPAIN: "Never use press-release verbs such as «registra», «se sitúa», «marca», «alcanza» or «encabeza»; "
+    "use everyday words such as «tiene», «paga», «sube», «baja» or «gana».",
+    ENGLISH_US: "Never use press-release verbs such as «registers», «stands at», «posts» or «tops»; "
+    "use everyday words such as «has», «pays», «rises», «falls» or «earns».",
+}
 _MACHINE_MENTIONS = {
     SPANISH_SPAIN: re.compile(r"inteligencia artificial|(?-i:\bIA\b)|generad[oa] (?:con|por|automáticamente)", re.IGNORECASE),
     ENGLISH_US: re.compile(r"artificial intelligence|(?-i:\bAI\b)|generated (?:with|by|automatically)", re.IGNORECASE),
@@ -43,8 +53,8 @@ Every segment is shown with exactly one of these scenes. Use only these scene id
 1. Use only the facts above. Do not add numbers, dates, times, prices, percentages or comparisons that are not in the facts.
 2. Write every figure exactly as it appears in the facts, with digits. Never spell numbers out in words and never use words that express proportions, such as double, triple or half.
 3. Every segment lists the keys of the facts its figures come from, and may only contain figures from those facts.
-4. The first segment is the hook, at most {max_hook_words} words: the most surprising figure as a bold contrast or a direct question to the viewer. Never open with the date, the source or a general statement.
-5. Sound like an energetic presenter talking to one viewer: address the viewer directly, short punchy sentences, contrasts and questions, every sentence carries a fact. No filler, no official-report phrasing and no comments about the video itself.
+4. The first segment is the hook, at most {max_hook_words} words: open with concrete places and their figures, as a bold contrast between the extremes. Never open with the date, the source, a general statement or a stock phrase such as "did you know".
+5. Sound like an energetic presenter talking to one viewer: address the viewer directly, short punchy sentences, contrasts and questions, every sentence carries a fact. No filler and no comments about the video itself. {plain_words}
 6. Inform, do not advise: never recommend tariffs, companies, investments or financial products.
 7. Name the source once in the first three segments, in a few words, and say when the data is from.
 8. The whole narration has between {min_words} and {max_words} words in plain sentences. No greetings, hashtags, emojis, markdown or stage directions.
@@ -140,6 +150,7 @@ def build_script_prompt(
         max_segments=SEGMENT_COUNT_RANGE[1],
         max_segment_words=MAX_SEGMENT_WORDS,
         max_hook_words=MAX_HOOK_WORDS,
+        plain_words=_PLAIN_WORDS[locale],
         max_closing_words=MAX_CLOSING_WORDS,
         max_title=MAX_TITLE_LENGTH,
     )
@@ -217,6 +228,8 @@ def _find_problems(
         referenced = [facts_by_key[key].statement for key in segment.fact_keys if key in facts_by_key]
         problems.extend(_figure_problems(f"segment {number}", verify_figures(segment.text, referenced, locale)))
     problems.extend(_edge_problems(script))
+    if script.segments and _STOCK_OPENERS[locale].search(script.segments[0].text):
+        problems.append("the hook opened with a stock phrase instead of concrete places and figures")
     if _MACHINE_MENTIONS[locale].search(script.narration):
         problems.append("the narration talked about artificial intelligence or how the video was made")
     if not SEGMENT_COUNT_RANGE[0] <= len(script.segments) <= SEGMENT_COUNT_RANGE[1]:

@@ -20,7 +20,7 @@ judge = "gpt-6.1-sol"
 
 [voice]
 name = "es-ES-AlvaroNeural-V2-Male"
-rate = 1.2
+rate = 1.25
 
 [theme]
 font_file = "BeVietnamPro-Bold.ttf"
