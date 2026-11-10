@@ -27,6 +27,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 | `store.py`, `pipeline.py` | Carpeta por historia con un artefacto por paso; reanudable, no repite historias publicadas, no publica sin licencia verificada ni controles superados y nunca reintenta solo una subida sin confirmar |
 | `publish.py`, `notify.py`, `digest.py` | Upload-Post con la clave de `.env`; Telegram solo para bloqueos, fallos y resumen semanal |
 | `cli.py` | `produce`, `run` (produce todo y publica como máximo `per_day` vídeos al día, empezando por la tabla que lleva más tiempo sin salir) y `report` (resumen semanal) |
+| `editor.py` | Revisor automático: puntúa cada guion de 0 a 10 en gancho, interés, claridad, ritmo y cierre; el guionista revisa su borrador hasta 3 rondas; por debajo de 7 no se publica |
 | `scheduler.py` | Planificador del contenedor: `run` a la hora `daily_at` de cada canal y `report` los lunes, con límite de 90 min por orden y latido para la comprobación de salud |
 
 - **Cómo se usa** (claves en `.env`):
@@ -151,6 +152,7 @@ Una fuente solo puede usarse en un vídeo publicado cuando su `Source.license_ve
 |---|---|---|
 | 1 | Planificador en el servidor | ✅ Contenedor `datavideo-scheduler` en el VPS (ver sección 7). Publica 1 vídeo al día a las 12:00 (Madrid) en **privado** en el canal de pruebas hasta el paso 2 |
 | 2 | Pasar el canal 1 a producción | **Propietario:** pulsar *Crear canal* para *Tu Dinero en Datos* (`@TuDineroDatos`, formulario ya relleno; crea una cuenta de marca de Google), conectarlo al perfil `tu_dinero_es` de Upload-Post (consentimiento de Google) y contratar Upload-Post Basic (el plan Free solo admite 10 subidas al mes). Después: `[publish]` con `user = "tu_dinero_es"`, `platforms = ["youtube", "instagram"]`, `privacy = "public"` y desplegar |
+| 2b | Calidad del Short | Revisión fotograma a fotograma del 10 de noviembre de 2026 (4 iteraciones): gancho con lugares y cifras, subtítulos de 3 palabras, foco en el ranking, cifras que cuentan, sin tarjeta final ni mención de IA en la voz. El editor aprueba el paro (7–8) y bloquea el salario (ritmo y cierre 6). Pendiente: **música con licencia** (decisión del propietario), voz definitiva (muestras en el scratchpad), escena «de X a Y» para comparaciones y que la cifra grande no deje aire debajo |
 | 3 | Vídeo largo semanal 16:9 | **Siguiente tarea de desarrollo, la de más valor.** 8–12 min con capítulos y miniatura, a partir de las historias de la semana; mismas reglas de verificación |
 | 4 | Más historias (hasta ~20 mensuales) | Eurostat (IPCA y paro por país de la UE, mensuales; precios de la luz y el gas por país, semestrales), INE hipotecas y compraventa de viviendas por comunidad (mensuales), precio medio de hotel por comunidad (mensual) |
 | 5 | Más tipos de escena | Evolución temporal (líneas) y mapa de comunidades, para que no todos los vídeos sean rankings |
