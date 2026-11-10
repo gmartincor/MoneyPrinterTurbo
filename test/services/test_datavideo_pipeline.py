@@ -218,3 +218,26 @@ def test_a_missing_upload_key_leaves_no_pending_record(produced, monkeypatch):
         publish(production, profile(), cross_post=lambda **kwargs: pytest.fail("uploaded"))
 
     assert not production.run.has(PUBLICATION_FILE)
+
+
+@pytest.mark.parametrize(
+    "step, output_index, artefacts",
+    [
+        ("compose_video", 2, (pipeline.FINAL_FILE,)),
+        ("render_scene_track", 1, (pipeline.SCENES_FILE, pipeline.FINAL_FILE)),
+    ],
+)
+def test_a_video_interrupted_while_being_written_is_made_again(produced, monkeypatch, step, output_index, artefacts):
+    production, writer, root = produced
+    for name in artefacts:
+        production.run.path(name).unlink()
+
+    def interrupted(*arguments):
+        Path(arguments[output_index]).write_bytes(b"half a video")
+        raise RuntimeError("container restarted")
+
+    monkeypatch.setattr(pipeline, step, interrupted)
+    with pytest.raises(RuntimeError, match="restarted"):
+        produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, size=SMALL_VERTICAL)
+
+    assert not production.run.has(artefacts[0])

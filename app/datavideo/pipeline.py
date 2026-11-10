@@ -74,7 +74,8 @@ def produce(
     final = run.path(FINAL_FILE)
     if not run.has(FINAL_FILE):
         scene_track = _scene_track(run, profile, ranking, facts, script, narration, size)
-        compose_video(scene_track, narration, final, SHORT_ASPECT, script.title, profile.theme)
+        compose_video(scene_track, narration, run.partial_path(FINAL_FILE), SHORT_ASPECT, script.title, profile.theme)
+        run.commit(FINAL_FILE)
     quality = check_video(final, size, sum(narration.durations), narration.subtitle_path, SHORT_LIMITS)
     run.write_json(QUALITY_FILE, quality.to_dict())
     package = build_package(script, facts, ranking.period_label(profile.language), story.tags, profile.language)
@@ -190,4 +191,5 @@ def _scene_track(
         TimedScene(build_scene(segment.scene, segment.fact_keys, context), duration)
         for segment, duration in zip(script.segments, narration.durations)
     ]
-    return render_scene_track(timed, track, size)
+    render_scene_track(timed, run.partial_path(SCENES_FILE), size)
+    return run.commit(SCENES_FILE)

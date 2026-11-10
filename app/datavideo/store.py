@@ -31,6 +31,13 @@ class Run:
         artefact = self.path(name)
         return artefact.is_file() and artefact.stat().st_size > 0
 
+    def partial_path(self, name: str) -> Path:
+        return self.path(f".partial.{name}")
+
+    def commit(self, name: str) -> Path:
+        os.replace(self.partial_path(name), self.path(name))
+        return self.path(name)
+
     def read_json(self, name: str) -> Any:
         return json.loads(self.path(name).read_text(encoding="utf-8"))
 
