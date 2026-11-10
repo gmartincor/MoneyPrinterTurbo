@@ -164,12 +164,20 @@ def _script(
     editor = edit or text_generator(profile, "judge")
     rounds: list[tuple[Script, Review]] = []
     notes: tuple[str, ...] = ()
+    draft: Script | None = None
     for _ in range(EDITORIAL_ROUNDS):
-        script = generate_verified_script(
-            facts, story.topic, profile.language, SCENE_DESCRIPTIONS, writer, fact_scenes=FACT_SCENES, editor_notes=notes
+        draft = generate_verified_script(
+            facts,
+            story.topic,
+            profile.language,
+            SCENE_DESCRIPTIONS,
+            writer,
+            fact_scenes=FACT_SCENES,
+            editor_notes=notes,
+            previous_draft=draft,
         )
-        review = review_script(script, facts, story.topic, profile.language, editor)
-        rounds.append((script, review))
+        review = review_script(draft, facts, story.topic, profile.language, editor)
+        rounds.append((draft, review))
         if review.passed:
             break
         notes = review.fixes

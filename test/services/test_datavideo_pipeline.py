@@ -285,3 +285,20 @@ def test_a_script_the_editor_finds_weak_is_not_published(produced):
 
     with pytest.raises(BlockedPublication, match="editor"):
         publish(weak, profile(), cross_post=lambda **kwargs: pytest.fail("uploaded"))
+
+
+def test_each_editorial_round_revises_the_previous_draft(tmp_path, monkeypatch):
+    monkeypatch.setattr(pipeline, "narrate", fake_narrate)
+    reviews = iter([editor_reply(6), editor_reply(9)])
+    prompts = []
+
+    def writer(prompt):
+        prompts.append(prompt)
+        return SCRIPT_REPLY
+
+    produce(
+        profile(), CPI_ANNUAL_BY_REGION, root=tmp_path, download=fake_download, generate=writer,
+        edit=lambda prompt: next(reviews), size=SMALL_VERTICAL,
+    )
+
+    assert "¿Dónde suben más los precios?" in prompts[1].split("Editor feedback")[1]

@@ -295,10 +295,10 @@ def test_the_writer_knows_the_screen_already_shows_the_source_and_every_value():
     assert "never recite a list" in prompt
 
 
-def test_a_tight_script_of_four_segments_is_enough():
-    script = generate(ScriptedModel(reply(segments=VALID_SEGMENTS[:4])), word_range=(35, 90))
+def test_a_tight_script_of_five_segments_is_enough():
+    script = generate(ScriptedModel(reply(segments=VALID_SEGMENTS[:5])), word_range=(35, 90))
 
-    assert len(script.segments) == 4
+    assert len(script.segments) == 5
 
 
 def test_the_writer_is_told_never_to_repeat_and_to_close_with_an_opinion_question():
@@ -306,3 +306,12 @@ def test_the_writer_is_told_never_to_repeat_and_to_close_with_an_opinion_questio
 
     assert "Never repeat a fact" in prompt
     assert "invites the viewer to give an opinion" in prompt
+
+
+def test_the_writer_revises_its_previous_draft_with_the_editor_notes():
+    model = ScriptedModel(reply())
+    draft = generate(ScriptedModel(reply()))
+
+    generate(model, editor_notes=("Cierra con una pregunta concreta",), previous_draft=draft)
+
+    assert "¿Luz barata mañana?" in model.prompts[0].split("Editor feedback")[1]
