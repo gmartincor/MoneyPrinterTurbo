@@ -11,8 +11,8 @@ from app.datavideo.figures import FigureCheck, verify_figures
 from app.datavideo.locale import ENGLISH_US, SPANISH_SPAIN
 
 DEFAULT_MAX_ATTEMPTS = 3
-DEFAULT_WORD_RANGE = (60, 100)
-SEGMENT_COUNT_RANGE = (6, 10)
+DEFAULT_WORD_RANGE = (40, 90)
+SEGMENT_COUNT_RANGE = (4, 8)
 MAX_SEGMENT_WORDS = 16
 MAX_HOOK_WORDS = 12
 MAX_CLOSING_WORDS = 14
@@ -60,9 +60,9 @@ Every segment is shown with exactly one of these scenes. Use only these scene id
 8. The whole narration has between {min_words} and {max_words} words in plain sentences. No greetings, hashtags, emojis, markdown or stage directions.
 9. Split the narration into {min_segments} to {max_segments} segments of at most {max_segment_words} words each, so the picture changes every few seconds.
 10. The title states the most striking finding in plain words, in at most {max_title} characters (aim for 70), may be a question, and follows the same rules about figures.
-11. The last segment closes in at most {max_closing_words} words with a question to the viewer or a reason to follow the channel for the next figure. No credits and no summary at the end.
+11. The last segment closes in at most {max_closing_words} words with a question that invites the viewer to give an opinion in the comments, never a question the video has already answered. No credits and no summary at the end.
 12. Never mention artificial intelligence, scripts or how the video was made.
-13. Say only the figures that carry the story: the extremes, the national figure and one striking count. The ranking scene shows every region with its value, so never recite a list of regions and figures.
+13. Never repeat a fact, a figure or a phrase: every segment adds something new, and a shorter script is better than a padded one. Say only the figures that carry the story: the extremes, the national figure and one striking count. The ranking scene shows every region with its value, so never recite a list of regions and figures.
 
 # Output
 Reply with a single JSON object and nothing else:

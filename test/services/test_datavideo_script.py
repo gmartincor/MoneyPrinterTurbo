@@ -222,7 +222,7 @@ def test_a_segment_too_long_to_keep_the_picture_moving_is_rejected():
 
 
 def test_too_few_segments_to_change_the_picture_are_rejected():
-    long_segments = VALID_SEGMENTS[:5]
+    long_segments = VALID_SEGMENTS[:3]
     model = ScriptedModel(reply(segments=long_segments), reply())
 
     generate(model)
@@ -293,3 +293,16 @@ def test_the_writer_knows_the_screen_already_shows_the_source_and_every_value():
 
     assert "already shows the source and the period" in prompt
     assert "never recite a list" in prompt
+
+
+def test_a_tight_script_of_four_segments_is_enough():
+    script = generate(ScriptedModel(reply(segments=VALID_SEGMENTS[:4])), word_range=(35, 90))
+
+    assert len(script.segments) == 4
+
+
+def test_the_writer_is_told_never_to_repeat_and_to_close_with_an_opinion_question():
+    prompt = build_script_prompt(FACTS, "la luz", SPANISH_SPAIN, SCENES)
+
+    assert "Never repeat a fact" in prompt
+    assert "invites the viewer to give an opinion" in prompt
