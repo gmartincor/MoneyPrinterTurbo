@@ -3,7 +3,7 @@ from types import SimpleNamespace
 import pytest
 
 from app.datavideo import timeline
-from app.datavideo.timeline import narrate, segment_durations
+from app.datavideo.timeline import caption_chunks, narrate, segment_durations
 
 TICKS_PER_SECOND = 10_000_000
 
@@ -69,18 +69,16 @@ def test_narration_uses_the_profile_voice_and_writes_audio_and_subtitles(tmp_pat
         calls["tts"] = (text, voice_name, voice_rate, voice_file)
         return SimpleNamespace(subs=texts, offset=offsets)
 
-    def fake_subtitle(sub_maker, text, subtitle_file):
-        calls["subtitle"] = (text, subtitle_file)
-
     monkeypatch.setattr(timeline.voice, "tts", fake_tts)
-    monkeypatch.setattr(timeline.voice, "create_subtitle", fake_subtitle)
     monkeypatch.setattr(timeline.voice, "get_audio_duration", lambda path: 2.0)
 
     result = narrate(["Hola", "mundo"], "es-ES-TristanMultilingualNeural-V2-Male", 1.0, tmp_path)
 
     assert calls["tts"][0] == "Hola mundo"
     assert calls["tts"][1] == "es-ES-TristanMultilingualNeural-V2-Male"
-    assert calls["subtitle"][0] == "Hola mundo"
+    assert result.subtitle_path.read_text(encoding="utf-8") == (
+        "1\n00:00:00,000 --> 00:00:01,500\nHola mundo\n"
+    )
     assert result.durations == pytest.approx((0.75, 1.25))
     assert result.audio_path == tmp_path / "narration.mp3"
     assert result.subtitle_path == tmp_path / "narration.srt"
@@ -100,3 +98,35 @@ def test_azure_key_from_the_environment_is_used_without_saving_it(monkeypatch):
     timeline.use_azure_key_from_environment()
 
     assert timeline.config.azure["speech_key"] == "fixture-key"
+
+
+def test_captions_show_at_most_three_words_at_a_time():
+    texts, offsets = words(*[(word, index * 0.4, index * 0.4 + 0.3) for index, word in enumerate("Madrid paga el sueldo más alto del país".split())])
+
+    chunks = caption_chunks(texts, offsets)
+
+    assert [text for _, _, text in chunks] == ["Madrid paga el", "sueldo más alto", "del país"]
+    assert all(len(text.split()) <= 3 for _, _, text in chunks)
+
+
+def test_symbols_and_punctuation_stay_with_their_word_and_sentences_end_a_caption():
+    texts, offsets = words(("Un", 0.0, 0.2), ("4,9", 0.2, 0.6), ("%", 0.6, 0.9), (".", 0.9, 0.9), ("Ceuta", 1.2, 1.6))
+
+    chunks = caption_chunks(texts, offsets)
+
+    assert [text for _, _, text in chunks] == ["Un 4,9 %.", "Ceuta"]
+
+
+def test_each_caption_stays_until_the_next_one_starts():
+    texts, offsets = words(("Uno", 0.0, 0.3), ("dos", 0.3, 0.6), ("tres.", 0.6, 0.9), ("Cuatro", 1.2, 1.5))
+
+    chunks = caption_chunks(texts, offsets)
+
+    assert chunks[0][:2] == pytest.approx((0.0, 1.2))
+    assert chunks[1][:2] == pytest.approx((1.2, 1.5))
+
+
+def test_long_words_do_not_fit_three_to_a_line():
+    texts, offsets = words(("comunidades", 0.0, 0.5), ("autónomas", 0.5, 1.0), ("superan", 1.0, 1.5))
+
+    assert [text for _, _, text in caption_chunks(texts, offsets)] == ["comunidades autónomas", "superan"]

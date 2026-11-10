@@ -32,7 +32,9 @@ class SceneContext:
 
 def build_scene(scene_id: str, fact_keys: Sequence[str], context: SceneContext) -> Scene:
     if scene_id == RANKING:
-        return RankingScene(ranking=context.ranking, theme=context.theme, locale=context.locale)
+        return RankingScene(
+            ranking=context.ranking, theme=context.theme, locale=context.locale, focus=_focus(fact_keys, context)
+        )
     if scene_id == BIG_NUMBER:
         known_keys = [key for key in fact_keys if key in context.facts]
         if not known_keys:
@@ -40,6 +42,19 @@ def build_scene(scene_id: str, fact_keys: Sequence[str], context: SceneContext) 
         fact = context.facts[known_keys[0]]
         return BigNumberScene(fact=fact, color=_fact_color(fact.key, context), theme=context.theme)
     raise ValueError(f"unknown scene: {scene_id}")
+
+
+def _focus(fact_keys: Sequence[str], context: SceneContext) -> frozenset[str]:
+    ranking = context.ranking
+    groups = {
+        "highest": ranking.highest,
+        "lowest": ranking.lowest,
+        "gap": ranking.highest + ranking.lowest,
+        "above_national": ranking.above_national,
+    }
+    regions = {item.region for key in fact_keys for item in groups.get(key, ())}
+    regions |= {context.facts[key].label for key in fact_keys if key.startswith("region_") and key in context.facts}
+    return frozenset(regions)
 
 
 def _fact_color(fact_key: str, context: SceneContext) -> Color:

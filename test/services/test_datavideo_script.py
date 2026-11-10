@@ -278,3 +278,11 @@ def test_the_spanish_prompt_bans_press_release_verbs():
 
     assert "«se sitúa»" in prompt
     assert "«registra»" in prompt
+
+
+def test_the_editor_notes_on_a_previous_draft_reach_the_writer():
+    model = ScriptedModel(reply())
+
+    generate(model, editor_notes=("Abre con la hora más barata y su precio",))
+
+    assert "Abre con la hora más barata y su precio" in model.prompts[0]

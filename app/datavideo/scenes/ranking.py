@@ -4,7 +4,7 @@ from decimal import Decimal
 from PIL import Image, ImageDraw, ImageFont
 
 from app.datavideo.locale import SPANISH_SPAIN
-from app.datavideo.scenes.base import Box, Size, content_box, draw_header, ease_out, fitting_font, load_font
+from app.datavideo.scenes.base import Box, Size, blend, content_box, draw_header, ease_out, fitting_font, load_font
 from app.datavideo.stories.regional_ranking import RegionalRanking, RegionalValue, format_value
 from app.datavideo.theme import Color, Theme
 
@@ -18,6 +18,7 @@ _BAR_HEIGHT_SHARE = 0.64
 _LABEL_GAP_SHARE = 0.012
 _LABEL_OFFSET_SHARE = 0.2
 _LABEL_PADDING_SHARE = 0.08
+_DIMMED_SHARE = 0.3
 
 
 def extreme_colors(ranking: RegionalRanking, theme: Theme) -> tuple[Color, Color]:
@@ -46,6 +47,7 @@ class RankingScene:
     ranking: RegionalRanking
     theme: Theme
     locale: str
+    focus: frozenset[str] = frozenset()
 
     def _columns(self, size: Size) -> _Columns:
         left, top, right, bottom = content_box(size)
@@ -100,7 +102,7 @@ class RankingScene:
         name_font = columns.font
         for item, box in zip(self.ranking.regions, boxes):
             middle_y = (box[1] + box[3]) / 2
-            draw.text((columns.names_right, middle_y), item.region, font=name_font, fill=self.theme.text, anchor="rm")
+            draw.text((columns.names_right, middle_y), item.region, font=name_font, fill=self._dimmed(item, self.theme.text), anchor="rm")
             if box[2] > box[0]:
                 draw.rectangle(box, fill=self._bar_color(item))
         self._draw_national_line(draw, size, columns, text["national"])
@@ -126,7 +128,7 @@ class RankingScene:
         box = self._label_box(draw, item, bar, font, row_height)
         draw.rectangle(box, fill=self.theme.background)
         anchor_point = (bar[2] + row_height * _LABEL_OFFSET_SHARE, (bar[1] + bar[3]) / 2)
-        draw.text(anchor_point, self._value_text(item.value), font=font, fill=self.theme.text, anchor="lm")
+        draw.text(anchor_point, self._value_text(item.value), font=font, fill=self._dimmed(item, self.theme.text), anchor="lm")
 
     def _value_text(self, value: Decimal) -> str:
         return format_value(self.ranking.story, value, self.locale)
@@ -134,10 +136,15 @@ class RankingScene:
     def _bar_color(self, item: RegionalValue) -> Color:
         highest_color, lowest_color = extreme_colors(self.ranking, self.theme)
         if item in self.ranking.highest:
-            return highest_color
+            return self._dimmed(item, highest_color)
         if item in self.ranking.lowest:
-            return lowest_color
-        return self.theme.neutral
+            return self._dimmed(item, lowest_color)
+        return self._dimmed(item, self.theme.neutral)
+
+    def _dimmed(self, item: RegionalValue, color: Color) -> Color:
+        if not self.focus or item.region in self.focus:
+            return color
+        return blend(self.theme.background, color, _DIMMED_SHARE)
 
     def _draw_national_line(self, draw: ImageDraw.ImageDraw, size: Size, columns: _Columns, label: str) -> None:
         x = columns.x_of(self.ranking.national)

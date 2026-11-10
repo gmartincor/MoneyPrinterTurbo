@@ -15,7 +15,7 @@ PROFILE = replace(BASE_PROFILE, stories=("ipc_anual_ccaa", "paro_ccaa", "salario
 NOW = datetime(2026, 11, 10, 11, 0, tzinfo=timezone.utc)
 
 
-def production(key):
+def production(key, score=40):
     story = STORIES[key]
     story_key = f"{key}_2026_t3"
     return SimpleNamespace(
@@ -24,6 +24,7 @@ def production(key):
         video_path=f"/runs/{story_key}/final.mp4",
         package=SimpleNamespace(title=f"Título de {key}"),
         quality=SimpleNamespace(passed=True, problems=()),
+        review=SimpleNamespace(total=score),
     )
 
 
@@ -209,3 +210,12 @@ def test_the_report_command_sends_the_weekly_digest(monkeypatch):
 
     assert cli.main(["report", "tu_dinero_es"]) == 0
     assert sent == ["Resumen semanal de tu_dinero_es"]
+
+
+def test_among_tables_never_published_the_most_interesting_story_goes_first():
+    uploads = Uploads()
+    scores = {"ipc_anual_ccaa": 35, "paro_ccaa": 38, "salario_ccaa": 44}
+
+    run(produce=lambda profile, story: production(story.key, scores[story.key]), publish=uploads)
+
+    assert uploads == ["salario_ccaa"]

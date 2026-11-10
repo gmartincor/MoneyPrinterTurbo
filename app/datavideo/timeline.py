@@ -10,6 +10,9 @@ from app.services import voice
 AUDIO_FILE_NAME = "narration.mp3"
 SUBTITLE_FILE_NAME = "narration.srt"
 _TICKS_PER_SECOND = 10_000_000
+MAX_CAPTION_WORDS = 3
+MAX_CAPTION_CHARACTERS = 22
+_SENTENCE_ENDINGS = (".", "?", "!", ":", ";")
 
 
 @dataclass(frozen=True)
@@ -33,10 +36,72 @@ def narrate(segment_texts: Sequence[str], voice_name: str, rate: float, director
     sub_maker = voice.tts(text=text, voice_name=voice_name, voice_rate=rate, voice_file=str(audio_path))
     if sub_maker is None or not sub_maker.subs:
         raise RuntimeError(f"the voice {voice_name} returned no audio")
-    voice.create_subtitle(sub_maker=sub_maker, text=text, subtitle_file=str(subtitle_path))
+    write_captions(caption_chunks(sub_maker.subs, sub_maker.offset), subtitle_path)
     total_seconds = voice.get_audio_duration(str(audio_path))
     durations = segment_durations(segment_texts, sub_maker.subs, sub_maker.offset, total_seconds)
     return Narration(audio_path=audio_path, subtitle_path=subtitle_path, durations=tuple(durations))
+
+
+@dataclass
+class _Caption:
+    start: int
+    end: int
+    text: str
+    words: int = 1
+
+    @property
+    def closed(self) -> bool:
+        return self.text.endswith(_SENTENCE_ENDINGS)
+
+    def takes(self, word: str) -> bool:
+        if not _letters_and_digits(word):
+            return True
+        return (
+            not self.closed
+            and self.words < MAX_CAPTION_WORDS
+            and len(f"{self.text} {word}") <= MAX_CAPTION_CHARACTERS
+        )
+
+    def add(self, word: str, end: int) -> None:
+        self.end = end
+        self.text = f"{self.text}{word}" if word in _SENTENCE_ENDINGS else f"{self.text} {word}"
+        self.words += 1 if _letters_and_digits(word) else 0
+
+
+def caption_chunks(word_texts: Sequence[str], word_offsets: Sequence[tuple[int, int]]) -> list[tuple[float, float, str]]:
+    captions: list[_Caption] = []
+    for word, (start, end) in zip(word_texts, word_offsets):
+        text = word.strip()
+        if not text:
+            continue
+        if captions and captions[-1].takes(text):
+            captions[-1].add(text, end)
+        else:
+            captions.append(_Caption(start=start, end=end, text=text))
+    return [
+        (
+            caption.start / _TICKS_PER_SECOND,
+            (captions[index + 1].start if index + 1 < len(captions) else caption.end) / _TICKS_PER_SECOND,
+            caption.text,
+        )
+        for index, caption in enumerate(captions)
+    ]
+
+
+def write_captions(chunks: Sequence[tuple[float, float, str]], path: Path) -> Path:
+    blocks = [
+        f"{index}\n{_srt_time(start)} --> {_srt_time(end)}\n{text}\n"
+        for index, (start, end, text) in enumerate(chunks, start=1)
+    ]
+    path.write_text("\n".join(blocks), encoding="utf-8")
+    return path
+
+
+def _srt_time(seconds: float) -> str:
+    milliseconds = round(seconds * 1000)
+    hours, rest = divmod(milliseconds, 3_600_000)
+    minutes, rest = divmod(rest, 60_000)
+    return f"{hours:02d}:{minutes:02d}:{rest // 1000:02d},{rest % 1000:03d}"
 
 
 def segment_durations(

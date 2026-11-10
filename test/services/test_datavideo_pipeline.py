@@ -11,6 +11,7 @@ from app.datavideo.channels import CHANNELS_DIRECTORY, load_channel
 from app.datavideo.pipeline import BlockedPublication, produce, publish
 from app.datavideo.qa import QualityReport
 from app.datavideo.facts import Source
+from app.datavideo.editor import CRITERIA, Review
 from app.datavideo.store import PUBLICATION_FILE
 from app.datavideo.stories.regional_ranking import CPI_ANNUAL_BY_REGION
 from app.datavideo.timeline import Narration
@@ -39,6 +40,14 @@ SCRIPT_REPLY = json.dumps(
 
 def profile():
     return load_channel(CHANNELS_DIRECTORY / "tu_dinero_es.toml")
+
+
+def editor_reply(score):
+    return json.dumps({"scores": {criterion: score for criterion in CRITERIA}, "fixes": ["Abre con Galicia y su 5,5 %"]})
+
+
+def PASSING_EDITOR(prompt):
+    return editor_reply(9)
 
 
 def fake_download(table_id, periods):
@@ -75,7 +84,7 @@ def rendered_runs(tmp_path_factory):
     writer = CountingWriter()
     with pytest.MonkeyPatch.context() as patch:
         patch.setattr(pipeline, "narrate", fake_narrate)
-        produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, size=SMALL_VERTICAL)
+        produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, edit=PASSING_EDITOR, size=SMALL_VERTICAL)
     assert writer.calls == 1
     return root
 
@@ -87,7 +96,7 @@ def produced(rendered_runs, tmp_path, monkeypatch):
     monkeypatch.setattr(pipeline, "narrate", lambda *arguments: pytest.fail("narrated again"))
     writer = CountingWriter()
     production = produce(
-        profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, size=SMALL_VERTICAL
+        profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, edit=PASSING_EDITOR, size=SMALL_VERTICAL
     )
     return production, writer, root
 
@@ -126,7 +135,7 @@ def test_the_source_response_is_kept_with_its_licence_for_audit(produced):
 def test_an_interrupted_run_resumes_without_writing_the_script_again(produced, monkeypatch):
     production, writer, root = produced
 
-    produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, size=SMALL_VERTICAL)
+    produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, edit=PASSING_EDITOR, size=SMALL_VERTICAL)
 
     assert writer.calls == 0
 
@@ -135,7 +144,7 @@ def test_a_story_already_published_is_not_produced_again(produced):
     production, writer, root = produced
     production.run.write_json(PUBLICATION_FILE, {"success": True})
 
-    again = produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, size=SMALL_VERTICAL)
+    again = produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, edit=PASSING_EDITOR, size=SMALL_VERTICAL)
 
     assert again is None
 
@@ -238,6 +247,41 @@ def test_a_video_interrupted_while_being_written_is_made_again(produced, monkeyp
 
     monkeypatch.setattr(pipeline, step, interrupted)
     with pytest.raises(RuntimeError, match="restarted"):
-        produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, size=SMALL_VERTICAL)
+        produce(profile(), CPI_ANNUAL_BY_REGION, root=root, download=fake_download, generate=writer, edit=PASSING_EDITOR, size=SMALL_VERTICAL)
 
     assert not production.run.has(artefacts[0])
+
+
+def test_the_editor_review_is_kept_with_the_production(produced):
+    production, _, _ = produced
+
+    assert production.review.passed is True
+    assert production.run.read_json("review.json")["best"]["scores"]["hook"] == 9
+
+
+def test_a_script_below_the_editor_target_is_rewritten_with_the_editor_fixes(tmp_path, monkeypatch):
+    monkeypatch.setattr(pipeline, "narrate", fake_narrate)
+    writer = CountingWriter()
+    reviews = iter([editor_reply(6), editor_reply(9)])
+    prompts = []
+
+    def writer_with_memory(prompt):
+        prompts.append(prompt)
+        return writer(prompt)
+
+    production = produce(
+        profile(), CPI_ANNUAL_BY_REGION, root=tmp_path, download=fake_download, generate=writer_with_memory,
+        edit=lambda prompt: next(reviews), size=SMALL_VERTICAL,
+    )
+
+    assert writer.calls == 2
+    assert "Abre con Galicia y su 5,5 %" in prompts[1]
+    assert production.review.passed is True
+
+
+def test_a_script_the_editor_finds_weak_is_not_published(produced):
+    production, _, _ = produced
+    weak = replace(production, review=Review(scores={criterion: 5 for criterion in CRITERIA}, fixes=("Gancho flojo",)))
+
+    with pytest.raises(BlockedPublication, match="editor"):
+        publish(weak, profile(), cross_post=lambda **kwargs: pytest.fail("uploaded"))

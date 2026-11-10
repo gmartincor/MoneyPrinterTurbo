@@ -90,7 +90,11 @@ def _publish_due(
             last_by_table[story.table_id] = max(last_by_table.get(story.table_id, _NEVER), _published_at(record))
     ordered = sorted(
         candidates,
-        key=lambda item: (last_by_table.get(item.story.table_id, _NEVER), profile.stories.index(item.story.key)),
+        key=lambda item: (
+            last_by_table.get(item.story.table_id, _NEVER),
+            -item.review.total,
+            profile.stories.index(item.story.key),
+        ),
     )
     for production in ordered:
         story_key = production.run.story_key

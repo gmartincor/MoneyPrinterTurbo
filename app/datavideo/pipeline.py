@@ -5,6 +5,7 @@ from typing import Any, Callable
 
 from app.datavideo.audio import normalize_loudness
 from app.datavideo.channels import ChannelProfile, text_generator
+from app.datavideo.editor import Review, review_from_dict, review_script
 from app.datavideo.facts import Fact, unique_sources
 from app.datavideo.packaging import Package, build_package
 from app.datavideo.publish import publish_video
@@ -34,6 +35,8 @@ SCENES_FILE = "scenes.mp4"
 FINAL_FILE = "final.mp4"
 QUALITY_FILE = "quality.json"
 PACKAGE_FILE = "package.json"
+REVIEW_FILE = "review.json"
+EDITORIAL_ROUNDS = 3
 SHORT_ASPECT = "9:16"
 
 
@@ -50,6 +53,7 @@ class Production:
     facts: tuple[Fact, ...]
     package: Package
     quality: QualityReport
+    review: Review
 
 
 def produce(
@@ -59,6 +63,7 @@ def produce(
     root: Path | None = None,
     download: Callable[[int, int], Any] = download_table,
     generate: Callable[[str], str] | None = None,
+    edit: Callable[[str], str] | None = None,
     size: Size = VERTICAL_SIZE,
 ) -> Production | None:
     payload = download(story.table_id, PERIODS_TO_DOWNLOAD)
@@ -69,7 +74,7 @@ def produce(
     _keep_source(run, story, payload)
     facts = tuple(describe_ranking(ranking, story))
     run.write_json(FACTS_FILE, [{"key": fact.key, "statement": fact.statement, "source": fact.source.name} for fact in facts])
-    script = _script(run, profile, story, facts, generate)
+    script, review = _script(run, profile, story, facts, generate, edit)
     narration = _narration(run, profile, script)
     final = run.path(FINAL_FILE)
     if not run.has(FINAL_FILE):
@@ -80,7 +85,9 @@ def produce(
     run.write_json(QUALITY_FILE, quality.to_dict())
     package = build_package(script, facts, ranking.period_label(profile.language), story.tags, profile.language)
     run.write_json(PACKAGE_FILE, {"title": package.title, "description": package.description, "tags": list(package.tags)})
-    return Production(run=run, story=story, video_path=final, script=script, facts=facts, package=package, quality=quality)
+    return Production(
+        run=run, story=story, video_path=final, script=script, facts=facts, package=package, quality=quality, review=review
+    )
 
 
 def publish(
@@ -102,6 +109,9 @@ def publish(
         raise BlockedPublication(f"licence not verified for: {', '.join(unverified)}")
     if not production.quality.passed:
         raise BlockedPublication(f"technical checks failed: {'; '.join(production.quality.problems)}")
+    if not production.review.publishable:
+        scores = ", ".join(f"{name} {score}/10" for name, score in production.review.scores.items())
+        raise BlockedPublication(f"the editor scored the script too low: {scores}")
 
     def upload_with_pending_record(**arguments: Any) -> dict:
         run.write_json(PUBLICATION_FILE, {"success": False, "request_id": None, "error": "upload started, no reply yet"})
@@ -146,19 +156,27 @@ def _script(
     story: RegionalRankingStory,
     facts: tuple[Fact, ...],
     generate: Callable[[str], str] | None,
-) -> Script:
-    if run.has(SCRIPT_FILE):
-        return script_from_dict(run.read_json(SCRIPT_FILE))
-    script = generate_verified_script(
-        facts,
-        story.topic,
-        profile.language,
-        SCENE_DESCRIPTIONS,
-        generate or text_generator(profile, "writer"),
-        fact_scenes=FACT_SCENES,
-    )
+    edit: Callable[[str], str] | None,
+) -> tuple[Script, Review]:
+    if run.has(SCRIPT_FILE) and run.has(REVIEW_FILE):
+        return script_from_dict(run.read_json(SCRIPT_FILE)), review_from_dict(run.read_json(REVIEW_FILE)["best"])
+    writer = generate or text_generator(profile, "writer")
+    editor = edit or text_generator(profile, "judge")
+    rounds: list[tuple[Script, Review]] = []
+    notes: tuple[str, ...] = ()
+    for _ in range(EDITORIAL_ROUNDS):
+        script = generate_verified_script(
+            facts, story.topic, profile.language, SCENE_DESCRIPTIONS, writer, fact_scenes=FACT_SCENES, editor_notes=notes
+        )
+        review = review_script(script, facts, story.topic, profile.language, editor)
+        rounds.append((script, review))
+        if review.passed:
+            break
+        notes = review.fixes
+    script, review = max(rounds, key=lambda item: item[1].total)
     run.write_json(SCRIPT_FILE, script_to_dict(script))
-    return script
+    run.write_json(REVIEW_FILE, {"best": review.to_dict(), "rounds": [item.to_dict() for _, item in rounds]})
+    return script, review
 
 
 def _narration(run: Run, profile: ChannelProfile, script: Script) -> Narration:

@@ -67,6 +67,12 @@ Every segment is shown with exactly one of these scenes. Use only these scene id
 Reply with a single JSON object and nothing else:
 {{"title": "...", "segments": [{{"text": "...", "facts": ["fact_key"], "scene": "scene_id"}}]}}"""
 
+_EDITOR_TEMPLATE = """
+
+# Editor feedback on your previous draft
+The channel editor rejected your previous draft. Write a new script that fixes every point:
+{notes}"""
+
 _RETRY_TEMPLATE = """
 
 # Previous reply rejected
@@ -165,8 +171,11 @@ def generate_verified_script(
     max_attempts: int = DEFAULT_MAX_ATTEMPTS,
     word_range: tuple[int, int] = DEFAULT_WORD_RANGE,
     fact_scenes: frozenset[str] = frozenset(),
+    editor_notes: Sequence[str] = (),
 ) -> Script:
     base_prompt = build_script_prompt(facts, topic, locale, scenes, word_range)
+    if editor_notes:
+        base_prompt += _EDITOR_TEMPLATE.format(notes="\n".join(f"- {note}" for note in editor_notes))
     prompt = base_prompt
     problems: list[str] = []
     for attempt in range(1, max_attempts + 1):

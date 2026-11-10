@@ -14,7 +14,7 @@ from app.datavideo.scenes.catalog import (
     credit_line,
 )
 from app.datavideo.scenes.base import CreditedScene
-from app.datavideo.scenes.figures import BigNumberScene
+from app.datavideo.scenes.figures import BigNumberScene, counting_value
 from app.datavideo.scenes.ranking import RankingScene
 from app.datavideo.sources.ine import INE_SOURCE
 from app.datavideo.scenes import ranking as ranking_module
@@ -215,3 +215,36 @@ def test_the_ranking_header_names_the_quarter_of_a_quarterly_story(monkeypatch):
     RankingScene(ranking=unemployment, theme=DEFAULT_THEME, locale=SPANISH_SPAIN).draw(SMALL_VERTICAL, 1.0)
 
     assert headers == ["tercer trimestre de 2026"]
+
+
+@pytest.mark.parametrize(
+    "value, amount, expected",
+    [("18,87 %", 0.0, "0,00 %"), ("18,87 %", 1.0, "18,87 %"), ("10 de 19", 0.0, "0 de 19"), ("2513 €", 0.5, "1256 €")],
+)
+def test_big_numbers_count_up_to_their_exact_value(value, amount, expected):
+    assert counting_value(value, amount) == expected
+
+
+def test_a_ranking_scene_focuses_on_the_regions_the_segment_talks_about():
+    scene = build_scene("ranking", ("highest",), context())
+
+    assert scene.focus == frozenset(item.region for item in scene.ranking.highest)
+
+
+def test_a_region_fact_focuses_on_that_region():
+    scene = build_scene("ranking", ("region_region_3",), context())
+
+    assert scene.focus == frozenset({"Región 3"})
+
+
+@pytest.mark.parametrize("size", [SMALL_VERTICAL, SMALL_HORIZONTAL])
+def test_bars_outside_the_focus_are_dimmed(size):
+    focused = RankingScene(
+        ranking=ranking("5.5", "5.0", "4.4", "3.1"), theme=DEFAULT_THEME, locale=SPANISH_SPAIN, focus=frozenset({"Región 0"})
+    )
+
+    image = focused.draw(size, progress=1.0)
+    boxes = focused.bar_boxes(size, progress=1.0)
+
+    assert image.getpixel(center(boxes[0])) == DEFAULT_THEME.negative
+    assert image.getpixel(center(boxes[1])) != DEFAULT_THEME.neutral
