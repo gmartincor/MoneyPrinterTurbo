@@ -44,6 +44,7 @@ class BlockedPublication(Exception):
 @dataclass(frozen=True)
 class Production:
     run: Run
+    story: RegionalRankingStory
     video_path: Path
     script: Script
     facts: tuple[Fact, ...]
@@ -76,9 +77,9 @@ def produce(
         compose_video(scene_track, narration, final, SHORT_ASPECT, script.title, profile.theme)
     quality = check_video(final, size, sum(narration.durations), narration.subtitle_path, SHORT_LIMITS)
     run.write_json(QUALITY_FILE, quality.to_dict())
-    package = build_package(script, facts, ranking.as_of, story.tags, profile.language)
+    package = build_package(script, facts, ranking.period_label(profile.language), story.tags, profile.language)
     run.write_json(PACKAGE_FILE, {"title": package.title, "description": package.description, "tags": list(package.tags)})
-    return Production(run=run, video_path=final, script=script, facts=facts, package=package, quality=quality)
+    return Production(run=run, story=story, video_path=final, script=script, facts=facts, package=package, quality=quality)
 
 
 def publish(
@@ -100,10 +101,16 @@ def publish(
         raise BlockedPublication(f"licence not verified for: {', '.join(unverified)}")
     if not production.quality.passed:
         raise BlockedPublication(f"technical checks failed: {'; '.join(production.quality.problems)}")
-    result = publish_video(production.video_path, production.package, profile.publish, cross_post=cross_post)
+
+    def upload_with_pending_record(**arguments: Any) -> dict:
+        run.write_json(PUBLICATION_FILE, {"success": False, "request_id": None, "error": "upload started, no reply yet"})
+        return cross_post(**arguments)
+
+    result = publish_video(production.video_path, production.package, profile.publish, cross_post=upload_with_pending_record)
     record = {
         "success": result.get("success") is True,
         "request_id": result.get("request_id"),
+        "story": production.story.key,
         "user": profile.publish.user,
         "platforms": list(profile.publish.platforms),
         "privacy": profile.publish.privacy,

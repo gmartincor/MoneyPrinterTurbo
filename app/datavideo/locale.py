@@ -20,6 +20,10 @@ _MONTHS = {
         "July", "August", "September", "October", "November", "December",
     ),
 }
+_QUARTER_ORDINALS = {
+    SPANISH_SPAIN: ("primer", "segundo", "tercer", "cuarto"),
+    ENGLISH_US: ("first", "second", "third", "fourth"),
+}
 
 
 def format_decimal(value: Decimal, places: int, locale: str) -> str:
@@ -51,6 +55,19 @@ def format_month(year: int, month: int, locale: str) -> str:
     _require_supported(locale)
     name = _MONTHS[locale][month - 1]
     return f"{name} de {year}" if locale == SPANISH_SPAIN else f"{name} {year}"
+
+
+def format_quarter(year: int, quarter: int, locale: str) -> str:
+    _require_supported(locale)
+    if not 1 <= quarter <= len(_QUARTER_ORDINALS[locale]):
+        raise ValueError(f"invalid quarter: {quarter}")
+    ordinal = _QUARTER_ORDINALS[locale][quarter - 1]
+    return f"{ordinal} trimestre de {year}" if locale == SPANISH_SPAIN else f"{ordinal} quarter of {year}"
+
+
+def format_euros(value: Decimal, places: int, locale: str) -> str:
+    number = format_decimal(value, places, locale)
+    return f"{number} €" if locale == SPANISH_SPAIN else f"€{number}"
 
 
 def _require_supported(locale: str) -> None:

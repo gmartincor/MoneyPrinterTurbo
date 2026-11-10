@@ -1,0 +1,1282 @@
+[
+ {
+  "COD": "EPA452434",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Total Nacional. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 10.18,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 9.87,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.83,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452436",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Total Nacional. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 23.33,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 23.77,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 24.54,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452440",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Andalucía. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 14.91,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 14.56,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.66,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452442",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Andalucía. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 29.14,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 30.91,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 32.39,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452448",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Aragón. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 9.23,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 8.17,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 8.37,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452450",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Aragón. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 21.44,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 21.06,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 18.46,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452456",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Asturias, Principado de. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 10.04,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 9.12,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 9.02,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452458",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Asturias, Principado de. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 25.28,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 24.14,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 20.41,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452464",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Balears, Illes. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 4.63,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 6.11,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.79,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452466",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Balears, Illes. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 10.31,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 17.08,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 28.69,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452472",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Canarias. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 10.92,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 11.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 11.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452474",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Canarias. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 20.28,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 27.78,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 17.36,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452480",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Cantabria. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 7.56,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 7.34,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 7.49,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452482",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Cantabria. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 16.06,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 27.93,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 20.54,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452488",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Castilla y León. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 7.75,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 8.37,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 9.04,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452490",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Castilla y León. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 22.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 22.79,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 20.75,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452496",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Castilla - La Mancha. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 11.36,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 11.81,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 12.97,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452498",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Castilla - La Mancha. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 28.06,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 31.09,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 27.62,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452504",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Cataluña. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 8.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 7.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.12,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452506",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Cataluña. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 17.44,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 16.05,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 19.31,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452512",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Comunitat Valenciana. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 11.82,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 10.88,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 11.75,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452514",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Comunitat Valenciana. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 27.84,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 27.69,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 28.59,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452520",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Extremadura. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 13.01,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 13.22,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.25,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452522",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Extremadura. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 34.24,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 30.16,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 27.65,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452528",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Galicia. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 9.17,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 7.94,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 8.96,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452530",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Galicia. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 27.03,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 26.96,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 24.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452536",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Madrid, Comunidad de. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 8.18,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 7.58,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 7.91,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452538",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Madrid, Comunidad de. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 23.41,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 19.81,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 21.91,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452544",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Murcia, Región de. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 10.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 10.83,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.84,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452546",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Murcia, Región de. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 20.78,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 22.06,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 27.76,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452552",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Navarra, Comunidad Foral de. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 9.16,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 8.07,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 9.09,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452554",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Navarra, Comunidad Foral de. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 21.93,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 27.45,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 22.81,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452560",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. País Vasco. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 7.17,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 7.11,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 8.23,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452562",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. País Vasco. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 20.96,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 21.47,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 21.83,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452568",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Rioja, La. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 8.63,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 8.77,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 9.62,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452570",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Rioja, La. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 30.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 25.67,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 29.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452576",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Ceuta. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 18.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 22.41,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 26.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452578",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Ceuta. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 23.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 47.55,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 61.11,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452584",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Melilla. Total. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 18.87,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 20.74,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 21.42,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "EPA452586",
+  "Nombre": "Tasa de paro de la población. Ambos sexos. Melilla. Menores de 25 años. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1782856800000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 21,
+    "Anyo": 2026,
+    "Valor": 42.54,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 80.18,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 76.5,
+    "Secreto": false
+   }
+  ]
+ }
+]

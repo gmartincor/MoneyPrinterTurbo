@@ -15,8 +15,10 @@ from app.datavideo.scenes.catalog import (
 from app.datavideo.scenes.figures import BigNumberScene, SourceCardScene
 from app.datavideo.scenes.ranking import RankingScene
 from app.datavideo.sources.ine import INE_SOURCE
+from app.datavideo.scenes import ranking as ranking_module
 from app.datavideo.stories.regional_ranking import (
     CPI_ANNUAL_BY_REGION,
+    STORIES,
     RegionalRanking,
     RegionalValue,
     describe_ranking,
@@ -27,11 +29,11 @@ SMALL_VERTICAL = (540, 960)
 SMALL_HORIZONTAL = (960, 540)
 
 
-def ranking(*values, national="4.9"):
+def ranking(*values, national="4.9", story=CPI_ANNUAL_BY_REGION, period=9):
     regions = tuple(RegionalValue(region=f"Región {index}", value=Decimal(value)) for index, value in enumerate(values))
     ordered = tuple(sorted(regions, key=lambda item: -item.value))
     return RegionalRanking(
-        story=CPI_ANNUAL_BY_REGION, year=2026, period=9, national=Decimal(national), previous_national=None,
+        story=story, year=2026, period=period, national=Decimal(national), previous_national=None,
         regions=ordered,
     )
 
@@ -116,7 +118,7 @@ def test_every_scene_draws_frames_of_the_requested_size(size):
     scenes = [
         ranking_scene(),
         BigNumberScene(fact=fact, color=DEFAULT_THEME.text, theme=DEFAULT_THEME),
-        SourceCardScene(source=INE_SOURCE, as_of=date(2026, 9, 1), locale=SPANISH_SPAIN, theme=DEFAULT_THEME),
+        SourceCardScene(source=INE_SOURCE, period="septiembre de 2026", locale=SPANISH_SPAIN, theme=DEFAULT_THEME),
     ]
 
     for scene in scenes:
@@ -173,3 +175,21 @@ def test_unknown_scenes_and_big_numbers_without_facts_are_rejected():
         build_scene("stock_footage", (), context())
     with pytest.raises(ValueError, match="fact"):
         build_scene("big_number", (), context())
+
+
+@pytest.mark.parametrize("size", [SMALL_VERTICAL, SMALL_HORIZONTAL])
+def test_euro_value_labels_fit_inside_the_frame(size):
+    wages = ranking("3060.53", "2770.19", "2016.13", national="2512.68", story=STORIES["salario_ccaa"], period=2)
+    scene = RankingScene(ranking=wages, theme=DEFAULT_THEME, locale=SPANISH_SPAIN)
+
+    assert all(scene.value_label_box(size, index)[2] <= size[0] for index in range(3))
+
+
+def test_the_ranking_header_names_the_quarter_of_a_quarterly_story(monkeypatch):
+    headers = []
+    monkeypatch.setattr(ranking_module, "draw_header", lambda draw, size, theme, title, subtitle: headers.append(subtitle))
+    unemployment = ranking("18.87", "4.63", national="10.18", story=STORIES["paro_ccaa"], period=3)
+
+    RankingScene(ranking=unemployment, theme=DEFAULT_THEME, locale=SPANISH_SPAIN).draw(SMALL_VERTICAL, 1.0)
+
+    assert headers == ["tercer trimestre de 2026"]

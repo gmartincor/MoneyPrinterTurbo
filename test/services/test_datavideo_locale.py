@@ -7,9 +7,11 @@ from app.datavideo.locale import (
     ENGLISH_US,
     SPANISH_SPAIN,
     format_decimal,
+    format_euros,
     format_long_date,
     format_month,
     format_percent,
+    format_quarter,
 )
 
 
@@ -55,3 +57,27 @@ def test_unsupported_language_is_rejected():
 )
 def test_months_are_written_with_their_year(locale, expected):
     assert format_month(2026, 9, locale) == expected
+
+
+@pytest.mark.parametrize(
+    "locale, expected", [(SPANISH_SPAIN, "tercer trimestre de 2026"), (ENGLISH_US, "third quarter of 2026")]
+)
+def test_quarters_are_written_with_their_ordinal_and_year(locale, expected):
+    assert format_quarter(2026, 3, locale) == expected
+
+
+def test_a_quarter_outside_the_year_is_rejected():
+    with pytest.raises(ValueError, match="quarter"):
+        format_quarter(2026, 5, SPANISH_SPAIN)
+
+
+@pytest.mark.parametrize(
+    "value, locale, expected",
+    [
+        (Decimal("2567.49"), SPANISH_SPAIN, "2567 €"),
+        (Decimal("12345.6"), SPANISH_SPAIN, "12.346 €"),
+        (Decimal("2567.49"), ENGLISH_US, "€2,567"),
+    ],
+)
+def test_euro_amounts_are_rounded_to_whole_euros_with_the_symbol_in_place(value, locale, expected):
+    assert format_euros(value, 0, locale) == expected

@@ -1,6 +1,6 @@
 import pytest
 
-from app.datavideo.store import PUBLICATION_FILE, open_run, published_story_keys
+from app.datavideo.store import PUBLICATION_FILE, open_run, published_story_keys, publications
 
 
 def test_a_run_lives_in_a_folder_per_channel_and_story(tmp_path):
@@ -43,3 +43,11 @@ def test_only_successful_publications_count_as_published(tmp_path):
 
 def test_a_channel_without_runs_has_published_nothing(tmp_path):
     assert published_story_keys("mundo_es", tmp_path) == set()
+
+
+def test_publications_map_each_published_run_to_its_record(tmp_path):
+    record = {"success": True, "story": "paro_ccaa", "published_at": "2026-11-10T11:00:00+00:00"}
+    open_run("tu_dinero_es", "paro_ccaa_2026_t3", tmp_path).write_json(PUBLICATION_FILE, record)
+    open_run("tu_dinero_es", "ipc_anual_ccaa_2026_09", tmp_path).write_json(PUBLICATION_FILE, {"success": False})
+
+    assert publications("tu_dinero_es", tmp_path) == {"paro_ccaa_2026_t3": record}

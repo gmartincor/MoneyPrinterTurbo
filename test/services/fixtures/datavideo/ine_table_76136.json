@@ -1,0 +1,1922 @@
+[
+ {
+  "COD": "IPC290754",
+  "Nombre": "Nacional. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC290762",
+  "Nombre": "Nacional. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 7.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC290774",
+  "Nombre": "Nacional. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.5,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC290794",
+  "Nombre": "Nacional. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293663",
+  "Nombre": "Andalucía. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293671",
+  "Nombre": "Andalucía. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 6.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293683",
+  "Nombre": "Andalucía. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 10.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293703",
+  "Nombre": "Andalucía. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.5,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293719",
+  "Nombre": "Aragón. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293727",
+  "Nombre": "Aragón. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 9.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 7.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293739",
+  "Nombre": "Aragón. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293759",
+  "Nombre": "Aragón. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293775",
+  "Nombre": "Asturias, Principado de. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293783",
+  "Nombre": "Asturias, Principado de. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 8.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293795",
+  "Nombre": "Asturias, Principado de. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293815",
+  "Nombre": "Asturias, Principado de. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293831",
+  "Nombre": "Balears, Illes. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293839",
+  "Nombre": "Balears, Illes. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 6.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293851",
+  "Nombre": "Balears, Illes. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 7.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293871",
+  "Nombre": "Balears, Illes. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 6.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 8.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293887",
+  "Nombre": "Canarias. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293895",
+  "Nombre": "Canarias. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293907",
+  "Nombre": "Canarias. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 8.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293927",
+  "Nombre": "Canarias. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293943",
+  "Nombre": "Cantabria. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293951",
+  "Nombre": "Cantabria. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 7.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293963",
+  "Nombre": "Cantabria. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 10.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293983",
+  "Nombre": "Cantabria. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293999",
+  "Nombre": "Castilla y León. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294007",
+  "Nombre": "Castilla y León. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 8.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294019",
+  "Nombre": "Castilla y León. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 11.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294039",
+  "Nombre": "Castilla y León. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294055",
+  "Nombre": "Castilla - La Mancha. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 1.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294063",
+  "Nombre": "Castilla - La Mancha. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294075",
+  "Nombre": "Castilla - La Mancha. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 10.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294095",
+  "Nombre": "Castilla - La Mancha. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294111",
+  "Nombre": "Cataluña. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294119",
+  "Nombre": "Cataluña. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 6.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294131",
+  "Nombre": "Cataluña. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 8.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 7.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294151",
+  "Nombre": "Cataluña. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294167",
+  "Nombre": "Comunitat Valenciana. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294175",
+  "Nombre": "Comunitat Valenciana. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 7.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294187",
+  "Nombre": "Comunitat Valenciana. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.5,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294207",
+  "Nombre": "Comunitat Valenciana. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294223",
+  "Nombre": "Extremadura. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294231",
+  "Nombre": "Extremadura. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 7.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294243",
+  "Nombre": "Extremadura. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 11.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294263",
+  "Nombre": "Extremadura. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294279",
+  "Nombre": "Galicia. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294287",
+  "Nombre": "Galicia. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294299",
+  "Nombre": "Galicia. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 12.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 11.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294319",
+  "Nombre": "Galicia. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294335",
+  "Nombre": "Madrid, Comunidad de. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294343",
+  "Nombre": "Madrid, Comunidad de. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 7.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294355",
+  "Nombre": "Madrid, Comunidad de. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294375",
+  "Nombre": "Madrid, Comunidad de. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294391",
+  "Nombre": "Murcia, Región de. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294399",
+  "Nombre": "Murcia, Región de. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294411",
+  "Nombre": "Murcia, Región de. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 12.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 11.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294431",
+  "Nombre": "Murcia, Región de. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.5,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294447",
+  "Nombre": "Navarra, Comunidad Foral de. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294455",
+  "Nombre": "Navarra, Comunidad Foral de. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294467",
+  "Nombre": "Navarra, Comunidad Foral de. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294487",
+  "Nombre": "Navarra, Comunidad Foral de. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 1.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294503",
+  "Nombre": "País Vasco. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294511",
+  "Nombre": "País Vasco. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 6.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294523",
+  "Nombre": "País Vasco. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 9.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294543",
+  "Nombre": "País Vasco. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 5.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 5.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294559",
+  "Nombre": "Rioja, La. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294567",
+  "Nombre": "Rioja, La. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 7.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 6.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294579",
+  "Nombre": "Rioja, La. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 11.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 10.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294599",
+  "Nombre": "Rioja, La. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294615",
+  "Nombre": "Ceuta. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 2.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294623",
+  "Nombre": "Ceuta. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294635",
+  "Nombre": "Ceuta. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 10.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC294655",
+  "Nombre": "Ceuta. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 0.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 0.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293607",
+  "Nombre": "Melilla. Alimentos y bebidas no alcohólicas. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 2.7,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293615",
+  "Nombre": "Melilla. Vivienda, agua, electricidad, gas y otros combustibles. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 4.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 4.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293627",
+  "Nombre": "Melilla. Transporte. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 10.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 10.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPC293647",
+  "Nombre": "Melilla. Restaurantes y servicios de alojamiento. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1788213600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 9,
+    "Anyo": 2026,
+    "Valor": 3.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1785535200000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 8,
+    "Anyo": 2026,
+    "Valor": 3.9,
+    "Secreto": false
+   }
+  ]
+ }
+]

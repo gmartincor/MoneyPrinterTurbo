@@ -25,6 +25,32 @@ _REGION_DISPLAY_NAMES = {
     "Murcia, Región de": "Región de Murcia",
     "Navarra, Comunidad Foral de": "Navarra",
 }
+NATIONAL_NAMES = frozenset({"Nacional", "Total Nacional"})
+REGION_NAMES = frozenset(
+    {
+        "Andalucía",
+        "Aragón",
+        "Asturias, Principado de",
+        "Balears, Illes",
+        "Canarias",
+        "Cantabria",
+        "Castilla - La Mancha",
+        "Castilla y León",
+        "Cataluña",
+        "Ceuta",
+        "Comunitat Valenciana",
+        "Extremadura",
+        "Galicia",
+        "Madrid, Comunidad de",
+        "Melilla",
+        "Murcia, Región de",
+        "Navarra, Comunidad Foral de",
+        "País Vasco",
+        "Rioja, La",
+    }
+)
+_FIRST_QUARTER_PERIOD = 19
+_QUARTERS_PER_YEAR = 4
 
 
 @dataclass(frozen=True)
@@ -93,3 +119,19 @@ def display_region(ine_name: str) -> str:
         main, article = name.split(", ", 1)
         return f"{article} {main}"
     return name
+
+
+def split_region(series_name: str) -> tuple[str, str] | None:
+    parts = [part.strip().rstrip(".").strip() for part in series_name.strip().split(". ")]
+    places = [part for part in parts if part in NATIONAL_NAMES or part in REGION_NAMES]
+    if len(places) != 1:
+        return None
+    measure = ". ".join(part for part in parts if part and part != places[0])
+    return places[0], f"{measure}."
+
+
+def quarter_of(period: int) -> int:
+    quarter = period - _FIRST_QUARTER_PERIOD + 1
+    if not 1 <= quarter <= _QUARTERS_PER_YEAR:
+        raise ValueError(f"INE period {period} is not a quarter")
+    return quarter

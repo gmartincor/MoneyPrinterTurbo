@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from app.datavideo.sources.ine import INE_SOURCE, display_region, download_table, parse_table
+from app.datavideo.sources.ine import INE_SOURCE, display_region, download_table, parse_table, quarter_of, split_region
 
 FIXTURE = Path(__file__).parent / "fixtures" / "datavideo" / "ine_table_76140.json"
 
@@ -92,3 +92,36 @@ def test_region_names_are_shown_as_people_say_them(ine_name, display_name):
 def test_the_ine_licence_allows_commercial_use_and_is_verified():
     assert INE_SOURCE.license_verified
     assert "CC BY 4.0" in INE_SOURCE.license
+
+
+@pytest.mark.parametrize(
+    "series_name, expected",
+    [
+        ("Andalucía. Índice general. Variación anual.", ("Andalucía", "Índice general. Variación anual.")),
+        ("Nacional. Transporte. Variación anual. ", ("Nacional", "Transporte. Variación anual.")),
+        (
+            "Tasa de paro de la población. Ambos sexos. Rioja, La. Total.",
+            ("Rioja, La", "Tasa de paro de la población. Ambos sexos. Total."),
+        ),
+        (
+            "Tasa de paro de la población. Ambos sexos. Total Nacional. Total.",
+            ("Total Nacional", "Tasa de paro de la población. Ambos sexos. Total."),
+        ),
+    ],
+)
+def test_the_region_is_found_wherever_the_ine_puts_it_in_the_series_name(series_name, expected):
+    assert split_region(series_name) == expected
+
+
+def test_a_series_without_a_region_has_no_split():
+    assert split_region("Industria. Coste laboral total. Euros.") is None
+
+
+@pytest.mark.parametrize("period, quarter", [(19, 1), (20, 2), (21, 3), (22, 4)])
+def test_ine_quarter_periods_are_read_as_quarters(period, quarter):
+    assert quarter_of(period) == quarter
+
+
+def test_a_period_that_is_not_a_quarter_is_rejected():
+    with pytest.raises(ValueError, match="quarter"):
+        quarter_of(9)

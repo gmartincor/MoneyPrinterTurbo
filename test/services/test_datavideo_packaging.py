@@ -21,7 +21,7 @@ TAGS = ("inflación", "IPC", "comunidades autónomas")
 
 
 def package():
-    return build_package(SCRIPT, FACTS, AS_OF, TAGS, SPANISH_SPAIN)
+    return build_package(SCRIPT, FACTS, "septiembre de 2026", TAGS, SPANISH_SPAIN)
 
 
 def test_title_and_tags_come_from_the_script_and_the_story():
@@ -36,7 +36,7 @@ def test_description_tells_the_story_and_credits_the_source_with_its_attribution
 
     assert description.startswith(SCRIPT.segments[0].text)
     assert "Elaboración propia con datos extraídos del sitio web del INE: www.ine.es" in description
-    assert "septiembre de 2026" in description
+    assert "Datos: septiembre de 2026." in description
 
 
 def test_description_discloses_the_ai_script_and_that_it_is_not_financial_advice():
@@ -60,4 +60,4 @@ def test_a_description_too_long_for_instagram_is_rejected_instead_of_cut():
     long_script = Script(title="Título", segments=(ScriptSegment(text="palabra " * 400, fact_keys=(), scene="ranking"),))
 
     with pytest.raises(ValueError, match="limit"):
-        build_package(long_script, FACTS, AS_OF, TAGS, SPANISH_SPAIN)
+        build_package(long_script, FACTS, "septiembre de 2026", TAGS, SPANISH_SPAIN)

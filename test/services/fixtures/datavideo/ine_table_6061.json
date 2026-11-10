@@ -1,0 +1,578 @@
+[
+ {
+  "COD": "ETCL4154",
+  "Nombre": "Total Nacional. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2512.68,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2403.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2531.22,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL4126",
+  "Nombre": "Andalucía. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2227.09,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 1995.92,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2214.57,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL4098",
+  "Nombre": "Aragón. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2393.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2185.71,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2434.38,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL4070",
+  "Nombre": "Asturias, Principado de. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2476.42,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2115.99,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2427.63,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL4042",
+  "Nombre": "Balears, Illes. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2428.22,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2420.44,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2602.51,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL4014",
+  "Nombre": "Canarias. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2016.13,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 1952.54,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2055.94,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3986",
+  "Nombre": "Cantabria. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2283.42,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2133.97,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2297.86,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3958",
+  "Nombre": "Castilla y León. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2223.06,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2094.96,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2316.04,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3930",
+  "Nombre": "Castilla - La Mancha. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2204.56,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2076.37,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2209.31,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3902",
+  "Nombre": "Cataluña. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2770.19,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2641.81,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2686.98,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3874",
+  "Nombre": "Comunitat Valenciana. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2215.43,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2144.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2206.02,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3846",
+  "Nombre": "Extremadura. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2021.62,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 1923.49,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2035.32,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3818",
+  "Nombre": "Galicia. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2174.28,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2071.24,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2260.07,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3790",
+  "Nombre": "Madrid, Comunidad de. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 3060.53,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 3033.15,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 3098.99,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3762",
+  "Nombre": "Murcia, Región de. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2127.37,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2007.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2215.69,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3734",
+  "Nombre": "Navarra, Comunidad Foral de. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2665.38,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2455.33,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2806.82,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3706",
+  "Nombre": "País Vasco. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2718.07,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2765.81,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2860.06,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "ETCL3678",
+  "Nombre": "Rioja, La. Industria, construcción y servicios (excepto actividades de los hogares como empleadores y de organizaciones y organismos extraterritoriales). Coste salarial total. Costes laborales. Euros. ",
+  "FK_Unidad": 7,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 2377.01,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 2111.78,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 2451.41,
+    "Secreto": false
+   }
+  ]
+ }
+]

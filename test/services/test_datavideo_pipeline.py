@@ -157,6 +157,7 @@ def test_publishing_records_the_upload_and_never_repeats_it(produced, monkeypatc
     assert first["success"] is True
     assert first["request_id"] == "abc"
     assert first["privacy"] == "private"
+    assert first["story"] == "ipc_anual_ccaa"
 
 
 def test_a_video_that_failed_the_checks_is_not_published(produced):
@@ -193,3 +194,27 @@ def test_a_failed_upload_is_recorded_and_reported(produced, monkeypatch):
         publish(production, profile(), cross_post=lambda **kwargs: {"success": False, "error": "quota exceeded"})
 
     assert production.run.read_json(PUBLICATION_FILE)["success"] is False
+
+
+def test_an_upload_interrupted_before_its_reply_is_never_repeated(produced, monkeypatch):
+    production, _, _ = produced
+    monkeypatch.setenv("UPLOAD_POST_API_KEY", "fixture-key")
+
+    def interrupted(**kwargs):
+        raise ConnectionError("connection reset")
+
+    with pytest.raises(ConnectionError):
+        publish(production, profile(), cross_post=interrupted)
+
+    with pytest.raises(BlockedPublication, match="not confirmed"):
+        publish(production, profile(), cross_post=lambda **kwargs: pytest.fail("uploaded twice"))
+
+
+def test_a_missing_upload_key_leaves_no_pending_record(produced, monkeypatch):
+    production, _, _ = produced
+    monkeypatch.delenv("UPLOAD_POST_API_KEY", raising=False)
+
+    with pytest.raises(RuntimeError, match="UPLOAD_POST_API_KEY"):
+        publish(production, profile(), cross_post=lambda **kwargs: pytest.fail("uploaded"))
+
+    assert not production.run.has(PUBLICATION_FILE)

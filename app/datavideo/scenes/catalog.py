@@ -36,7 +36,9 @@ def build_scene(scene_id: str, fact_keys: Sequence[str], context: SceneContext) 
         return RankingScene(ranking=context.ranking, theme=context.theme, locale=context.locale)
     if scene_id == SOURCE_CARD:
         source = unique_sources(context.facts.values())[0]
-        return SourceCardScene(source=source, as_of=context.ranking.as_of, locale=context.locale, theme=context.theme)
+        return SourceCardScene(
+            source=source, period=context.ranking.period_label(context.locale), locale=context.locale, theme=context.theme
+        )
     if scene_id == BIG_NUMBER:
         known_keys = [key for key in fact_keys if key in context.facts]
         if not known_keys:

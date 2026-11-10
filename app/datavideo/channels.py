@@ -3,8 +3,9 @@ import tomllib
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Callable, Literal
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
-from pydantic import BaseModel, ConfigDict, Field, ValidationError
+from pydantic import BaseModel, ConfigDict, Field, ValidationError, field_validator
 
 from app.datavideo.locale import SUPPORTED_LOCALES
 from app.datavideo.theme import DEFAULT_THEME, Color, Theme
@@ -33,6 +34,18 @@ class PublishSettings(_StrictModel):
     user: str = Field(pattern=r"^[A-Za-z0-9_@-]+$")
     platforms: list[Literal["youtube", "instagram"]] = Field(min_length=1)
     privacy: Literal["private", "unlisted", "public"]
+    per_day: int = Field(default=1, ge=1, le=3)
+    daily_at: str = Field(default="12:00", pattern=r"^([01]\d|2[0-3]):[0-5]\d$")
+    timezone: str = "Europe/Madrid"
+
+    @field_validator("timezone")
+    @classmethod
+    def _known_timezone(cls, value: str) -> str:
+        try:
+            ZoneInfo(value)
+        except (ZoneInfoNotFoundError, ValueError) as error:
+            raise ValueError(f"unknown timezone: {value}") from error
+        return value
 
 
 class _ThemeOverrides(_StrictModel):

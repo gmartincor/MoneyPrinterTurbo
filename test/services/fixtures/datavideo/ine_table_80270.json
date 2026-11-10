@@ -1,0 +1,642 @@
+[
+ {
+  "COD": "IPV1376",
+  "Nombre": "Nacional. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 12.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 12.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 12.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1625",
+  "Nombre": "Andalucía. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 11.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 12.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1640",
+  "Nombre": "Aragón. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 14.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 15.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 14.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1655",
+  "Nombre": "Asturias, Principado de. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 15.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 13.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1670",
+  "Nombre": "Balears, Illes. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 13.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 13.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1536",
+  "Nombre": "Canarias. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 11.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 11.0,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1551",
+  "Nombre": "Cantabria. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 13.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 13.6,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1566",
+  "Nombre": "Castilla y León. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 14.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 15.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1581",
+  "Nombre": "Castilla - La Mancha. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 11.7,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 11.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 12.8,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1379",
+  "Nombre": "Cataluña. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 10.1,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 10.9,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1394",
+  "Nombre": "Comunitat Valenciana. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 13.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 13.5,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1409",
+  "Nombre": "Extremadura. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 12.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 12.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 13.5,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1424",
+  "Nombre": "Galicia. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 12.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 14.1,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1439",
+  "Nombre": "Madrid, Comunidad de. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 12.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 14.2,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1454",
+  "Nombre": "Murcia, Región de. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 14.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 15.6,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 14.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1469",
+  "Nombre": "Navarra, Comunidad Foral de. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 9.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.5,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 11.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1484",
+  "Nombre": "País Vasco. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 10.0,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 10.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 12.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1499",
+  "Nombre": "Rioja, La. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 14.4,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.3,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 14.4,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1514",
+  "Nombre": "Ceuta. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 15.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 14.9,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 13.3,
+    "Secreto": false
+   }
+  ]
+ },
+ {
+  "COD": "IPV1519",
+  "Nombre": "Melilla. General. Variación anual. ",
+  "FK_Unidad": 135,
+  "FK_Escala": 1,
+  "Data": [
+   {
+    "Fecha": 1774994400000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 20,
+    "Anyo": 2026,
+    "Valor": 13.8,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1767222000000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 19,
+    "Anyo": 2026,
+    "Valor": 13.2,
+    "Secreto": false
+   },
+   {
+    "Fecha": 1759269600000,
+    "FK_TipoDato": 1,
+    "FK_Periodo": 22,
+    "Anyo": 2025,
+    "Valor": 12.8,
+    "Secreto": false
+   }
+  ]
+ }
+]

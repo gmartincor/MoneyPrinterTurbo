@@ -52,13 +52,20 @@ def open_run(channel_id: str, story_key: str, root: Path | None = None) -> Run:
     return Run(directory=directory)
 
 
-def published_story_keys(channel_id: str, root: Path | None = None) -> set[str]:
+def publications(channel_id: str, root: Path | None = None) -> dict[str, dict]:
     channel_directory = (root or runs_root()) / channel_id
     if not channel_directory.is_dir():
-        return set()
-    published = set()
-    for directory in channel_directory.iterdir():
+        return {}
+    published = {}
+    for directory in sorted(channel_directory.iterdir()):
         publication = directory / PUBLICATION_FILE
-        if publication.is_file() and json.loads(publication.read_text(encoding="utf-8")).get("success") is True:
-            published.add(directory.name)
+        if not publication.is_file():
+            continue
+        record = json.loads(publication.read_text(encoding="utf-8"))
+        if record.get("success") is True:
+            published[directory.name] = record
     return published
+
+
+def published_story_keys(channel_id: str, root: Path | None = None) -> set[str]:
+    return set(publications(channel_id, root))

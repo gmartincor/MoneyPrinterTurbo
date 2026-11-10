@@ -1,7 +1,17 @@
 id = "tu_dinero_es"
 name = "Tu Dinero en Datos"
 language = "es-ES"
-stories = ["ipc_anual_ccaa"]
+stories = [
+    "ipc_anual_ccaa",
+    "paro_ccaa",
+    "salario_ccaa",
+    "precio_vivienda_ccaa",
+    "ipc_alimentos_ccaa",
+    "ipc_vivienda_ccaa",
+    "paro_juvenil_ccaa",
+    "ipc_transporte_ccaa",
+    "ipc_restaurantes_ccaa",
+]
 
 [models]
 provider = "openai"

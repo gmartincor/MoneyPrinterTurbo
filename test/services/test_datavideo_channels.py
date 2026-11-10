@@ -130,10 +130,29 @@ def test_publish_settings_and_stories_are_loaded(tmp_path):
     assert profile.publish.privacy == "private"
 
 
-@pytest.mark.parametrize("field, value", [("privacy", '"secret"'), ("platforms", '["facebook"]')])
+def test_publishing_defaults_to_one_video_a_day_at_noon_in_madrid(tmp_path):
+    profile = load_channel(write_profile(tmp_path, "tu_dinero_es.toml", VALID_PROFILE))
+
+    assert profile.publish.per_day == 1
+    assert profile.publish.daily_at == "12:00"
+    assert profile.publish.timezone == "Europe/Madrid"
+
+
+@pytest.mark.parametrize(
+    "field, value",
+    [
+        ("privacy", '"secret"'),
+        ("platforms", '["facebook"]'),
+        ("per_day", "0"),
+        ("per_day", "4"),
+        ("daily_at", '"25:00"'),
+        ("timezone", '"Mars/Olympus"'),
+    ],
+)
 def test_publish_settings_outside_the_allowed_values_are_rejected(tmp_path, field, value):
-    line = {"privacy": 'privacy = "private"', "platforms": 'platforms = ["youtube"]'}[field]
-    content = VALID_PROFILE.replace(line, f"{field} = {value}")
+    line = {"privacy": 'privacy = "private"', "platforms": 'platforms = ["youtube"]'}.get(field, 'privacy = "private"')
+    replacement = f"{field} = {value}" if field in ("privacy", "platforms") else f'{line}\n{field} = {value}'
+    content = VALID_PROFILE.replace(line, replacement)
 
     with pytest.raises(ValueError, match=field):
         load_channel(write_profile(tmp_path, "tu_dinero_es.toml", content))
