@@ -1,6 +1,6 @@
 # Arquitectura del sistema de vídeos de datos
 
-Estado: **confirmada por el propietario el 3 de noviembre de 2026**, revisada el mismo día para reutilizar la voz, los subtítulos y el montaje del proyecto original. Cualquier cambio de diseño se refleja aquí antes de implementarlo.
+Estado: **confirmada por el propietario el 3 de noviembre de 2026**, revisada el mismo día para reutilizar la voz, los subtítulos y el montaje del proyecto original, y el 10 de noviembre de 2026 para el ritmo de publicación, las historias trimestrales y el despliegue en el servidor. Cualquier cambio de diseño se refleja aquí antes de implementarlo.
 
 ## 1. Objetivo
 
@@ -14,7 +14,7 @@ Producir y publicar sin intervención humana vídeos originales construidos a pa
 |---|---|
 | Canales | 4, lanzados de forma escalonada: `tu_dinero_es` (*Tu Dinero en Datos*: finanzas del hogar, España, español), `your_money_us` (*The Wallet Census*: finanzas del hogar, EE. UU., inglés), `mundo_es` (*Medir el Mundo*: el mundo en datos, español), `space_en` (*The Apogee Almanac*: espacio y ciencia, inglés) |
 | Deportes | Descartados como canal principal: los datos de pago no incluyen derechos sobre las competiciones y el RPM es bajo. Posible experimento futuro con datos de dominio público de openfootball, sin imágenes de partidos |
-| Formatos por canal | El vídeo largo es el formato principal: semanal de 8–12 min con una pregunta, ranking y mapa; de búsqueda cada 2 semanas; especiales el día que se publica un dato oficial. Shorts 3–5 por semana (solo si superan el listón), con un dato de un vídeo largo para llevar a él |
+| Formatos por canal | El vídeo largo es el formato que genera ingresos: semanal de 8–12 min (con anuncios a mitad de vídeo a partir de 8 min) y uno de búsqueda al mes con datos anuales o trimestrales. Los Shorts (pagan 50–100 veces menos por visualización) sirven para ganar suscriptores: **como máximo 1 al día por canal**, cada uno de una historia distinta con datos recién publicados, sin repetir la misma tabla dos días seguidos si hay alternativa. El límite lo pone la oferta de datos nuevos y la política de contenido no auténtico, no la capacidad de producción |
 | Datos del canal 1 | INE (CC BY 4.0) y Eurostat, ambos con uso comercial permitido sin autorización previa. REE queda descartada: su aviso legal limita la reutilización a fines no comerciales salvo autorización escrita, y un dato diario del precio de la luz caduca en 24 horas y repite el mismo formato |
 | Plataformas | YouTube (principal), Instagram Reels y carruseles. Facebook descartado definitivamente. TikTok solo alcance opcional |
 | Imagen | Generada por nuestro código: gráficos, mapas, cifras. Imágenes reales de NASA/ESA en `space_en`. Sin modelos de generación de vídeo (Sora cerrado, Veo caro e impreciso con cifras) |
@@ -52,11 +52,15 @@ Producir y publicar sin intervención humana vídeos originales construidos a pa
 | D10 | Límites de gasto mensuales por proveedor y canal | ⏳ `budget.py` |
 | D11 | Copia de cada respuesta de las fuentes con su licencia, para auditoría y pruebas | ✅ `source.json` por ejecución |
 | D12 | Avisos legales automáticos en descripción y pantalla | ✅ `packaging.py`, escena `source_card` |
+| D13 | Historias del catálogo como datos: tabla del INE, medida, indicador, periodicidad (mensual o trimestral), unidad (% o €), decimales y género gramatical. La comunidad se reconoce por su nombre oficial en cualquier posición del nombre de la serie | ✅ `stories/regional_ranking.py`: 9 historias (IPC general, alimentos, vivienda y suministros, transporte, restaurantes; paro EPA, paro juvenil; precio de la vivienda; coste salarial) |
+| D14 | Ritmo de publicación: `run` produce todas las historias con datos nuevos y publica como máximo `per_day` al día natural del canal (zona horaria del perfil). Primero va la historia cuya tabla lleva más tiempo sin publicarse; las demás esperan al día siguiente. Antes de cada subida se deja un registro pendiente: si el proceso muere en mitad de la subida, nunca se repite sola | ✅ `cli.py`, `pipeline.py` |
+| D15 | Planificador en un contenedor siempre encendido: cada minuto comprueba la hora de cada canal, lanza `run` a su `daily_at` y `report` los lunes, cada orden en un proceso aparte con límite de 90 min. Un latido en `storage/datavideo/heartbeat` alimenta la comprobación de salud | ✅ `scheduler.py` |
+| D16 | Despliegue con Docker Compose (`docker-compose.datavideo.yml`) reutilizando el `Dockerfile` del proyecto original: sin puertos, usuario sin privilegios, 2 CPU y 3 GB como máximo, registros rotados, `storage/` y `config.toml` montados y claves solo en `.env`. Un contenedor siempre encendido evita que la limpieza nocturna de imágenes del servidor borre la imagen | ✅ VPS `/opt/projects/datavideo` |
 
 ## 5. Flujo de un vídeo
 
 ```
-Planificador (cada noche, por canal) — sin tema de entrada
+Planificador (cada día a la hora del canal) — sin tema de entrada
  1. Fuentes → copia de la respuesta + licencia → datos con tipo (D1, D11)
  2. Detector de historias (código): récords, cambios, rankings, comparaciones, calendario
  3. Juez (LLM + pesos aprendidos) → si nada supera el listón, no se publica
@@ -84,7 +88,7 @@ app/datavideo/
   theme.py       ✅ colores y tipografía
   scenes/        ✅ base.py, catalog.py, ranking.py, figures.py (big_number, source_card)
   sources/       ✅ ine; ⏳ eurostat, worldbank, nasa, bls, eia, fred; minetur_fuel y bde solo si se verifica su licencia
-  stories/       ✅ regional_ranking; ⏳ más detectores
+  stories/       ✅ regional_ranking (9 historias mensuales y trimestrales); ⏳ Eurostat, series temporales
   judge.py       ⏳ juez con rúbrica + pesos aprendidos (cuando haya varias historias candidatas)
   timeline.py    ✅ voz, tiempos por palabra → segmentos con inicio y fin, subtítulos
   audio.py       ✅ normalización a −14 LUFS y medición
@@ -99,7 +103,8 @@ app/datavideo/
   digest.py      ✅ resumen semanal
   store.py       ✅ carpeta por ejecución, artefactos por paso
   pipeline.py    ✅ orquestación reanudable
-  cli.py         ✅ produce | run | report
+  cli.py         ✅ produce | run (con ritmo diario) | report
+  scheduler.py   ✅ planificador del contenedor y comprobación de salud
 ```
 
 ## 7. Contratos clave
@@ -110,7 +115,7 @@ app/datavideo/
 ```
 Reglas comprobadas por código: entre 4 y 7 segmentos de 30 palabras como máximo; cada cifra de un segmento aparece en los datos que ese segmento cita; el título solo usa cifras de los datos; no hay números escritos con letra ni proporciones; claves y escenas existen; longitud total dentro del rango.
 
-**Perfil de canal (campos actuales):** `id`, `name`, `language`, `[models] provider/writer/judge`, `[voice] name/rate` (nombre de voz en el formato del proyecto original: `es-ES-TristanMultilingualNeural-V2-Male` para Azure oficial (sufijo `-V2` antes del género), `elevenlabs:<voice_id>` para ElevenLabs, `es-ES-AlvaroNeural-Male` para Edge en desarrollo), `[theme]` con colores y fuente. `stories` (claves del catálogo de historias) y `[publish]` (`user` de Upload-Post, `platforms` entre `youtube` e `instagram`, `privacy`). Campos previstos que se añadirán cuando exista el módulo que los usa: `formats`, `schedule`, `budget`, `affiliates`.
+**Perfil de canal (campos actuales):** `id`, `name`, `language`, `[models] provider/writer/judge`, `[voice] name/rate` (nombre de voz en el formato del proyecto original: `es-ES-TristanMultilingualNeural-V2-Male` para Azure oficial (sufijo `-V2` antes del género), `elevenlabs:<voice_id>` para ElevenLabs, `es-ES-AlvaroNeural-Male` para Edge en desarrollo), `[theme]` con colores y fuente. `stories` (claves del catálogo de historias; el orden decide los empates) y `[publish]` (`user` de Upload-Post, `platforms` entre `youtube` e `instagram`, `privacy`, `per_day` entre 1 y 3, `daily_at` en formato HH:MM y `timezone`). Campos previstos que se añadirán cuando exista el módulo que los usa: `formats`, `budget`, `affiliates`.
 
 ## 8. Estrategia de pruebas
 
@@ -129,7 +134,7 @@ Reglas comprobadas por código: entre 4 y 7 segmentos de 30 palabras como máxim
 
 | Concepto | 1 canal | 4 canales |
 |---|---|---|
-| Voz (Azure Speech, pago por uso) | ~1–2 $/mes | ~4–5 $/mes |
+| Voz (Azure Speech) | 0 $: el plan F0 incluye 500.000 caracteres al mes y un canal usa ~60.000 | ~0–5 $/mes |
 | GPT-6.1 Sol | ~3 $/mes | ~10 $/mes |
 | Upload-Post | ~16 $/mes | ~16 $/mes (hasta pasar a APIs directas) |
 | Servidor | ~10 €/mes | ~10–15 €/mes |

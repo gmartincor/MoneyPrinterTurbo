@@ -1,0 +1,41 @@
+name: datavideo
+
+services:
+  scheduler:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        DOCKER_BUILD_MIRROR: default
+        PIP_USE_OFFICIAL: "1"
+    image: datavideo-scheduler:${DATAVIDEO_TAG:-latest}
+    container_name: datavideo-scheduler
+    command: ["python", "-m", "app.datavideo.scheduler"]
+    user: "${DATAVIDEO_UID:-1000}:${DATAVIDEO_GID:-1000}"
+    env_file:
+      - .env
+    environment:
+      HOME: /tmp
+      PYTHONUNBUFFERED: "1"
+    volumes:
+      - ./storage:/MoneyPrinterTurbo/storage
+      - ./config.toml:/MoneyPrinterTurbo/config.toml:ro
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD", "python", "-m", "app.datavideo.scheduler", "healthcheck"]
+      interval: 5m
+      timeout: 60s
+      retries: 2
+      start_period: 2m
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 3G
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: "3"
