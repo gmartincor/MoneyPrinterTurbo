@@ -84,6 +84,11 @@ class Review:
         return {"scores": dict(self.scores), "fixes": list(self.fixes)}
 
 
+def weakest(scores: Mapping[str, int]) -> str:
+    criterion, score = min(scores.items(), key=lambda item: item[1])
+    return f"{criterion} {score}/10"
+
+
 def review_from_dict(data: dict) -> Review:
     payload = _ReviewPayload.model_validate(data)
     return Review(scores=payload.scores, fixes=tuple(payload.fixes))

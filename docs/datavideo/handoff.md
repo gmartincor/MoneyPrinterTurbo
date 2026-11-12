@@ -27,7 +27,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 | `store.py`, `pipeline.py` | Carpeta por historia con un artefacto por paso; reanudable, no repite historias publicadas, no publica sin licencia verificada ni controles superados y nunca reintenta solo una subida sin confirmar |
 | `publish.py`, `notify.py`, `digest.py` | Upload-Post con la clave de `.env`; Telegram solo para bloqueos, fallos y resumen semanal |
 | `cli.py` | `produce`, `run` (produce todo y publica como máximo `per_day` vídeos al día, empezando por la tabla que lleva más tiempo sin salir) y `report` (resumen semanal) |
-| `editor.py` | Revisor automático: puntúa cada guion de 0 a 10 en gancho, interés, claridad, ritmo y cierre; el guionista revisa su borrador hasta 3 rondas; por debajo de 7 no se publica |
+| `editor.py` | Revisor automático: puntúa cada guion de 0 a 10 en gancho, interés, claridad, ritmo y cierre; el guionista revisa su borrador hasta 3 rondas; por debajo de 7 queda retenido (sin aviso diario, sale en el resumen semanal) |
 | `scheduler.py` | Planificador del contenedor: `run` a la hora `daily_at` de cada canal y `report` los lunes, con límite de 90 min por orden y latido para la comprobación de salud |
 
 - **Cómo se usa** (claves en `.env`):
@@ -36,7 +36,7 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
   ```
   `run` en lugar de `produce` también publica; `report` envía el resumen semanal. Los vídeos quedan en `storage/datavideo/<canal>/<historia>/final.mp4`.
 - **Primer Short real (9 de noviembre de 2026):** `storage/datavideo/tu_dinero_es/ipc_anual_ccaa_2026_09/final.mp4`, inflación anual por comunidades de septiembre de 2026: 38 s, 5 escenas, −15,2 LUFS, controles superados. Producirlo cuesta ~55 s.
-- **Sin publicar todavía:** el clasificador de seguridad de Claude Code bloqueó el comando de subida. El propietario lo ejecuta a mano (`run` en vez de `produce`); sube en **privado** al canal personal de pruebas (perfil `default`).
+- **Publicaciones automáticas (privadas, canal de pruebas, perfil `default`):** 11 de noviembre de 2026, `ipc_vivienda_ccaa` (YouTube `U-rrWuTZgno`); 12 de noviembre de 2026, `paro_ccaa` (YouTube `CAujy4-LgSY`). El 12 de noviembre el editor retuvo `precio_vivienda_ccaa` y `paro_juvenil_ccaa` (cierre 6/10). El cierre es el criterio que más falla.
 - Voz del canal 1: `es-ES-AlvaroNeural-V2-Male` a velocidad 1,25 (castellano, "segura y animada"). Tristán a 1,0 se descartó el 10 de noviembre de 2026 por plana y lenta (121–130 palabras por minuto). Alternativas con tiempos por palabra: Ximena, Arabella e Isidora Multilingual. Marta (MAI-Voice-2, HD con estilos como *excited*) es la más expresiva de Azure, pero no da tiempos por palabra ni marcas: usarla exige sintetizar cada segmento por separado.
 - Pruebas: `uv run --no-sync python -X utf8 -m pytest -q test/services/test_datavideo_*.py` → 160 pruebas en ~5 s (necesitan FFmpeg).
 - La batería completa del proyecto original (~3.200 pruebas, 12–14 min) tiene 9 fallos **heredados** en pruebas de audio con Python 3.13 (`test_remote_speech_complete_decode`, `test_webui_bgm`, `test_webui_custom_audio_upload`, `test_bgm_decoded_audio`). No se ha tocado código del proyecto original.

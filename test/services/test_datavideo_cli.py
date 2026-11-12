@@ -15,7 +15,7 @@ PROFILE = replace(BASE_PROFILE, stories=("ipc_anual_ccaa", "paro_ccaa", "salario
 NOW = datetime(2026, 11, 10, 11, 0, tzinfo=timezone.utc)
 
 
-def production(key, score=40):
+def production(key, score=40, publishable=True):
     story = STORIES[key]
     story_key = f"{key}_2026_t3"
     return SimpleNamespace(
@@ -24,7 +24,7 @@ def production(key, score=40):
         video_path=f"/runs/{story_key}/final.mp4",
         package=SimpleNamespace(title=f"Título de {key}"),
         quality=SimpleNamespace(passed=True, problems=()),
-        review=SimpleNamespace(total=score),
+        review=SimpleNamespace(total=score, publishable=publishable, scores={"closing": 6 if not publishable else 8}),
     )
 
 
@@ -219,3 +219,18 @@ def test_among_tables_never_published_the_most_interesting_story_goes_first():
     run(produce=lambda profile, story: production(story.key, scores[story.key]), publish=uploads)
 
     assert uploads == ["salario_ccaa"]
+
+
+def test_a_script_the_editor_holds_is_skipped_quietly_and_the_next_one_is_published():
+    uploads = Uploads()
+    alerts = Alerts()
+
+    def produce(profile, story):
+        return production(story.key, score=45 if story.key == "ipc_anual_ccaa" else 40, publishable=story.key != "ipc_anual_ccaa")
+
+    outcome = run(produce=produce, publish=uploads, alerts=alerts)
+
+    assert uploads == ["paro_ccaa"]
+    assert alerts == []
+    assert outcome.failed is False
+    assert any("held by the editor" in line and "closing 6/10" in line for line in outcome.lines)

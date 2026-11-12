@@ -9,6 +9,7 @@ from loguru import logger
 
 from app.datavideo.channels import ChannelProfile, load_channels
 from app.datavideo.digest import weekly_digest
+from app.datavideo.editor import weakest
 from app.datavideo.notify import send_alert
 from app.datavideo.pipeline import BlockedPublication, Production, produce, publish
 from app.datavideo.script import ScriptRejected
@@ -98,6 +99,9 @@ def _publish_due(
     )
     for production in ordered:
         story_key = production.run.story_key
+        if not production.review.publishable:
+            outcome.lines.append(f"{profile.id}/{story_key}: held by the editor: {weakest(production.review.scores)}")
+            continue
         if remaining <= 0:
             outcome.lines.append(f"{profile.id}/{story_key}: queued for a later day")
             continue
