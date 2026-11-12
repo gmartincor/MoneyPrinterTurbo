@@ -8,7 +8,9 @@ Arquitectura confirmada: [`architecture.md`](architecture.md).
 
 ## 1. Estado actual
 
-Última actualización: **10 de noviembre de 2026**, rama `main`.
+Última actualización: **12 de noviembre de 2026**, rama `main`.
+
+> **Sistema PARADO a petición del propietario (12 de noviembre de 2026):** considera que los Shorts no tienen la calidad necesaria (voz, enganche, contenido). El contenedor `datavideo-scheduler` está detenido y sin reinicio automático (`docker update --restart=no`), así que el vigilante del servidor no lo arranca. No se ha borrado nada. Para volver a encenderlo, solo cuando el propietario lo pida: `docker update --restart=unless-stopped datavideo-scheduler` y `docker compose -f docker-compose.datavideo.yml up -d` en `/opt/projects/datavideo`. Límite conocido: Claude revisa fotogramas y textos, pero no oye el audio; la calidad de la voz y del ritmo la tiene que juzgar una persona.
 
 **Hecho y probado (`app/datavideo/`):**
 
